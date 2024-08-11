@@ -2,15 +2,26 @@ import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 import Icon from "../Icon";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import Funnel from "../Funnel";
+import Header from "../Header";
+import Search from "../Search";
+import Others from "../Header/Others";
+import Dashboard from "../../pages/Dashboard";
 
 const SecondaryNavigation: React.FC = () => {
     return (
-        <Box display="flex" paddingTop="16px">
+        <Box display="flex" width="100%">
           <Box width="250px" height="100%" borderRight="1px solid rgba(235, 235, 235, 1)">
             <Projects />
           </Box>
-          <Funnel />
+          <Box flexGrow="1" width="100%" height="100%">
+            <Header>
+                <>
+                    <Search />
+                    <Others />
+                </>
+            </Header>
+            <Dashboard />
+          </Box>
         </Box>
       )
 }

@@ -5,8 +5,14 @@ type OwnProps = {
     shape: 'square' | 'circle';
     border: '1' | '2' | '3';
     text: string;
-    size: 'small' | 'medium';
+    size: 'small' | 'medium' | 'large';
     margin?: string
+}
+
+const SIZES = {
+    small: '24px',
+    medium: '36px',
+    large: '44px'
 }
 
 const Icon: React.FC<OwnProps> = ({
@@ -17,8 +23,8 @@ const Icon: React.FC<OwnProps> = ({
     margin
 }) => {
     return <Box
-        width={size === 'small' ? '24px' : '36px'}
-        height={size === 'small' ? '24px' : '36px'}
+        width={SIZES[size]}
+        height={SIZES[size]}
         borderRadius={shape === 'square' ? '20%' : '50%'}
         border={`${border}px solid #cbcbcb`}
         margin={margin || "0 8px 0 0 "}
