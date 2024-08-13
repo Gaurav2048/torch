@@ -11,13 +11,14 @@ type OwnProps = {
 const Column: React.FC<OwnProps> = ({
     column, tasks
 }) => {
-    return <Box margin="8px" border="1px solid rgba(235, 235, 235, 1)" borderRadius="2px">
-        <Text padding="8px" fontSize="md">{column.title}</Text>
+    return <Box  >
         <Droppable droppableId={column.id}>
             {(provided) => (
-                <Box ref={provided.innerRef} {...provided.droppableProps} padding="8px">
-                    {tasks.map((task, index) => <Task key={task.id} index={index} task={task} />)}
-                    {provided.placeholder}
+                <Box ref={provided.innerRef} {...provided.droppableProps} height="800px" overflow="scroll !important" >
+                    
+                        {tasks.map((task, index) => <Task key={task.id} index={index} task={task} />)}
+                        {provided.placeholder}
+                   
                 </Box>
             )}
         </Droppable>

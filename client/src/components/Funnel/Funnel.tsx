@@ -5,8 +5,13 @@ import { Box } from "@chakra-ui/react";
 import Header from "./Header";
 import { produce } from "immer";
 
-const Funnel: React.FC = () => {
-    const [ board, setBoard ] = useState<BoardType>(InitialBoard)
+type OwnProps = {
+    board: BoardType;
+    setBoard: any
+}
+
+const Funnel: React.FC<OwnProps> = ({ board, setBoard }) => {
+
     const move = (source: string[], destination: string[], droppableSource: DraggableLocation, droppableDestination: DraggableLocation) => {
         const sourceClone = Array.from(source);
         const destClone = Array.from(destination);
@@ -105,16 +110,18 @@ const Funnel: React.FC = () => {
     
     }
 
-    return <DragDropContext onDragEnd={handleDragEnd}>
+    return  <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId="all-columns" direction="horizontal" type="column">
-            {(provided) => <Box {...provided.droppableProps} ref={provided.innerRef}>
+            {(provided) => <Box display="flex" {...provided.droppableProps} ref={provided.innerRef}>
             {board.columnOrder.map((columnId, index) => {
                 const column = board.columns[columnId] 
                 const tasks = column.taskIds.map(taskId => board.tasks[taskId])
                 
                 return <Header key={column.id} column={column} tasks={tasks} index={index} />
             })}
-        </Box>}
+            {provided.placeholder}
+        </Box>
+        }
         </Droppable>
         
     </DragDropContext>

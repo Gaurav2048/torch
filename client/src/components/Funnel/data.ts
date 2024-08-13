@@ -1,4 +1,4 @@
-export const board = {
+export const board: BoardType = {
     tasks: {
         'task-1': { id: 'task-1', content: 'task 1 content' },
         'task-2': { id: 'task-2', content: 'task 2 content' },

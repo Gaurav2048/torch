@@ -13,7 +13,7 @@ const SecondaryNavigation: React.FC = () => {
           <Box width="250px" height="100%" borderRight="1px solid rgba(235, 235, 235, 1)">
             <Projects />
           </Box>
-          <Box flexGrow="1" width="100%" height="100%">
+          <Box overflow="hidden" display="flex" flexDirection="column" flexGrow="1" width="100%" height="100%">
             <Header>
                 <>
                     <Search />

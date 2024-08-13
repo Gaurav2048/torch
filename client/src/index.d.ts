@@ -17,4 +17,19 @@ interface BoardType {
   interface Task {
     id: string;
     content: string;
+    title?: string;
+    sprintId?: string;
+    todos?: Array<Todo>;
+    comments?: Array<Comment>;
+  }
+
+  interface Todo {
+    id: String;
+    text: String;
+    completed: boolean;
+  }
+
+  interface Comment {
+    id: String;
+    text: String;
   }
