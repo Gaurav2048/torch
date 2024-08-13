@@ -20,7 +20,6 @@ const Header: React.FC<OwnProps> = ({ column, tasks, index }) => {
          width="300px"
          height="700px"
          overflow="hidden"
-         bgColor="red"
          marginLeft="20px"
     >
             <Box display="flex" marginBottom="18px" justifyContent="space-between" alignItems="center">

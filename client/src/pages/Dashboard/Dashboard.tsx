@@ -7,6 +7,7 @@ import { boardAtom } from "../../AppState/state";
 import Notes from "../Notes";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import useAxios from "../../hooks/useAxios";
 
 const TAB_SEGMENTS = {
     FUNNEL: "funnel",
@@ -19,13 +20,29 @@ const Dashboard: React.FC = () => {
     const [tabIndex, setTabIndex] = useState(0);
     const location = useLocation()
     const { orgId } = useParams()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
+
+    const { response, fetchData } = useAxios({
+        method: 'GET',
+        url: `/boards/${orgId}`
+    })
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    useEffect(() => {
+        console.log('response', response)
+        if(!response) return
+        
+        setBoard(response)
+    }, [response])
 
     const handleTabsChange = (index: number) => {
       setTabIndex(index);
     };
 
-    
+
 
     useEffect(() => {
         if (location.pathname.includes(TAB_SEGMENTS.FUNNEL)) {

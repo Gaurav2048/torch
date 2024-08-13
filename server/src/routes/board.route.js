@@ -4,7 +4,7 @@ const { getBoards, createBoard } = require('../controllers/board.controller')
 
 const router = express.Router()
 
-router.get('/:orgId', auth, getBoards)
+router.get('/:orgId', getBoards)
 router.post('/:orgId', createBoard)
 
 module.exports = router;

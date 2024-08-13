@@ -3,7 +3,11 @@ const catchAsync = require("../utils/catchAsync")
 const httpsStatus = require('http-status')
 
 const getBoards = catchAsync(async (req, res) => {
-    
+    const orgId = req.params.orgId
+    const board = await Board.findOne({
+        orgId
+    })
+    res.status(httpsStatus.OK).send(board)
 })
 
 const createBoard = catchAsync(async (req, res) => {
