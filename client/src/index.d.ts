@@ -3,6 +3,9 @@ interface BoardType {
     tasks: Tasks;
     columns: Columns;
     columnOrder: string[];
+    members?: Array<Member>;
+    creator: string; 
+    orgId: string;
   }
   interface Columns {
     [key: string]: Column;
@@ -33,4 +36,9 @@ interface BoardType {
   interface Comment {
     id: String;
     text: String;
+  }
+
+  interface Member {
+    id: string;
+    role: "ADMIN" | "USER";
   }

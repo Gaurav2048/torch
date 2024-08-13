@@ -4,15 +4,48 @@ import Progress from "../../components/Progress";
 import Members from "../../components/Members";
 import { useRecoilState } from "recoil";
 import { boardAtom } from "../../AppState/state";
+import Notes from "../Notes";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
+const TAB_SEGMENTS = {
+    FUNNEL: "funnel",
+    NOTES: "notes"
+}
 
 const Dashboard: React.FC = () => {
     const [ board, setBoard ] = useRecoilState(boardAtom)
+    
+    const [tabIndex, setTabIndex] = useState(0);
+    const location = useLocation()
+    const { orgId } = useParams()
+    const navigate = useNavigate()
+
+    const handleTabsChange = (index: number) => {
+      setTabIndex(index);
+    };
+
+    
+
+    useEffect(() => {
+        if (location.pathname.includes(TAB_SEGMENTS.FUNNEL)) {
+            setTabIndex(0)
+        }
+        if (location.pathname.includes(TAB_SEGMENTS.NOTES)) {
+            setTabIndex(1)
+        }
+    }, [])
+
+    useEffect(() => {
+        // if (tabIndex === 0) navigate('/')
+    }, [tabIndex])
+
     return <Box flexGrow={1} display="flex" flexDirection="column">
         <Box padding="24px 32px" display="flex" justifyContent="space-between" >
             <Progress title="Piper Enterprise" />
             <Members />
         </Box>
-        <Tabs display="flex" flexDirection="column" flexGrow={1} variant="line" >
+        <Tabs index={tabIndex} onChange={handleTabsChange} display="flex" flexDirection="column" flexGrow={1} variant="line" >
             <Box display="flex" justifyContent="space-between" borderBottom="1px solid rgb(235, 235, 235)" alignItems="center">
                 <TabList width="max-content" borderBottomWidth="0">
                     <Tab>Overview</Tab>
@@ -27,7 +60,7 @@ const Dashboard: React.FC = () => {
                     <Funnel board={board} setBoard={setBoard} />
                 </TabPanel>
                 <TabPanel>
-                <p>two!</p>
+                    <Notes />
                 </TabPanel>
                 <TabPanel>
                 <p>three!</p>

@@ -6,6 +6,7 @@ import Header from "../Header";
 import Search from "../Search";
 import Others from "../Header/Others";
 import Dashboard from "../../pages/Dashboard";
+import AppRouter from "../../router";
 
 const SecondaryNavigation: React.FC = () => {
     return (
@@ -20,7 +21,7 @@ const SecondaryNavigation: React.FC = () => {
                     <Others />
                 </>
             </Header>
-            <Dashboard />
+            <AppRouter />
           </Box>
         </Box>
       )
