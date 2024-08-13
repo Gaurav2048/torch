@@ -1,4 +1,5 @@
 interface BoardType {
+    id: string;
     tasks: Tasks;
     columns: Columns;
     columnOrder: string[];

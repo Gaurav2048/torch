@@ -7,7 +7,6 @@ import { boardAtom } from "../../AppState/state";
 
 const Dashboard: React.FC = () => {
     const [ board, setBoard ] = useRecoilState(boardAtom)
-    console.log(board)
     return <Box flexGrow={1} display="flex" flexDirection="column">
         <Box padding="24px 32px" display="flex" justifyContent="space-between" >
             <Progress title="Piper Enterprise" />

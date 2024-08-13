@@ -3,6 +3,7 @@ export const STATE = {
 }
 
 export const DEFAULT_BOARD: BoardType = {
+    id: '',
     tasks: {},
     columns: {},
     columnOrder: []
