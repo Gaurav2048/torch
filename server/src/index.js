@@ -5,7 +5,7 @@ const mongooseOptions = {
     useUnifiedTopology: true,
 }
 
-mongoose.connect('mongodb://localhost:27017', mongooseOptions).then(() => {
+mongoose.connect('mongodb://localhost:27017/torch', mongooseOptions).then(() => {
     app.listen(3001, port => {
         console.log(`Server running ${port}`)
     })

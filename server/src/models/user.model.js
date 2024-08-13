@@ -20,12 +20,12 @@ const userSchema = mongoose.Schema({
     }
 })
 
-userSchema.statics.isEmailTaken = function (email) {
-    return this.findOne({ email })
+userSchema.statics.isEmailTaken = async function (email) {
+    return await this.findOne({ email })
 } 
 
-userSchema.methods.isPasswordMatch = function (password) {
-    return bcrypt.compare(password, this.password)
+userSchema.methods.isPasswordMatch = async function (password) {
+    return await bcrypt.compare(password, this.password)
 }
 
 const User = mongoose.model('User', userSchema)
