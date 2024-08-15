@@ -4,6 +4,7 @@ import { array, boolean, object, string } from "yup";
 import FormBody from "./FormBody";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Button } from "@chakra-ui/react";
 
 const TaskForm: React.FC = () => {
     const location = useLocation()
@@ -22,16 +23,20 @@ const TaskForm: React.FC = () => {
     }, [location.pathname])
 
     const task: Task = {
-        sprintId: '',
+        sprintId: 'id',
         title: '',
-        todos: [],
+        todos: [{
+          id: 'id-goes-here',
+          text: 'dummy work',
+          completed: false
+        }],
         content: '',
         id: '',
         workType: ''
     }
 
     const validationSchema = object({
-        sprintId: string().required('required!'),
+        sprintId: string(),
         title: string().required('required!'),
         content: string().required('required!'),
         todos: array().of(object().shape({
@@ -41,24 +46,33 @@ const TaskForm: React.FC = () => {
         }))
     })
 
-    return <AppDrawer open={openDrawer} onClose={handleClose}>
-        <Formik
+    const onSubmit = (values: Task) => {
+      alert(JSON.stringify(values))
+    }
+
+    return <Formik
             initialValues={task}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 400);
+              onSubmit(values)
+              // setTimeout(() => {
+              //   alert(JSON.stringify(values, null, 2));
+              //   setSubmitting(false);
+              // }, 400);
             }}
         >
-            {() => (
-                 <form>
-                    <FormBody />
-                </form>
+            {({ submitForm, errors }) => (
+              <form>
+                <AppDrawer open={openDrawer} onClose={handleClose} submitForm={submitForm}>
+                  <>
+                    <Button onClick={() => alert(JSON.stringify(errors))}>click!</Button>
+                    <FormBody  />
+                  </>
+                </AppDrawer>
+              </form>
             )}
         </Formik>
-    </AppDrawer>
+
 }
 
 export default TaskForm;

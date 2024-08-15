@@ -19,7 +19,19 @@ const createBoard = catchAsync(async (req, res) => {
     res.status(httpsStatus.CREATED).send(board)
 })
 
+const createTask = catchAsync(async (req, res) => {
+    const { orgId, boardId } = req.params
+    const task = req.body
+
+    const board = await Board.findById(boardId)
+    board.tasks[task.id] = task
+    board.columns[task.columnId].taskIds.unshift(task.id)
+    await board.save()
+    res.status(httpsStatus.CREATED).send(board)
+})
+
 module.exports = {
     getBoards, 
-    createBoard
+    createBoard,
+    createTask
 }

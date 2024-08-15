@@ -4,9 +4,10 @@ type OwnProps = {
     open: boolean;
     onClose: () => void;
     children: React.ReactElement;
+    submitForm: () => void;
 }
 
-const AppDrawer: React.FC<OwnProps> = ({ open, onClose, children }) => {
+const AppDrawer: React.FC<OwnProps> = ({ open, onClose, children, submitForm }) => {
   
     return (
       <>
@@ -29,7 +30,7 @@ const AppDrawer: React.FC<OwnProps> = ({ open, onClose, children }) => {
               <Button variant='outline' mr={3} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme='blue'>Save</Button>
+              <Button colorScheme='blue' onClick={submitForm}>Create task</Button>
             </DrawerFooter>
           </DrawerContent>
         </Drawer>

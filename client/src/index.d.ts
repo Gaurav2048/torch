@@ -30,8 +30,8 @@ interface BoardType {
   }
 
   interface Todo {
-    id: String;
-    text: String;
+    id: string;
+    text: string;
     completed: boolean;
   }
 
