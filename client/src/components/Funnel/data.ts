@@ -1,6 +1,7 @@
 export const board: BoardType = {
     id: 'board-1',
     orgId: 'org_id_1',
+    assignedTo: 'member_1',
     creator: 'creator_id_1',
     tasks: {
         'task-1': { id: 'task-1', content: 'task 1 content' },

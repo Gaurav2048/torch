@@ -1,15 +1,16 @@
 import { Box } from "@chakra-ui/react";
+import AppRouter from "../../router";
 
 type OwnProps = {
     children: any
 }
 
-const PrimaryNavigation: React.FC<OwnProps> = ({ children }) => {
+const PrimaryNavigation: React.FC<OwnProps> = () => {
     return <Box display="flex" width="100%" height="100%">
         <Box padding="16px 12px" width="72px" borderRight="1px solid rgba(235, 235, 235, 1)" height="100%">
             <NavigationIcon />
         </Box>
-        {children}
+        <AppRouter />
     </Box>
 }
 

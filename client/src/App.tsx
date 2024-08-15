@@ -1,12 +1,12 @@
 import './App.css'
 import PrimaryNavigation from './components/PrimaryNavigation'
-import SecondaryNavigation from './components/SecondaryNavigation'
+import AppRouter from './router'
 
 function App() {
 
   return (
     <PrimaryNavigation>
-      <SecondaryNavigation />
+      <AppRouter />
     </PrimaryNavigation>
   )
 }

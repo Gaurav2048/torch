@@ -8,6 +8,9 @@ import Notes from "../Notes";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
+import TaskForm from "./Task/TaskForm";
+import DashboardRoutes from "../../router/dashboardRouter";
+import SecondaryNavigation from "../../components/SecondaryNavigation";
 
 const TAB_SEGMENTS = {
     FUNNEL: "funnel",
@@ -22,21 +25,21 @@ const Dashboard: React.FC = () => {
     const { orgId } = useParams()
     // const navigate = useNavigate()
 
-    const { response, fetchData } = useAxios({
-        method: 'GET',
-        url: `/boards/${orgId}`
-    })
+    // const { response, fetchData } = useAxios({
+    //     method: 'GET',
+    //     url: `/boards/${orgId}`
+    // })
 
-    useEffect(() => {
-        fetchData()
-    }, [])
+    // useEffect(() => {
+    //     fetchData()
+    // }, [])
 
-    useEffect(() => {
-        console.log('response', response)
-        if(!response) return
+    // useEffect(() => {
+    //     console.log('response', response)
+    //     if(!response) return
         
-        setBoard(response)
-    }, [response])
+    //     setBoard(response)
+    // }, [response])
 
     const handleTabsChange = (index: number) => {
       setTabIndex(index);
@@ -57,37 +60,27 @@ const Dashboard: React.FC = () => {
         // if (tabIndex === 0) navigate('/')
     }, [tabIndex])
 
-    return <Box flexGrow={1} display="flex" flexDirection="column">
-        <Box padding="24px 32px" display="flex" justifyContent="space-between" >
-            <Progress title="Piper Enterprise" />
-            <Members />
-        </Box>
-        <Tabs index={tabIndex} onChange={handleTabsChange} display="flex" flexDirection="column" flexGrow={1} variant="line" >
-            <Box display="flex" justifyContent="space-between" borderBottom="1px solid rgb(235, 235, 235)" alignItems="center">
-                <TabList width="max-content" borderBottomWidth="0">
-                    <Tab>Overview</Tab>
-                    <Tab>Tasks</Tab>
-                    <Tab>Notes</Tab>    
-                    <Tab>Question</Tab>
-                </TabList>
+    return <SecondaryNavigation>
+            <Box flexGrow={1} display="flex" flexDirection="column">
+            <Box padding="24px 32px" display="flex" justifyContent="space-between" >
+                <Progress title="Piper Enterprise" />
+                <Members />
             </Box>
+            <Tabs index={tabIndex} onChange={handleTabsChange} display="flex" flexDirection="column" flexGrow={1} variant="line" >
+                <Box display="flex" justifyContent="space-between" borderBottom="1px solid rgb(235, 235, 235)" alignItems="center">
+                    <TabList width="max-content" borderBottomWidth="0">
+                        <Tab>Board</Tab>
+                        <Tab>Notes</Tab>    
+                    </TabList>
 
-            <TabPanels flexGrow={1} bgColor="rgb(247, 247, 247)">
-                <TabPanel>
-                    <Funnel board={board} setBoard={setBoard} />
-                </TabPanel>
-                <TabPanel>
-                    <Notes />
-                </TabPanel>
-                <TabPanel>
-                <p>three!</p>
-                </TabPanel>
-                <TabPanel>
-                <p>three!</p>
-                </TabPanel>
-            </TabPanels>
-            </Tabs>
-    </Box>
+                </Box>
+
+                <Box flexGrow={1} bgColor="rgb(247, 247, 247)">
+                    <DashboardRoutes />
+                </Box>
+                </Tabs>
+        </Box>
+    </SecondaryNavigation>
 }
 
 export default Dashboard;

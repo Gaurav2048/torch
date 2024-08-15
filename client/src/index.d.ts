@@ -6,6 +6,7 @@ interface BoardType {
     members?: Array<Member>;
     creator: string; 
     orgId: string;
+    assignedTo: string;
   }
   interface Columns {
     [key: string]: Column;
@@ -25,6 +26,7 @@ interface BoardType {
     sprintId?: string;
     todos?: Array<Todo>;
     comments?: Array<Comment>;
+    workType: string;
   }
 
   interface Todo {
@@ -41,4 +43,23 @@ interface BoardType {
   interface Member {
     id: string;
     role: "ADMIN" | "USER";
+  }
+
+
+  interface Organisation {
+    id: string;
+    name: string;
+    sprints: Array<Sprint>;
+    workType: Array<WorkType>;
+  }
+
+  interface Sprint {
+    id: string;
+    name: string;
+    size: number; // in days
+  }
+
+  interface WorkType {
+    id: string;
+    name: string;
   }

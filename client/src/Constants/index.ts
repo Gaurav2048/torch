@@ -4,6 +4,7 @@ export const STATE = {
 
 export const DEFAULT_BOARD: BoardType = {
     id: '',
+    assignedTo: '',
     creator: '',
     orgId: '',
     tasks: {},
