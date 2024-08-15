@@ -9,9 +9,12 @@ type OwnProps = {
     column: Column;
     tasks: Task[];
     index: number;
+    createTask: (columnId: string) => void
 }
 
-const Header: React.FC<OwnProps> = ({ column, tasks, index }) => {
+const Header: React.FC<OwnProps> = ({ column, tasks, index, createTask }) => {
+
+    const handleCreateTask = () => createTask(column.id)
 
     return <Draggable draggableId={column.id} index={index}>
     {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
@@ -21,6 +24,7 @@ const Header: React.FC<OwnProps> = ({ column, tasks, index }) => {
          height="700px"
          overflow="hidden"
          marginLeft="20px"
+         paddingTop="12px"
     >
             <Box display="flex" marginBottom="18px" justifyContent="space-between" alignItems="center">
                 <Flex alignItems="center" gap="8px">
@@ -31,7 +35,7 @@ const Header: React.FC<OwnProps> = ({ column, tasks, index }) => {
                     <BsThreeDotsVertical color="#333333" />
                 </Box>
             </Box>
-            <Button marginBottom="12px" leftIcon={<GoPlus color="#355EFF" />} size='md'  width="100%" color="#355EFF">Add Member</Button>
+            <Button onClick={handleCreateTask} marginBottom="12px" leftIcon={<GoPlus color="#355EFF" />} size='md'  width="100%" color="#355EFF">Add Member</Button>
             <Column column={column} tasks={tasks} />
         </Box>)}
         </Draggable>

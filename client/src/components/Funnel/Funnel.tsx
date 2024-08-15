@@ -7,10 +7,11 @@ import { produce } from "immer";
 
 type OwnProps = {
     board: BoardType;
-    setBoard: any
+    setBoard: any;
+    createTask: (columnId: string) => void
 }
 
-const Funnel: React.FC<OwnProps> = ({ board, setBoard }) => {
+const Funnel: React.FC<OwnProps> = ({ board, setBoard, createTask }) => {
 
     const move = (source: string[], destination: string[], droppableSource: DraggableLocation, droppableDestination: DraggableLocation) => {
         const sourceClone = Array.from(source);
@@ -117,7 +118,7 @@ const Funnel: React.FC<OwnProps> = ({ board, setBoard }) => {
                 const column = board.columns[columnId] 
                 const tasks = column.taskIds.map(taskId => board.tasks[taskId])
                 
-                return <Header key={column.id} column={column} tasks={tasks} index={index} />
+                return <Header key={column.id} column={column} tasks={tasks} index={index} createTask={createTask} />
             })}
             {provided.placeholder}
         </Box>

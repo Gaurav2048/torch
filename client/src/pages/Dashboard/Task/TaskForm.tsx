@@ -2,16 +2,22 @@ import { Formik } from "formik"
 import AppDrawer from "../../../components/Drawer/Drawer"
 import { array, boolean, object, string } from "yup";
 import FormBody from "./FormBody";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const TaskForm: React.FC = () => {
     const location = useLocation()
-    const handleClose = () => {}
+    const navigate = useNavigate()
+
+    const handleClose = () => {
+      navigate(-1)
+    }
     const [openDrawer, setOpenDrawer] = useState(false)
     useEffect(() => {
         if (location.pathname.includes('task')) {
           setOpenDrawer(true)
+        }else {
+          setOpenDrawer(false)
         }
     }, [location.pathname])
 

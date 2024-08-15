@@ -3,18 +3,19 @@ import { boardAtom } from "../../../AppState/state";
 import { useEffect, useState } from "react";
 import useAxios from "../../../hooks/useAxios";
 import Funnel from "../../../components/Funnel";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import TaskForm from "../Task/TaskForm";
 
 const FunnelPage: React.FC = () => {
     const [ board, setBoard ] = useRecoilState(boardAtom)
     
-    // const { orgId } = useParams()
-    // const navigate = useNavigate()
+    const { orgId } = useParams()
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const { response, fetchData } = useAxios({
         method: 'GET',
-        url: `/boards/123-234-345`
+        url: `/boards/${orgId}`
     })
 
     useEffect(() => {
@@ -27,8 +28,12 @@ const FunnelPage: React.FC = () => {
         setBoard(response)
     }, [response])
 
+    const createTask = (columnId: string) => {
+        navigate(`${location.pathname}/task/${columnId}`)
+    }
+
     return <>
-        <Funnel board={board} setBoard={setBoard} />
+        <Funnel board={board} setBoard={setBoard} createTask={createTask} />
         <TaskForm />
     </>
 
