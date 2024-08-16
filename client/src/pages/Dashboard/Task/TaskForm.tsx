@@ -26,12 +26,12 @@ const TaskForm: React.FC = () => {
         sprintId: 'id',
         title: '',
         todos: [{
-          id: 'id-goes-here',
+          _id: 'id-goes-here',
           text: 'dummy work',
           completed: false
         }],
         content: '',
-        id: '',
+        _id: '',
         workType: ''
     }
 

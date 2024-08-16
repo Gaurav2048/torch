@@ -19,7 +19,7 @@ const Todos: React.FC = () => {
             name="todos"
             render={({ push, remove }) => <Box>
                 <Flex alignItems="center" onClick={() => push(dummyTodo)}>
-                    <FormLabel>Todos</FormLabel> 
+                    <FormLabel paddingTop="4px">Todos</FormLabel> 
                     <IoIosAdd size={ICON_SIZE}  />
                 </Flex>
                 {values.todos?.map((todo, index) => <TodoUi {...todo} remove={remove} index={index} key={todo?.id} />)}

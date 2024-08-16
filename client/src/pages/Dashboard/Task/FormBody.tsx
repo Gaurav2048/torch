@@ -1,21 +1,41 @@
-import { Button, FormControl, FormHelperText, FormLabel, Input, Textarea } from "@chakra-ui/react";
+import { Button, FormControl, FormHelperText, FormLabel, Input, Select, Textarea } from "@chakra-ui/react";
 import Todos from "./Todos";
 import { getIn, useFormikContext } from "formik";
+import { useRecoilValue } from "recoil";
+import { orgAtom } from "../../../AppState/state";
 
 const FormBody: React.FC = () => {
-    const { errors, handleChange } = useFormikContext()
+    const { errors, handleChange, values } = useFormikContext<Task>()
+    const org = useRecoilValue(orgAtom)
 
     return <>
         <FormControl>
             <FormLabel>Title</FormLabel>
-            <Input name="title" onChange={handleChange} type="text" placeholder="Task title" />
+            <Input value={values.title} name="title" onChange={handleChange} type="text" placeholder="Task title" />
             <FormHelperText>{getIn(errors, 'title')}</FormHelperText>
         </FormControl>
         <FormControl mt={4}>
             <FormLabel>Description</FormLabel>
-            <Textarea name="content" onChange={handleChange} placeholder="Describe the task here" />
+            <Textarea value={values.content} name="content" onChange={handleChange} placeholder="Describe the task here" />
             <FormHelperText>{getIn(errors, 'content')}</FormHelperText>
         </FormControl>
+
+        <FormControl mt={4}>
+            <FormLabel>Work Type</FormLabel>
+            <Select name="workType" value={values.workType} onChange={handleChange}>
+                {org.workTypes.map(type => <option value={type._id} key={type._id}>{type.name}</option>)}
+            </Select>
+            <FormHelperText>{getIn(errors, 'content')}</FormHelperText>
+        </FormControl>
+
+        <FormControl mt={4}>
+            <FormLabel>Sprint</FormLabel>
+            <Select>
+                {org.workTypes.map(type => <option value={type._id} key={type._id}>{type.name}</option>)}
+            </Select>
+            <FormHelperText>{getIn(errors, 'content')}</FormHelperText>
+        </FormControl>
+
         <FormControl mt={4} >
             <Todos />
         </FormControl>
