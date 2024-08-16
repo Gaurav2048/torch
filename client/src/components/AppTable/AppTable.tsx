@@ -7,7 +7,7 @@ type OwnProps = {
 }
 
 
-const AppTable: React.FC<OwnProps> = () => {
+const AppTable: React.FC<OwnProps> = ({ members }) => {
     return <TableContainer margin="0 32px" borderRadius="8px" border="1px solid rgba(235, 235, 235, 1)" >
     <Table variant='simple'>
       <Thead>
@@ -19,28 +19,18 @@ const AppTable: React.FC<OwnProps> = () => {
         </Tr>
       </Thead>
       <Tbody>
-        <Tr>
+        {members.map(member => <Tr key={member._id}>
           <Td>
-            <User />
+            <User name={member.name} email={member.email} />
           </Td>
           <Td>
             <Access />
           </Td>
+          <Td></Td>
           <Td>
             <Text fontSize='sm'>20th Jan, 2023</Text>
           </Td>
-        </Tr>
-        <Tr>
-          <Td>
-            <User />
-          </Td>
-          <Td>
-            <Access />
-          </Td>
-          <Td>
-            15th Jan, 2023
-          </Td>
-        </Tr>
+        </Tr>)}
       </Tbody>
     </Table>
   </TableContainer>
@@ -48,12 +38,20 @@ const AppTable: React.FC<OwnProps> = () => {
 
 export default AppTable;
 
-const User: React.FC = () => {
+type UserProps = {
+    name: string,
+    email: string,
+}
+
+const User: React.FC<UserProps> = ({
+    name,
+    email
+}) => {
     return <Flex gap="8px" alignItems="center">
-        <Avatar size="sm" />
+        <Avatar size="sm" name={name} />
         <Box>
-            <Text fontSize="md" fontWeight={600} padding="0">John Doe</Text>
-            <Text fontSize="xs" fontWeight={300}>johndoe@example.com</Text>
+            <Text fontSize="md" fontWeight={600} padding="0">{name}</Text>
+            <Text fontSize="xs" fontWeight={300}>{email}</Text>
         </Box>
     </Flex>
 }

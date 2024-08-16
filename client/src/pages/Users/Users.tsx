@@ -4,22 +4,34 @@ import AppButton from "../../components/AppButton";
 import AppTable from "../../components/AppTable";
 import useAxios from "../../hooks/useAxios";
 import { ROUTES } from "../../Constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CreateMember from "./create/CreateMember";
+import { useRecoilState } from "recoil";
+import { memberAtom } from "../../AppState/state";
 
 const Users: React.FC = () => {
     const orgId = '66beb38e168efaf09cb836bd' // Need to change to local storage later
     const navigate = useNavigate()
+    const [ members, setMembers ] = useRecoilState(memberAtom)
 
-    const { loading, fetchData } = useAxios({
+    const { loading, response, fetchData } = useAxios({
         method: 'GET',
-        url: ROUTES.CREATE_MEMBER(orgId)
+        url: ROUTES.FETCH_MEMBER(orgId)
     })
 
     const openCreateMemberDrawer = () => {
         navigate('/members/create')
     }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    useEffect(() => {
+        if(!response) return
+        setMembers(response)
+    }, [response])
     
 
     return <SecondaryNavigation>
@@ -28,7 +40,7 @@ const Users: React.FC = () => {
             <AppButton onClick={openCreateMemberDrawer}>Add Member</AppButton>
         </Flex>
         <Box>
-            <AppTable members={[]} />
+            <AppTable members={members} />
             <CreateMember />
         </Box>
     </SecondaryNavigation>

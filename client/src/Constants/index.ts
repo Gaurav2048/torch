@@ -25,4 +25,5 @@ export const DEFAULT_MEMBER: Array<Member> = []
 
 export const ROUTES = {
     CREATE_MEMBER: (orgId: string) => `/member/${orgId}`,
+    FETCH_MEMBER: (orgId: string) => `/member/${orgId}`
 }
