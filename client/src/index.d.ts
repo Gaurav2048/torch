@@ -1,5 +1,5 @@
 interface BoardType {
-    id: string;
+    _id: string;
     tasks: Tasks;
     columns: Columns;
     columnOrder: string[];
@@ -12,7 +12,7 @@ interface BoardType {
     [key: string]: Column;
   }
   interface Column {
-    id: string;
+    _id: string;
     title: string;
     taskIds: string[];
   }
@@ -20,7 +20,7 @@ interface BoardType {
     [key: string]: Task;
   }
   interface Task {
-    id: string;
+    _id: string;
     content: string;
     title?: string;
     sprintId?: string;
@@ -30,36 +30,36 @@ interface BoardType {
   }
 
   interface Todo {
-    id: string;
+    _id: string;
     text: string;
     completed: boolean;
   }
 
   interface Comment {
-    id: String;
+    _id: String;
     text: String;
   }
 
   interface Member {
-    id: string;
+    _id: string;
     role: "ADMIN" | "USER";
   }
 
 
   interface Organisation {
-    id: string;
+    _id: string;
     name: string;
     sprints: Array<Sprint>;
-    workType: Array<WorkType>;
+    workTypes: Array<WorkType>;
   }
 
   interface Sprint {
-    id: string;
+    _id: string;
     name: string;
     size: number; // in days
   }
 
   interface WorkType {
-    id: string;
+    _id: string;
     name: string;
   }

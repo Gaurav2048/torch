@@ -13,7 +13,7 @@ const FunnelPage: React.FC = () => {
     const navigate = useNavigate()
     const location = useLocation()
 
-    const { response, fetchData } = useAxios({
+    const { loading, response, fetchData } = useAxios({
         method: 'GET',
         url: `/boards/${orgId}`
     })
@@ -24,7 +24,6 @@ const FunnelPage: React.FC = () => {
 
     useEffect(() => {
         if(!response) return
-        
         setBoard(response)
     }, [response])
 
@@ -32,10 +31,10 @@ const FunnelPage: React.FC = () => {
         navigate(`${location.pathname}/task/${columnId}`)
     }
 
-    return <>
+    return !loading ? <>
         <Funnel board={board} setBoard={setBoard} createTask={createTask} />
         <TaskForm />
-    </>
+    </> : <div>Loading...</div>
 
 }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axiosInstance from './axiosInstance';
 
 const useAxios = (config: any) => {
@@ -8,7 +8,15 @@ const useAxios = (config: any) => {
 
   const fetchData = async () => {
     try {
-      const result = await axiosInstance(config);
+      const result = await axiosInstance({
+        ...config,
+        // transformResponse: [function (data) {
+        //     return {
+        //         ...data, 
+        //         id: data._id
+        //     };
+        //   }],
+      });
       console.log('hook', result.data)
       setResponse(result.data);
     } catch (err) {
