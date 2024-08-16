@@ -9,8 +9,7 @@ type OwnProps = {
 const Search: React.FC<OwnProps> = ({ query, onChange }) => {
     return  <Stack>
         <InputGroup
-        
-        borderRadius="4px"
+                borderRadius="4px"
                 size="md"
                 width="300px" 
                 bgColor="rgb(241, 241, 241)" 

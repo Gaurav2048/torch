@@ -3,7 +3,7 @@ interface BoardType {
     tasks: Tasks;
     columns: Columns;
     columnOrder: string[];
-    members?: Array<Member>;
+    members?: Array<TMember>;
     creator: string; 
     orgId: string;
     assignedTo: string;
@@ -40,7 +40,7 @@ interface BoardType {
     text: String;
   }
 
-  interface Member {
+  interface TMember {
     _id: string;
     role: "ADMIN" | "USER";
   }
@@ -62,4 +62,15 @@ interface BoardType {
   interface WorkType {
     _id: string;
     name: string;
+  }
+
+  interface Member {
+    _id?: string;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    organisation: string;
+    createdAt?: string;
+    boards?: Array<string>;
   }

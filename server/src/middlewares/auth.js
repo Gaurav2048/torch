@@ -3,15 +3,22 @@ const httpStatus = require('http-status')
 
 
 const jwt = require('jsonwebtoken')
+const User = require('../models/user.model')
 
-const auth = (req, res, next) => {
-    jwt.verify(req.header[REQUEST_TOKEN_LOCATION], JWT_SIGN_KEY, function(err, payload) {
-        if (err) {
-            res.status(httpStatus.UNAUTHORIZED).send("Unauthorised")
+const auth = async (req, res, next) => {
+    try {
+        const decoded = jwt.verify(req.header[REQUEST_TOKEN_LOCATION], JWT_SIGN_KEY)
+        const user = await User.findOne({ email: decoded.email })
+        if (!user) {
+            res.status(httpStatus.BAD_REQUEST).send({ message: "No user found" })
+            return;
         }
-        res.user = payload
+        res.user = user._doc
         next()
-    })
+    } catch (e) {
+        next(e)
+    }
+    
 }
 
 module.exports = auth;

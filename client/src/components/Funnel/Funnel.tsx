@@ -1,6 +1,4 @@
-import { useState } from "react";
-import {board as InitialBoard} from "./data";
-import { DragDropContext, Droppable, DropResult, ResponderProvided } from "react-beautiful-dnd";
+import { DragDropContext, DraggableLocation, Droppable, DropResult, ResponderProvided } from "react-beautiful-dnd";
 import { Box } from "@chakra-ui/react";
 import Header from "./Header";
 import { produce } from "immer";
@@ -118,7 +116,7 @@ const Funnel: React.FC<OwnProps> = ({ board, setBoard, createTask }) => {
                 const column = board.columns[columnId] 
                 const tasks = column.taskIds.map(taskId => board.tasks[taskId])
                 
-                return <Header key={column.id} column={column} tasks={tasks} index={index} createTask={createTask} />
+                return <Header key={column._id} column={column} tasks={tasks} index={index} createTask={createTask} />
             })}
             {provided.placeholder}
         </Box>

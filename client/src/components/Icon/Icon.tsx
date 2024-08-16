@@ -4,9 +4,10 @@ import { avaterText } from "../../utils/textUtils";
 type OwnProps = {
     shape: 'square' | 'circle';
     border: '1' | '2' | '3';
-    text: string;
+    text?: string;
     size: 'small' | 'medium' | 'large';
-    margin?: string
+    margin?: string;
+    icon?: any
 }
 
 const SIZES = {
@@ -20,7 +21,8 @@ const Icon: React.FC<OwnProps> = ({
     border,
     text,
     size,
-    margin
+    margin,
+    icon
 }) => {
     return <Box
         width={SIZES[size]}
@@ -35,7 +37,8 @@ const Icon: React.FC<OwnProps> = ({
         justifyContent="center"
         bgColor="white"
     >   
-        {avaterText(text)}
+        {text ? avaterText(text) : null}
+        {icon ? icon?.() : null}
     </Box>
 }
 

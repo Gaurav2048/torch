@@ -14,9 +14,9 @@ type OwnProps = {
 
 const Header: React.FC<OwnProps> = ({ column, tasks, index, createTask }) => {
 
-    const handleCreateTask = () => createTask(column.id)
+    const handleCreateTask = () => createTask(column._id)
 
-    return <Draggable draggableId={column.id} index={index}>
+    return <Draggable draggableId={column._id} index={index}>
     {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
     <Box ref={provided.innerRef} 
          {...provided.draggableProps}

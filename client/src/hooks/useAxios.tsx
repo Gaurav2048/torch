@@ -6,10 +6,11 @@ const useAxios = (config: any) => {
   const [error, setError] = useState<any>();
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
+  const fetchData = async (data: any) => {
     try {
       const result = await axiosInstance({
         ...config,
+        data
         // transformResponse: [function (data) {
         //     return {
         //         ...data, 

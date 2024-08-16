@@ -11,12 +11,19 @@ const userSchema = mongoose.Schema({
         require: true,
         unique: true
     }, 
+    role: {
+        type: String,
+        default: 'admin'
+    },
     password: {
         type: String,
         require: true
     },
     organisation: {
         type: String,
+    },
+    boards: {
+        type: [String]
     }
 })
 
