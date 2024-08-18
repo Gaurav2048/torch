@@ -28,6 +28,10 @@ const columnSchema = mongoose.Schema({
 })
 
 const boardSchema = mongoose.Schema({
+    name: {
+        type: String,
+        require: true
+    },
     tasks: {
         type: Map,
         of: taskSchema

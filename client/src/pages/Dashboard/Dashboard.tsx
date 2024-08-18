@@ -1,14 +1,10 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react"
-import Funnel from "../../components/Funnel";
+import { Box, Tab, TabList, Tabs } from "@chakra-ui/react"
 import Progress from "../../components/Progress";
 import Members from "../../components/Members";
 import { useRecoilState } from "recoil";
 import { boardAtom } from "../../AppState/state";
-import Notes from "../Notes";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import useAxios from "../../hooks/useAxios";
-import TaskForm from "./Task/TaskForm";
+import { useLocation, useParams } from "react-router-dom";
 import DashboardRoutes from "../../router/dashboardRouter";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 
@@ -72,7 +68,6 @@ const Dashboard: React.FC = () => {
                         <Tab>Board</Tab>
                         <Tab>Notes</Tab>    
                     </TabList>
-
                 </Box>
 
                 <Box flexGrow={1} bgColor="rgb(247, 247, 247)">

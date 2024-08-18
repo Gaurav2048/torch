@@ -1,4 +1,5 @@
 const Board = require("../models/board.model")
+const Org = require("../models/org.model")
 const ApiError = require("../utils/ApiError")
 const catchAsync = require("../utils/catchAsync")
 const httpsStatus = require('http-status')
@@ -16,10 +17,25 @@ const getBoards = catchAsync(async (req, res) => {
 
 const createBoard = catchAsync(async (req, res) => {
     const orgId = req.params.orgId
+    const org = await Org.findById(orgId)
+    if (!org) {
+        throw new ApiError(httpsStatus.INTERNAL_SERVER_ERROR, "Something went wrong!")
+    }
     // TODO: Permission check 
     const boardData = req.body
     boardData.orgId = orgId
     const board = await Board.create(boardData)
+    if (!board) {
+        throw new ApiError(httpsStatus.INTERNAL_SERVER_ERROR, "Something went wrong!")
+    }
+    // add board to org 
+    
+    org.boards.push({
+        _id: board._id,
+        name: board.name
+    })
+    await org.save()
+
     res.status(httpsStatus.CREATED).send(board)
 })
 

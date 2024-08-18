@@ -1,5 +1,6 @@
 interface BoardType {
     _id: string;
+    name: string;
     tasks: Tasks;
     columns: Columns;
     columnOrder: string[];
@@ -49,8 +50,9 @@ interface BoardType {
   interface Organisation {
     _id: string;
     name: string;
-    sprints: Array<Sprint>;
+    sprints: Array<sprint>;
     workTypes: Array<WorkType>;
+    boards: Array<Partial<BoardType>>
   }
 
   interface Sprint {

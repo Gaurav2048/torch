@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
 
 const orgSchema = mongoose.Schema({
     name: {
@@ -18,6 +17,12 @@ const orgSchema = mongoose.Schema({
             id: String,
             name: String,
         }]
+    },
+    boards: {
+        type: [{
+            name: String,
+            _id: String
+        }],
     }
 })
 

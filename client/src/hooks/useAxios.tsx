@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axiosInstance from './axiosInstance';
 
 const useAxios = (config: any) => {
-  const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState<any>(null);
   const [error, setError] = useState<any>();
   const [loading, setLoading] = useState(true);
 

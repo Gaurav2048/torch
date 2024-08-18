@@ -1,16 +1,17 @@
-import { Box, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, Link, Text } from "@chakra-ui/react";
 import React, { useEffect, useMemo, useState } from "react";
 import Icon from "../Icon";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Header from "../Header";
 import Search from "../Search";
 import Others, { HEADER_ICON_COLOR, HEADER_ICON_SIZE } from "../Header/Others";
-import Dashboard from "../../pages/Dashboard";
-import AppRouter from "../../router";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IoSettingsOutline } from "react-icons/io5";
 import { GiSprint } from "react-icons/gi";
 import { GoWorkflow } from "react-icons/go";
+import { GoPlus } from "react-icons/go";
+import { useRecoilValue } from "recoil";
+import { orgAtom } from "../../AppState/state";
 
 type OwnProps = {
     children: React.ReactElement | React.ReactElement[]
@@ -47,13 +48,22 @@ const SecondaryNavigation: React.FC<OwnProps> = ({
 export default SecondaryNavigation;
 
 const Projects: React.FC = () => {
+    const org = useRecoilValue(orgAtom)
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    const openBoardDrawer = () => {
+        navigate(`${location.pathname}/createboard`)
+    }
+
     return (
         <Box padding="12px 16px">
-            <Text align="left" fontWeight="600" fontSize='xl' marginBottom="24px">Projects</Text>
+            <Flex justifyContent="space-between" alignItems="center" marginBottom="24px">
+                <Text align="left" fontWeight="600" fontSize='xl' >Projects</Text>
+                <GoPlus size="24px" onClick={openBoardDrawer} cursor="pointer" />
+            </Flex>
             <Box height="300px" overflow="scroll">
-                <Project isActive />
-                <Project isActive={false} />
-                <Project isActive />
+                {org?.boards?.map(board => <Project isActive />)}
             </Box>
         </Box>
     )

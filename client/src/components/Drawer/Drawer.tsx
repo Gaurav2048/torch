@@ -5,9 +5,11 @@ type OwnProps = {
     onClose: () => void;
     children: React.ReactElement;
     submitForm: () => void;
+    title?: string;
+    actionTitle?: string;
 }
 
-const AppDrawer: React.FC<OwnProps> = ({ open, onClose, children, submitForm }) => {
+const AppDrawer: React.FC<OwnProps> = ({ title, actionTitle, open, onClose,  children, submitForm }) => {
   
     return (
       <>
@@ -20,7 +22,7 @@ const AppDrawer: React.FC<OwnProps> = ({ open, onClose, children, submitForm }) 
           <DrawerOverlay />
           <DrawerContent>
             <DrawerCloseButton />
-            <DrawerHeader>Create your account</DrawerHeader>
+            <DrawerHeader>{title}</DrawerHeader>
   
             <DrawerBody>
               {children}
@@ -30,7 +32,7 @@ const AppDrawer: React.FC<OwnProps> = ({ open, onClose, children, submitForm }) 
               <Button variant='outline' mr={3} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme='blue' onClick={submitForm}>Create task</Button>
+              <Button colorScheme='blue' onClick={submitForm}>{actionTitle}</Button>
             </DrawerFooter>
           </DrawerContent>
         </Drawer>

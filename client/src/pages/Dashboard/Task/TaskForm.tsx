@@ -5,22 +5,10 @@ import FormBody from "./FormBody";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@chakra-ui/react";
+import useNavDisclosure from "../../../hooks/useNavDisclosure";
 
 const TaskForm: React.FC = () => {
-    const location = useLocation()
-    const navigate = useNavigate()
-
-    const handleClose = () => {
-      navigate(-1)
-    }
-    const [openDrawer, setOpenDrawer] = useState(false)
-    useEffect(() => {
-        if (location.pathname.includes('task')) {
-          setOpenDrawer(true)
-        }else {
-          setOpenDrawer(false)
-        }
-    }, [location.pathname])
+    const { open, goBack } = useNavDisclosure('task')
 
     const task: Task = {
         sprintId: 'id',
@@ -59,7 +47,7 @@ const TaskForm: React.FC = () => {
         >
             {({ submitForm, errors }) => (
               <form>
-                <AppDrawer open={openDrawer} onClose={handleClose} submitForm={submitForm}>
+                <AppDrawer open={open} onClose={goBack} submitForm={submitForm}>
                   <>
                     <Button onClick={() => alert(JSON.stringify(errors))}>click!</Button>
                     <FormBody  />

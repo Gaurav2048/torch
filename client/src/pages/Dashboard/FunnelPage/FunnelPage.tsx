@@ -5,6 +5,7 @@ import useAxios from "../../../hooks/useAxios";
 import Funnel from "../../../components/Funnel";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import TaskForm from "../Task/TaskForm";
+import CreateBoard from "../Board";
 
 const FunnelPage: React.FC = () => {
     const [ board, setBoard ] = useRecoilState(boardAtom)
@@ -34,6 +35,7 @@ const FunnelPage: React.FC = () => {
     return !loading ? <>
         <Funnel board={board} setBoard={setBoard} createTask={createTask} />
         <TaskForm />
+        <CreateBoard />
     </> : <div>Loading...</div>
 
 }

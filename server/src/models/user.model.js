@@ -25,6 +25,8 @@ const userSchema = mongoose.Schema({
     boards: {
         type: [String]
     }
+}, {
+    timestamps: { createdAt: true, updatedAt: false }
 })
 
 userSchema.statics.isEmailTaken = async function (email) {
