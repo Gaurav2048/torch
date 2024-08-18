@@ -12,6 +12,8 @@ import { GoWorkflow } from "react-icons/go";
 import { GoPlus } from "react-icons/go";
 import { useRecoilValue } from "recoil";
 import { orgAtom } from "../../AppState/state";
+import AppMenu from "../AppMenu";
+import { IoIosInformationCircleOutline } from "react-icons/io";
 
 type OwnProps = {
     children: React.ReactElement | React.ReactElement[]
@@ -52,29 +54,61 @@ const Projects: React.FC = () => {
     const navigate = useNavigate()
     const location = useLocation()
 
+    const [ activeBoard, setActiveBoard ] = useState('')
+
+    useEffect(() => {
+        handleActive(org?.boards?.[0]._id)
+    }, [org])
+
     const openBoardDrawer = () => {
         navigate(`${location.pathname}/createboard`)
     }
 
+    const handleActive = (id?: string) => {
+        if (!id) return
+        setActiveBoard(id)
+    }
+
+    useEffect(() => {
+        if (!activeBoard) return
+        navigate(`/dashboard/${activeBoard}/funnel`)
+    }, [activeBoard])
+
     return (
         <Box padding="12px 16px">
-            <Flex justifyContent="space-between" alignItems="center" marginBottom="24px">
-                <Text align="left" fontWeight="600" fontSize='xl' >Projects</Text>
-                <GoPlus size="24px" onClick={openBoardDrawer} cursor="pointer" />
-            </Flex>
+            <Box>
+                <Flex justifyContent="space-between" alignItems="center">
+                    <Text align="left" fontWeight="600" fontSize='xl' >Projects</Text>
+                    <GoPlus size="24px" onClick={openBoardDrawer} cursor="pointer" />
+                </Flex>
+                <AppMenu anchor={() => <Flex gap="4px" marginBottom="24px">
+                    <IoIosInformationCircleOutline color="light" size="16px" />
+                    <Text fontSize="2xs">1 board left</Text>
+                    </Flex>}>
+                    <Box fontSize="small" textAlign="start" paddingLeft="8px">
+                        This is the maximum boards you can create. For further query 
+                        <a href="mailto:gunjankalita836@gmail.com">Write To Us</a>  
+                    </Box>
+                </AppMenu>
+            </Box>
             <Box height="300px" overflow="scroll">
-                {org?.boards?.map(board => <Project isActive />)}
+                {org?.boards?.map(board => <Project isActive={activeBoard === board._id} board={board} setActive={handleActive} />)}
             </Box>
         </Box>
     )
 }
 
 type ProjectProps = {
-    isActive: boolean
+    isActive: boolean;
+    board: Partial<BoardType>;
+    setActive: (id?: string) => void;
 }
 
-const Project: React.FC<ProjectProps> = ({ isActive }) => {
-    return <Box borderRadius="8px" 
+const Project: React.FC<ProjectProps> = ({ isActive, board, setActive }) => {
+    return <Box
+                onClick={() => setActive(board?._id)}
+                borderRadius="8px" 
+                cursor="pointer"
                 marginBottom="12px" 
                 display="flex" 
                 padding="10px 16px 10px 10px" 
@@ -85,7 +119,7 @@ const Project: React.FC<ProjectProps> = ({ isActive }) => {
                 justifyContent="space-between">
                     <Box display="flex" alignItems="center">
                         <Icon shape="square" size="small" text="Test Project" border="2" />
-                        <Text fontSize='md'>Test Project</Text>
+                        <Text fontSize='xs'>{board.name}</Text>
                     </Box>
                     <BsThreeDotsVertical color={isActive ? "white" : "#333333"} />
             </Box>

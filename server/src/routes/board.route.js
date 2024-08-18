@@ -4,7 +4,7 @@ const { getBoards, createBoard, createTask } = require('../controllers/board.con
 
 const router = express.Router()
 
-router.get('/:orgId', getBoards)
+router.get('/:orgId/board/:id', getBoards)
 router.post('/:orgId', createBoard)
 router.post('/task/:orgId/:boardId', createTask)
 

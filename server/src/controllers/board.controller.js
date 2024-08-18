@@ -5,9 +5,10 @@ const catchAsync = require("../utils/catchAsync")
 const httpsStatus = require('http-status')
 
 const getBoards = catchAsync(async (req, res) => {
-    const orgId = req.params.orgId
+    const { orgId, id } = req.params
     const board = await Board.findOne({
-        orgId
+        orgId,
+        _id: id
     })
     if (!board) {
         throw new ApiError(httpsStatus.BAD_REQUEST, "Board not found!")

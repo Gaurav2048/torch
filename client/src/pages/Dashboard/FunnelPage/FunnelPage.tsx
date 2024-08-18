@@ -1,5 +1,5 @@
-import { useRecoilState } from "recoil";
-import { boardAtom } from "../../../AppState/state";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { boardAtom, orgAtom } from "../../../AppState/state";
 import { useEffect } from "react";
 import useAxios from "../../../hooks/useAxios";
 import Funnel from "../../../components/Funnel";
@@ -9,19 +9,20 @@ import CreateBoard from "../Board";
 
 const FunnelPage: React.FC = () => {
     const [ board, setBoard ] = useRecoilState(boardAtom)
+    const org = useRecoilValue(orgAtom)
     
-    const { orgId } = useParams()
+    const { boardId } = useParams()
     const navigate = useNavigate()
     const location = useLocation()
 
     const { loading, response, fetchData } = useAxios({
         method: 'GET',
-        url: `/boards/${orgId}`
+        url: `/boards/${org._id}/board/${boardId}`
     })
 
     useEffect(() => {
         fetchData()
-    }, [])
+    }, [boardId])
 
     useEffect(() => {
         if(!response) return

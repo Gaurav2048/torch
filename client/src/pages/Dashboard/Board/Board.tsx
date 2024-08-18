@@ -71,7 +71,7 @@ const CreateBoard: React.FC = () => {
     >
       {({ values, submitForm, handleChange }) => (
         <Form>
-        <AppDrawer open={open} onClose={goBack} submitForm={submitForm} >
+        <AppDrawer title='Create New Board' actionTitle='create'  open={open} onClose={goBack} submitForm={submitForm} >
             <>
                 <FormControl mt={4}>
                     <FormLabel htmlFor="name">Name</FormLabel>

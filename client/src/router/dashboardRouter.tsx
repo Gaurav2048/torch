@@ -6,10 +6,10 @@ import Notes from '../pages/Notes';
 const DashboardRoutes: React.FC = () => {
   return (
       <Routes>
-        <Route path=":orgId/funnel" element={<FunnelPage />} />
-        <Route path=":orgId/notes" element={<Notes />} />
-        <Route path=":orgId/funnel/task/:columnId" element={<FunnelPage />} />
-        <Route path=":orgId/funnel/createboard" element={<FunnelPage />} />
+        <Route path=":boardId/funnel" element={<FunnelPage />} />
+        <Route path=":boardId/notes" element={<Notes />} />
+        <Route path=":boardId/funnel/task/:columnId" element={<FunnelPage />} />
+        <Route path=":boardId/funnel/createboard" element={<FunnelPage />} />
       </Routes>
   );
 }
