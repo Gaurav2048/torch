@@ -21,8 +21,10 @@ const FunnelPage: React.FC = () => {
     })
 
     useEffect(() => {
-        fetchData()
-    }, [boardId])
+        if (org?._id) {
+            fetchData()
+        }
+    }, [boardId, org?._id])
 
     useEffect(() => {
         if(!response) return

@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex, Table, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from "@chakra-ui/react"
+import { Avatar, Box, Flex, FlexProps, Table, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from "@chakra-ui/react"
 import React from "react";
 
 type OwnProps = {
@@ -43,13 +43,14 @@ type UserProps = {
     email: string,
 }
 
-const User: React.FC<UserProps> = ({
+export const User: React.FC<FlexProps & UserProps> = ({
     name,
-    email
+    email,
+    ...rest
 }) => {
-    return <Flex gap="8px" alignItems="center">
+    return <Flex gap="8px" alignItems="center" justifyContent="start" {...rest}>
         <Avatar size="sm" name={name} />
-        <Box>
+        <Box textAlign="start">
             <Text fontSize="md" fontWeight={600} padding="0">{name}</Text>
             <Text fontSize="xs" fontWeight={300}>{email}</Text>
         </Box>

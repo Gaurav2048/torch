@@ -4,7 +4,7 @@ interface BoardType {
     tasks: Tasks;
     columns: Columns;
     columnOrder: string[];
-    members?: Array<TMember>;
+    members?: Array<string>;
     creator: string; 
     orgId: string;
     assignedTo: string;

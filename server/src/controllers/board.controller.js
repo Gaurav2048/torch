@@ -1,5 +1,6 @@
 const Board = require("../models/board.model")
 const Org = require("../models/org.model")
+const User = require("../models/user.model")
 const ApiError = require("../utils/ApiError")
 const catchAsync = require("../utils/catchAsync")
 const httpsStatus = require('http-status')
@@ -51,8 +52,72 @@ const createTask = catchAsync(async (req, res) => {
     res.status(httpsStatus.CREATED).send(board)
 })
 
+const createBoardMember = catchAsync(async (req, res) => {
+    const { memberId, boardId } = req.body
+    const orgId = req.params.orgId
+
+    const board = await Board.findById(boardId)
+    if (!board) {
+        throw new ApiError(httpsStatus.BAD_REQUEST, "Project not found!")
+    }
+    if (board.orgId !== orgId) {
+        throw new ApiError(httpsStatus.BAD_REQUEST, "Project does not belongs to the organisation!")
+    }
+    const member = await User.findById(memberId)
+    if (!member) {
+        throw new ApiError(httpsStatus.BAD_REQUEST, "Member not found!")
+    }
+    if (member.organisation !== orgId) {
+        throw new ApiError(httpsStatus.BAD_REQUEST, "Member does not belongs to the Organisation!")
+    }
+
+    const isMemberExists = board.members.includes(memberId)
+    if (isMemberExists) {
+        throw new ApiError(httpsStatus.BAD_REQUEST, "Member already added to board!")
+    }
+    board.members.push(memberId)
+    await board.save()
+    member.boards.push(boardId)
+    await member.save()
+    res.status(httpsStatus.OK).send({
+        message: "Member created for the project",
+        board
+    })
+})
+
+const removeBoardMember = catchAsync(async (req, res) => {
+    const { memberId, boardId } = req.body
+    const orgId = req.params.orgId
+
+    const board = await Board.findById(boardId)
+    if (!board) {
+        throw new ApiError(httpsStatus.BAD_REQUEST, "Project not found!")
+    }
+    if (board.orgId !== orgId) {
+        throw new ApiError(httpsStatus.BAD_REQUEST, "Project does not belongs to the organisation!")
+    }
+    const member = await User.findById(memberId)
+    if (!member) {
+        throw new ApiError(httpsStatus.BAD_REQUEST, "Member not found!")
+    }
+    if (member.organisation !== orgId) {
+        throw new ApiError(httpsStatus.BAD_REQUEST, "Member does not belongs to the Organisation!")
+    }
+
+    board.members = board.members.filter(m =>  m !== memberId)
+    await board.save()
+    member.boards = member.boards.filter(b => b !== boardId)
+    await member.save()
+    res.status(httpsStatus.OK).send({
+        message: "Member created for the project",
+        board
+    })
+})
+
 module.exports = {
     getBoards, 
     createBoard,
-    createTask
+    createTask,
+    createBoardMember,
+    removeBoardMember
 }

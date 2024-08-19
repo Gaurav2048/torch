@@ -57,7 +57,7 @@ const Projects: React.FC = () => {
     const [ activeBoard, setActiveBoard ] = useState('')
 
     useEffect(() => {
-        handleActive(org?.boards?.[0]._id)
+        handleActive(org?.boards?.[0]?._id)
     }, [org])
 
     const openBoardDrawer = () => {

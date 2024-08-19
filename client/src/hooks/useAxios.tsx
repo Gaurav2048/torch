@@ -4,13 +4,17 @@ import axiosInstance from './axiosInstance';
 const useAxios = (config: any) => {
   const [response, setResponse] = useState<any>(null);
   const [error, setError] = useState<any>();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async (data?: any) => {
+    setLoading(true)
     try {
       const result = await axiosInstance({
         ...config,
-        data
+        data: {
+          ...data, 
+          ...config?.data
+        }
         // transformResponse: [function (data) {
         //     return {
         //         ...data, 
@@ -18,7 +22,6 @@ const useAxios = (config: any) => {
         //     };
         //   }],
       });
-      console.log('hook', result.data)
       setResponse(result.data);
     } catch (err) {
       setError(err);
