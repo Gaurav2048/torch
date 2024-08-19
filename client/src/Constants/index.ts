@@ -30,5 +30,7 @@ export const ROUTES = {
     CREATE_MEMBER: (orgId: string) => `/member/${orgId}`,
     FETCH_MEMBER: (orgId: string) => `/member/${orgId}`,
     CREATE_BOARD: (orgId: string) => `/boards/${orgId}`,
-    ADD_REMOVE_MEMBER: (orgId: string) => `/boards/${orgId}/member`
+    ADD_REMOVE_MEMBER: (orgId: string) => `/boards/${orgId}/member`,
+    ADD_TASK: (orgId: string, boardId: string) => `/boards/task/${orgId}/${boardId}`
+
 }

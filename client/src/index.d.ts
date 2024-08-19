@@ -14,6 +14,7 @@ interface BoardType {
   }
   interface Column {
     _id: string;
+    id: string;
     title: string;
     taskIds: string[];
   }
@@ -25,19 +26,22 @@ interface BoardType {
     content: string;
     title?: string;
     sprintId?: string;
+    createdBy?: string;
+    assignedTo?: string;
+    columnId?: string;
     todos?: Array<Todo>;
     comments?: Array<Comment>;
     workType: string;
   }
 
   interface Todo {
-    _id: string;
+    id: string;
     text: string;
     completed: boolean;
   }
 
   interface Comment {
-    _id: String;
+    id: String;
     text: String;
   }
 
@@ -67,7 +71,7 @@ interface BoardType {
   }
 
   interface Member {
-    _id?: string;
+    _id: string;
     name: string;
     email: string;
     password: string;
@@ -76,3 +80,7 @@ interface BoardType {
     createdAt?: string;
     boards?: Array<string>;
   }
+
+  interface MemberMap {
+    [key: string]: Member
+}

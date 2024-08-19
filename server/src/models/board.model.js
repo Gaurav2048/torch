@@ -17,6 +17,8 @@ const taskSchema = mongoose.Schema({
     title: String,
     sprintId: String,
     columnId: String,
+    createdBy: String,
+    assignedTo: String,
     todos: [todoSchema],
     comments: [commentSchema],
 })

@@ -46,8 +46,11 @@ const createTask = catchAsync(async (req, res) => {
     const task = req.body
 
     const board = await Board.findById(boardId)
-    board.tasks[task.id] = task
-    board.columns[task.columnId].taskIds.unshift(task.id)
+    if (board.orgId !== orgId) {
+        throw new ApiError(httpsStatus.BAD_REQUEST, "Board not found")
+    }
+    board.tasks.set(task.id, task) 
+    board.columns.get(task.columnId).taskIds.unshift(task.id)
     await board.save()
     res.status(httpsStatus.CREATED).send(board)
 })
