@@ -4,6 +4,7 @@ import Column from './Column';
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { GoPlus } from 'react-icons/go';
+import { NOSCROLL_BAR_PROPERTIES } from './Funnel';
 
 type OwnProps = {
     column: Column;
@@ -20,22 +21,24 @@ const Header: React.FC<OwnProps> = ({ column, tasks, index, createTask }) => {
     {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
     <Box ref={provided.innerRef} 
          {...provided.draggableProps}
-         width="300px"
-         height="700px"
-         overflow="hidden"
+         minWidth="300px"
+         overflow="scroll"
          marginLeft="20px"
-         paddingTop="12px"
+         height="100%"
+         sx={NOSCROLL_BAR_PROPERTIES}
     >
-            <Box display="flex" marginBottom="18px" justifyContent="space-between" alignItems="center">
-                <Flex alignItems="center" gap="8px">
-                    <Box width="8px" height="8px" borderRadius="50%" bgColor="lightgreen" />
-                    <Text fontWeight="500" fontSize="md">{column.title}</Text>
-                </Flex>
-                <Box {...provided.dragHandleProps} >
-                    <BsThreeDotsVertical color="#333333" />
+            <Box zIndex={1000} top="0" position="sticky" bgColor="rgb(247, 247, 247)">
+                <Box display="flex" marginBottom="18px" justifyContent="space-between" alignItems="center">
+                    <Flex alignItems="center" gap="8px">
+                        <Box width="8px" height="8px" borderRadius="50%" bgColor="lightgreen" />
+                        <Text fontWeight="500" fontSize="md">{column.title}</Text>
+                    </Flex>
+                    <Box {...provided.dragHandleProps} >
+                        <BsThreeDotsVertical color="#333333" />
+                    </Box>
                 </Box>
+                <Button onClick={handleCreateTask} marginBottom="12px" leftIcon={<GoPlus color="#355EFF" />} size='md'  width="100%" color="#355EFF">Create New Task</Button>
             </Box>
-            <Button onClick={handleCreateTask} marginBottom="12px" leftIcon={<GoPlus color="#355EFF" />} size='md'  width="100%" color="#355EFF">Add Member</Button>
             <Column column={column} tasks={tasks} />
         </Box>)}
         </Draggable>

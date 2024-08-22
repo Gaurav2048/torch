@@ -11,18 +11,14 @@ type OwnProps = {
 const Column: React.FC<OwnProps> = ({
     column, tasks
 }) => {
-    return <Box  >
-        <Droppable droppableId={column.id}>
+    return <Droppable droppableId={column.id}>
             {(provided) => (
-                <Box ref={provided.innerRef} {...provided.droppableProps} height="800px" overflow="scroll !important" >
-                    
-                        {tasks.map((task, index) => <Task key={task.id} index={index} task={task} />)}
-                        {provided.placeholder}
-                   
+                <Box  height="100%" ref={provided.innerRef} {...provided.droppableProps} >
+                    {tasks.map((task, index) => <Task key={task.id} index={index} task={task} />)}
+                    {provided.placeholder}
                 </Box>
             )}
         </Droppable>
-    </Box>
 }
 
 export default Column;

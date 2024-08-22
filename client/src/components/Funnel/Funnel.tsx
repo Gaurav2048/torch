@@ -9,6 +9,13 @@ type OwnProps = {
     createTask: (columnId: string) => void
 }
 
+export const NOSCROLL_BAR_PROPERTIES = {
+    scrollbarWidth: "none", 
+    "::-webkit-scrollbar": {
+      display: "none", 
+    },
+  }
+
 const Funnel: React.FC<OwnProps> = ({ board, setBoard, createTask }) => {
 
     const move = (source: string[], destination: string[], droppableSource: DraggableLocation, droppableDestination: DraggableLocation) => {
@@ -109,9 +116,10 @@ const Funnel: React.FC<OwnProps> = ({ board, setBoard, createTask }) => {
     
     }
 
-    return  <DragDropContext onDragEnd={handleDragEnd}>
+    return  <Box width="100%" height="100%" overflow="hidden">
+        <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId="all-columns" direction="horizontal" type="column">
-            {(provided) => <Box display="flex" {...provided.droppableProps} ref={provided.innerRef}>
+            {(provided) => <Box sx={NOSCROLL_BAR_PROPERTIES} display="flex" paddingTop="12px" width="100%" height="100%"  overflow="auto" {...provided.droppableProps} ref={provided.innerRef}>
             {board.columnOrder.map((columnId, index) => {
                 const column = board.columns[columnId] 
                 const tasks = column.taskIds.map(taskId => board.tasks[taskId])
@@ -124,6 +132,7 @@ const Funnel: React.FC<OwnProps> = ({ board, setBoard, createTask }) => {
         </Droppable>
         
     </DragDropContext>
+    </Box>
 }
 
 export default Funnel;

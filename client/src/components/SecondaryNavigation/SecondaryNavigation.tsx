@@ -30,11 +30,11 @@ const SecondaryNavigation: React.FC<OwnProps> = ({
     }, [])
 
     return (
-        <Box display="flex" width="100%">
+        <Box display="flex" width="100%" height="100%" overflow="hidden">
           <Box width="300px" height="100%" borderRight="1px solid rgba(235, 235, 235, 1)">
             {isProject ? <Projects /> : <SettingsMenu />}
           </Box>
-          <Box overflow="hidden" display="flex" flexDirection="column" flexGrow="1" width="100%" height="100%">
+          <Box overflow="hidden" display="flex" flexDirection="column" width="100%" height="100%">
             <Header>
                 <>
                     <Search />

@@ -23,6 +23,7 @@ interface BoardType {
   }
   interface Task {
     _id: string;
+    id: string;
     content: string;
     title?: string;
     sprintId?: string;

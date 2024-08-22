@@ -57,7 +57,7 @@ const Dashboard: React.FC = () => {
     }, [tabIndex])
 
     return <SecondaryNavigation>
-            <Box flexGrow={1} display="flex" flexDirection="column">
+            <Box width="100%" height="100%" overflow="hidden" flexGrow={1} display="flex" flexDirection="column">
             <Box padding="24px 32px" display="flex" justifyContent="space-between" >
                 <Progress title="Piper Enterprise" />
                 <Members />
@@ -69,11 +69,10 @@ const Dashboard: React.FC = () => {
                         <Tab>Notes</Tab>    
                     </TabList>
                 </Box>
-
-                <Box flexGrow={1} bgColor="rgb(247, 247, 247)">
-                    <DashboardRoutes />
-                </Box>
-                </Tabs>
+            </Tabs>
+            <Box width="100%" height="100%" overflow="hidden" bgColor="rgb(247, 247, 247)">
+                <DashboardRoutes />
+            </Box>
         </Box>
     </SecondaryNavigation>
 }
