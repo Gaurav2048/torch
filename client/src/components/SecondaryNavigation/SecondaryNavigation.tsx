@@ -14,6 +14,7 @@ import { useRecoilValue } from "recoil";
 import { orgAtom } from "../../AppState/state";
 import AppMenu from "../AppMenu";
 import { IoIosInformationCircleOutline } from "react-icons/io";
+import { colorSchema } from "../../Constants";
 
 type OwnProps = {
     children: React.ReactElement | React.ReactElement[]
@@ -113,7 +114,7 @@ const Project: React.FC<ProjectProps> = ({ isActive, board, setActive }) => {
                 display="flex" 
                 padding="10px 16px 10px 10px" 
                 border={!isActive ? "1px solid rgba(235, 235, 235, 1)" : "none"}
-                bgColor={isActive ? "#355EFF" : "white"} 
+                bgColor={isActive ? colorSchema.PRIMARY : "white"} 
                 alignItems="center"
                 color={isActive ? "white" : "#333333"}
                 justifyContent="space-between">

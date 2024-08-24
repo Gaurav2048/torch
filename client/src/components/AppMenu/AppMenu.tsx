@@ -11,7 +11,7 @@ const AppMenu: React.FC<OwnProps> = ({ anchor, children }) => {
     <MenuButton as={Box} cursor="pointer">
       {anchor()}
     </MenuButton>
-    <MenuList>
+    <MenuList zIndex={1001}>
       {children}
     </MenuList>
   </Menu>

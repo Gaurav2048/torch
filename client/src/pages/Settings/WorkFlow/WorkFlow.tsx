@@ -1,11 +1,10 @@
-import { Box, Flex, FormControl, FormLabel, Input, Text } from "@chakra-ui/react"
-import { Formik } from "formik"
+import { Box, Flex, Input, Text } from "@chakra-ui/react"
 import { useState } from "react"
 import AppButton from "../../../components/AppButton"
 import useAxios from "../../../hooks/useAxios"
 import { v4 } from "uuid"
 
-const COLORS = ["#87CEFA", "#FFD1DC", "#98FF98", "#E6E6FA", "#FFDAB9", "#F08080","#FFFACD", "#B0E0E6", "D3D3D3", "FFFFF0"]
+export const COLORS = ["#87CEFA", "#FFD1DC", "#98FF98", "#E6E6FA", "#FFDAB9", "#F08080","#FFFACD", "#B0E0E6", "D3D3D3", "FFFFF0"]
 
 const WorkFlow: React.FC = () => {
     const [ text, setText ] = useState('')
@@ -30,7 +29,6 @@ const WorkFlow: React.FC = () => {
     }
 
     const submitWorkType = () => {
-        alert('clicked')
         fetchData()
     }
 

@@ -31,7 +31,7 @@ interface BoardType {
     assignedTo?: string;
     columnId?: string;
     todos?: Array<Todo>;
-    comments?: Array<Comment>;
+    comments?: Array<CommentType>;
     workType: string;
   }
 
@@ -41,9 +41,26 @@ interface BoardType {
     completed: boolean;
   }
 
-  interface Comment {
-    id: String;
-    text: String;
+  interface CommentType {
+    _id: string;
+    comment: string;
+    commenterId: string;
+    reactions?: Array<Reaction>;
+    replies: Array<Reply>
+  }
+
+  interface Reply {
+    _id: string;
+    reply: string;
+    replierId: string;
+    reactions?: Array<Reaction>
+  }
+
+  export type REACTION_TYPE = 'SMILE' | 'THUMBS_UP' | 'THUMBS_DOWN' | 'CLAPS' | 'THANKS'
+
+  interface Reaction {
+    reactedBy: string;
+    reaction: REACTION_TYPE
   }
 
   interface TMember {
@@ -69,6 +86,7 @@ interface BoardType {
   interface WorkType {
     _id: string;
     name: string;
+    color: string;
   }
 
   interface Member {

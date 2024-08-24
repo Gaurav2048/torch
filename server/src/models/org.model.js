@@ -16,6 +16,7 @@ const orgSchema = mongoose.Schema({
         type: [{
             id: String,
             name: String,
+            color: String
         }]
     },
     boards: {

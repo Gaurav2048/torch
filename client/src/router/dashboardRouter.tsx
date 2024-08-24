@@ -8,8 +8,9 @@ const DashboardRoutes: React.FC = () => {
       <Routes>
         <Route path=":boardId/funnel" element={<FunnelPage />} />
         <Route path=":boardId/notes" element={<Notes />} />
-        <Route path=":boardId/funnel/task/:columnId" element={<FunnelPage />} />
+        <Route path=":boardId/funnel/create/task/:columnId" element={<FunnelPage />} />
         <Route path=":boardId/funnel/createboard" element={<FunnelPage />} />
+        <Route path=":boardId/funnel/view/task/:taskId" element={<FunnelPage />} />
       </Routes>
   );
 }

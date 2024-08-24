@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import AppMenu from "../AppMenu";
 import { User } from "../AppTable/AppTable";
 import useAxios from "../../hooks/useAxios";
-import { ROUTES } from "../../Constants";
+import { colorSchema, ROUTES } from "../../Constants";
 import { produce } from "immer";
 import { capitalize } from "../../utils/textUtils";
 
@@ -17,7 +17,7 @@ const Members: React.FC = () => {
         <AvatarGroup size='sm'  max={4} cursor="pointer"  >
             {members?.map(member => <Avatar key={member._id} name={member.name} />)}
         </AvatarGroup>
-        <AppMenu anchor={() => <Button leftIcon={<GoPlus color="white" />} size='sm' bgColor="#355EFF" color="white">Add Member</Button>}>
+        <AppMenu anchor={() => <Button leftIcon={<GoPlus color="white" />} size='sm' bgColor={colorSchema.PRIMARY} color="white">Add Member</Button>}>
             <AddMembersToBoard />
         </AppMenu>
     </Box>

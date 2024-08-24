@@ -14,7 +14,7 @@ import { v4 } from "uuid";
 export const DUMMY_SPRINT = 'sprint_1'
 
 const TaskForm: React.FC = () => {
-    const { open, goBack } = useNavDisclosure('task')
+    const { open, goBack } = useNavDisclosure('create/task')
     const org = useRecoilValue(orgAtom)
     const { boardId, columnId } = useParams()
 

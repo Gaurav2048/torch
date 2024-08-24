@@ -5,6 +5,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { FaUsers } from "react-icons/fa";
 import { IoMdLogOut } from "react-icons/io";
 import Icon from "../Icon";
+import { colorSchema } from "../../Constants";
 
 
 type OwnProps = {
@@ -29,7 +30,7 @@ const PrimaryNavigation: React.FC<OwnProps> = () => {
 export default PrimaryNavigation;
 
 const NavigationIcon: React.FC = () => {
-    return <Box width="44px" height="44px" borderRadius="12px" bgColor="#355EFF">
+    return <Box width="44px" height="44px" borderRadius="12px" bgColor={colorSchema.PRIMARY}>
         
     </Box>
 }

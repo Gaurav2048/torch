@@ -6,6 +6,7 @@ import Funnel from "../../../components/Funnel";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import TaskForm from "../Task/TaskForm";
 import CreateBoard from "../Board";
+import ViewTask from "../view";
 
 const FunnelPage: React.FC = () => {
     const [ board, setBoard ] = useRecoilState(boardAtom)
@@ -32,13 +33,18 @@ const FunnelPage: React.FC = () => {
     }, [response])
 
     const createTask = (columnId: string) => {
-        navigate(`${location.pathname}/task/${columnId}`)
+        navigate(`${location.pathname}/create/task/${columnId}`)
+    }
+
+    const openTask = (taskId: string) => {
+        navigate(`${location.pathname}/view/task/${taskId}`)
     }
 
     return !loading ? <>
-        <Funnel board={board} setBoard={setBoard} createTask={createTask} />
+        <Funnel board={board} setBoard={setBoard} createTask={createTask} openTask={openTask} />
         <TaskForm />
         <CreateBoard />
+        <ViewTask />
     </> : <div>Loading...</div>
 
 }

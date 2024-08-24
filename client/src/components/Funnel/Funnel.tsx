@@ -6,7 +6,8 @@ import { produce } from "immer";
 type OwnProps = {
     board: BoardType;
     setBoard: any;
-    createTask: (columnId: string) => void
+    createTask: (columnId: string) => void;
+    openTask: (taskId: string) => void;
 }
 
 export const NOSCROLL_BAR_PROPERTIES = {
@@ -16,7 +17,7 @@ export const NOSCROLL_BAR_PROPERTIES = {
     },
   }
 
-const Funnel: React.FC<OwnProps> = ({ board, setBoard, createTask }) => {
+const Funnel: React.FC<OwnProps> = ({ board, setBoard, createTask, openTask }) => {
 
     const move = (source: string[], destination: string[], droppableSource: DraggableLocation, droppableDestination: DraggableLocation) => {
         const sourceClone = Array.from(source);
@@ -124,7 +125,7 @@ const Funnel: React.FC<OwnProps> = ({ board, setBoard, createTask }) => {
                 const column = board.columns[columnId] 
                 const tasks = column.taskIds.map(taskId => board.tasks[taskId])
                 
-                return <Header key={column._id} column={column} tasks={tasks} index={index} createTask={createTask} />
+                return <Header key={column._id} column={column} tasks={tasks} index={index} createTask={createTask} openTask={openTask} />
             })}
             {provided.placeholder}
         </Box>

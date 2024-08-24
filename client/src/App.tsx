@@ -1,5 +1,6 @@
 import './App.css'
 import PrimaryNavigation from './components/PrimaryNavigation'
+import ErrorBoundary from './ErrorBoundary'
 import useInitials from './hooks/useInitials'
 import AppRouter from './router'
 
@@ -8,9 +9,11 @@ function App() {
 
   return (
     loading ? <div>Loading...</div> : 
-    <PrimaryNavigation>
-      <AppRouter />
-    </PrimaryNavigation>
+    <ErrorBoundary>
+      <PrimaryNavigation>
+        <AppRouter />
+      </PrimaryNavigation>
+    </ErrorBoundary>
   )
 }
 
