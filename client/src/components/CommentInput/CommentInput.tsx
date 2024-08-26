@@ -1,34 +1,70 @@
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import { MentionsInput, Mention } from 'react-mentions';
 import AppButton from '../AppButton';
-import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
+import { Avatar, Box, Flex } from '@chakra-ui/react';
 import defaultStyle from './defaultStyle';
-import Comments from './Comments';
+import { Member } from '../..';
 
-const users = [
-  { id: '1', display: 'John Doe' },
-  { id: '2', display: 'Jane Smith' },
-  { id: '3', display: 'Bob Johnson' }
-];
+type CommentInputType = {
+  comment: string;
+  isPrimary: boolean;
+  setComment: (comment: string) => void;
+  members?: Array<Member>;
+  commentId: string;
+  createComment: (text: string) => void;
+  createReply: (text: string, taskId: string) => void;
+}
 
-function App() {
-  const [value, setValue] = useState('');
+const CommentInput: React.FC<CommentInputType> = ({
+  comment, setComment,
+  members, isPrimary,
+  createComment, 
+  createReply, commentId
+}) => {
+
+  const memberSuggestions = useMemo<{ id: string, display: string }[]>(() => {
+    if (!members) return []
+    return members?.map(member => ({
+      id: member._id,
+      display: member.name
+    }))
+  }, [members])
+
+  const handleCreateComment = () => {
+    if (isPrimary) {
+      createComment(comment)
+    } else {
+      createReply(comment, commentId)
+    }
+    setComment('')
+  }
 
   return (
       <Box>
         <MentionsInput
-            value={value}
+            value={comment}
             placeholder='Enter your comment'
-            onChange={(event, newValue) => setValue(newValue)}
+            onChange={(event, newValue) => setComment(newValue)}
             style={defaultStyle}
         >
             <Mention
-            trigger="@"
-            data={users}
-            renderSuggestion={(suggestion, search, highlightedDisplay) => <Suggestion displayName={suggestion?.display || ""} />}
+              trigger="@"
+              data={memberSuggestions}
+              renderSuggestion={(suggestion, search, highlightedDisplay) => <Suggestion displayName={suggestion?.display || ""} />}
             />
         </MentionsInput>
-        <AppButton float="right" color="white" marginTop="-36px" bgColor="#6B49F2" fontSize="md" marginRight="8px" size="small" padding="4px">SEND</AppButton>
+        {comment ? <AppButton 
+                      float="right"
+                      onClick={handleCreateComment} 
+                      color="white" 
+                      marginTop="-36px" 
+                      bgColor="#6B49F2" 
+                      fontSize="md" 
+                      marginRight="8px" 
+                      size="small" 
+                      padding="4px">
+                        SEND
+                    </AppButton> : null}
       </Box>
   );
 }
@@ -41,6 +77,6 @@ const Suggestion: React.FC<{displayName: string}> = ({ displayName }) => {
 }
 
 
-export default App;
+export default CommentInput;
 
 

@@ -1,9 +1,11 @@
-import { BoardType, Member, Organisation } from ".."
+import { BoardType, CommentType, Member, Organisation } from ".."
 
 export const STATE = {
     BOARD: 'state_type_board',
     ORGANISATION: 'state_type_organisation',
     MEMBER: 'state_type_member',
+    COMMENTS: 'state_type_comments',
+    PROFILE: 'state_type_profile'
 }
 
 export const colorSchema = {
@@ -41,11 +43,16 @@ export const APP_IMOJI = {
     "THANKS": 128591
 }
 
+export const DEFAULT_COMMENT: Array<CommentType> = []
+
 export const ROUTES = {
     CREATE_MEMBER: (orgId: string) => `/member/${orgId}`,
     FETCH_MEMBER: (orgId: string) => `/member/${orgId}`,
     CREATE_BOARD: (orgId: string) => `/boards/${orgId}`,
     ADD_REMOVE_MEMBER: (orgId: string) => `/boards/${orgId}/member`,
-    ADD_TASK: (orgId: string, boardId: string) => `/boards/task/${orgId}/${boardId}`
+    ADD_TASK: (orgId: string, boardId: string) => `/boards/task/${orgId}/${boardId}`,
+    CREATE_COMMENT: (orgId: string, boardId: string, taskId: string) => `/comment/${orgId}/${boardId}/${taskId}`,
+    GET_COMMENTS: (orgId: string, boardId: string, taskId: string) => `/comment/${orgId}/${boardId}/${taskId}`,
+    CREATE_REPLY: (orgId: string, boardId: string, taskId: string) => `/comment/${orgId}/${boardId}/${taskId}/reply`,
 
 }

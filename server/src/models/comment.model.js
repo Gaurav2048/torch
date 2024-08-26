@@ -17,10 +17,25 @@ const commentSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    taskId: {
+        type: String,
+        require: true
+    },
     reactions: [reactionSchema],
     replies: [{
         reply: String,
         replierId: String,
-        reactions: [reactionSchema]
+        reactions: [reactionSchema],
+        createdAt: {
+            type : Date, 
+            default: Date.now
+        }
     }]
+}, {
+    timestamps: { createdAt: true, updatedAt: false }
 })
+
+const Comment = mongoose.model("Comment", commentSchema)
+
+module.exports = Comment;
+
