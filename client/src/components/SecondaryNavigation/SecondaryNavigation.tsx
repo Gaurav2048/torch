@@ -1,4 +1,4 @@
-import { Box, Flex, Link, Text } from "@chakra-ui/react";
+import { Avatar, Box, Flex, Link, Text } from "@chakra-ui/react";
 import React, { useEffect, useMemo, useState } from "react";
 import Icon from "../Icon";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -11,10 +11,11 @@ import { GiSprint } from "react-icons/gi";
 import { GoWorkflow } from "react-icons/go";
 import { GoPlus } from "react-icons/go";
 import { useRecoilValue } from "recoil";
-import { orgAtom } from "../../AppState/state";
+import { memberAtom, orgAtom } from "../../AppState/state";
 import AppMenu from "../AppMenu";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { colorSchema } from "../../Constants";
+import { BoardType } from "../..";
 
 type OwnProps = {
     children: React.ReactElement | React.ReactElement[]
@@ -95,6 +96,7 @@ const Projects: React.FC = () => {
             <Box height="300px" overflow="scroll">
                 {org?.boards?.map(board => <Project isActive={activeBoard === board._id} board={board} setActive={handleActive} />)}
             </Box>
+            <TeamMembers />
         </Box>
     )
 }
@@ -188,4 +190,25 @@ const Item: React.FC<ItemProps> = ({
             {name}
         </Box>
     
+}
+
+const TeamMembers: React.FC = () => {
+    const members = useRecoilValue(memberAtom)
+    return <>
+        <Text marginBottom="16px" fontWeight={500} fontSize="md" textAlign="left">Team Members</Text>
+        <Box overflow="scroll" height="300px">
+            {members.map(member => (
+                <Flex marginBottom="8px" padding="4px 8px" borderRadius="4px" border="1px solid rgb(235, 235, 235)" key={member._id} gap="8px" alignItems="center">
+                    <Avatar size="xs" name={member.name} />
+                    <Box>
+                        <Text fontSize="xs" fontWeight={500}>{member.name}</Text>
+                        <Flex gap="4px" alignItems="center">
+                            <Box width="8px" height="8px" borderRadius="50%" bgColor="green" />
+                            <Text fontSize="2xs" color="gray">Online</Text>
+                        </Flex>
+                    </Box>
+                </Flex> 
+            ))}
+        </Box>
+    </>
 }
