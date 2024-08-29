@@ -56,7 +56,9 @@ interface BoardType {
     reactions?: Array<Reaction>
   }
 
-  export type REACTION_TYPE = 'SMILE' | 'THUMBS_UP' | 'THUMBS_DOWN' | 'CLAPS' | 'THANKS'
+  export enum REACTION_TYPE {
+    SMILE ,THUMBS_UP ,THUMBS_DOWN ,CLAPS ,THANKS
+  }
 
   interface Reaction {
     reactedBy: string;

@@ -28,6 +28,11 @@ const useComments = () => {
         method: 'POST'
     })
 
+    const { loading: createCommentReactionLoader, response: createCommentReactionData, fetchData: toogleCommentReactionRequest } = useAxios({
+        url: ROUTES.CREATE_COMMENT_REACTION(org._id, boardId || '', taskId || ''),
+        method: 'PATCH'
+    })
+
     useEffect(() => {
         fetchCommentRequest()
     }, [])
@@ -57,6 +62,19 @@ const useComments = () => {
         }))
     }, [createReplyData])
 
+    useEffect(() => {
+        if (!createCommentReactionData) return 
+        setComments(produce(comments, draft => {
+            draft.map(c => {
+                if (c._id === createCommentReactionData._id) {
+                    c.reactions = createCommentReactionData.reactions
+                }
+                return c
+            })
+            return draft
+        }))
+    }, [createCommentReactionData])
+
     const createReply = async (reply: string, commentId: string) => {
         const replyRequestData = {
             reply,
@@ -74,11 +92,16 @@ const useComments = () => {
         await createCommentRequest(commentData)
     }
 
+    const toogleCommentReaction = async (data: any) => {
+        await toogleCommentReactionRequest(data)
+    }
+
     return {
         createComment,
         createReply,
         fetchCommentLoader,
-        comments
+        comments,
+        toogleCommentReaction,
     }
 }
 

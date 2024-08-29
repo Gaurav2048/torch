@@ -1,13 +1,16 @@
-import { Avatar, Box, Flex, Text } from "@chakra-ui/react"
+import { Avatar, Box, Flex, Text, useDisclosure } from "@chakra-ui/react"
 import { BsThreeDots } from "react-icons/bs";
 import AppButton from "../AppButton";
 import { FiSmile } from "react-icons/fi";
 import { APP_IMOJI } from "../../Constants";
 import { useState } from "react";
 import CommentInput from "./CommentInput";
-import { CommentType, Member } from "../..";
+import { CommentType, Member, Reaction } from "../..";
 import { useRecoilValue } from "recoil";
-import { memberAtom } from "../../AppState/state";
+import { memberAtom, profileAtom } from "../../AppState/state";
+import useComments from "../../pages/Dashboard/view/useComments";
+import AppHover from "../AppHover";
+import { createReationMap } from "../../utils/utils";
 
 
 type CommentsType = {
@@ -42,7 +45,11 @@ const Comment: React.FC<CommentType & CommentCreateType & { handleChange: (text:
     const [ showReply, setShowReply ] = useState(false)
 
     return <Box marginTop="12px" overflow="hidden" >
-            <CommentUI comment={props.comment} commenterId={props.commenterId}  isPrimary setShowReply={setShowReply} />
+            <CommentUI 
+                comment={props.comment} 
+                commentId={props._id}
+                reactions={props.reactions}
+                commenterId={props.commenterId}  isPrimary setShowReply={setShowReply} />
             <Reply commentId={props._id} showReply={showReply} comment={props.comment} commentObj={props} commenterId={props.commenterId} handleChange={handleChange} createComment={createComment} createReply={createReply} />
         </Box>
 }
@@ -51,6 +58,8 @@ type CommentUIType = {
     comment: string;
     commenterId: string;
     isPrimary?: boolean;
+    commentId: string;
+    reactions?: Array<Reaction>;
     setShowReply?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -58,12 +67,30 @@ const CommentUI: React.FC<CommentUIType> = ({
     isPrimary,
     comment,
     commenterId,
-    setShowReply
+    setShowReply,
+    commentId,
+    reactions
 }) => {
     const members = useRecoilValue(memberAtom)
+    const { isOpen: hover, onToggle } = useDisclosure()
+    const profile = useRecoilValue(profileAtom)
 
     const commenterProfile = members.find(member => member._id === commenterId)
     const toogleShowReply = () => setShowReply?.(prev => !prev)
+    const { toogleCommentReaction } = useComments()
+
+    const createReaction = async (reaction: string) => {
+        const reactionBody = {
+            commentId,
+            reaction,
+            reactorId: profile._id,
+        }
+        if (isPrimary) {
+            await toogleCommentReaction(reactionBody)
+        } else {
+            
+        }
+    }
 
     return (
         <Box>
@@ -100,26 +127,84 @@ const CommentUI: React.FC<CommentUIType> = ({
                     >
                         REPLY
                     </AppButton> : null}
-                <Box 
-                    border="1px solid rgb(235, 235, 235)" 
-                    padding="2px" 
-                    borderRadius="2px"
+                <Flex 
+                    onMouseEnter={onToggle}
+                    onMouseLeave={onToggle}
+                    marginTop="8px"
+                    marginBottom="8px"
+                    gap="8px"
+                    alignItems="center"
+                    position="relative"
                 >
-                    <FiSmile color="gray" />
-                </Box>
-                {Object.entries(APP_IMOJI).map(([name, dec]) => (
                     <Box 
-                        key={name} 
                         border="1px solid rgb(235, 235, 235)" 
                         padding="2px" 
                         borderRadius="2px"
-                    >
-                        {String.fromCodePoint(dec)}
+                        cursor="pointer">
+                        <FiSmile color="gray" />
                     </Box>
-                ))}
+                    <Box gap="8px" top="-20px" position="absolute" display="flex">
+                        {hover ? 
+                            Object.entries(APP_IMOJI).map(([name, dec]) => (
+                                <ImojiComponent 
+                                    name={name}
+                                    dec={dec} 
+                                    key={name} 
+                                    type="APPLY_REACTION"
+                                    createReaction={createReaction} />
+                            )) : null}
+                    </Box>
+                </Flex>
+                <DisplayReaction reactions={reactions} />
             </Flex>
         </Box>
     )
+}
+
+type DisplayReactionType = {
+    reactions?: Array<Reaction>;
+
+}
+
+const DisplayReaction: React.FC<DisplayReactionType> = ({
+    reactions
+}) => {
+    const reactionMap = createReationMap(reactions)
+    return Object.entries(reactionMap).map(([name, arr]) => (
+        <Flex alignItems="center" padding="2px 4px" border="1px solid rgb(235, 235, 235)" borderRadius="2px">
+            {String.fromCodePoint(APP_IMOJI[name])}
+            <Text fontSize="sm" marginLeft="8px">{arr.length}</Text>
+        </Flex>
+    ))
+}
+
+
+type ImojiComponentType = {
+    name: string;
+    dec: number;
+    type: 'APPLY_REACTION' | 'DISPLAY_REACTION';
+    createReaction: (name: string) => void
+}
+
+const ImojiComponent: React.FC<ImojiComponentType> = ({
+    name, 
+    createReaction,
+    dec,
+    type
+}) => {
+    return <AppHover>
+    {({ isOpen: hover, onClose, onOpen }) => <Box 
+            onClick={() => createReaction(name)}
+            border={type === 'DISPLAY_REACTION' ? "1px solid rgb(235, 235, 235)" : undefined} 
+            borderRadius="2px"
+            cursor="pointer"
+            onMouseEnter={onOpen}
+            onMouseLeave={onClose}
+            fontSize={hover ? "20px" : "16px"}
+        >
+            {String.fromCodePoint(dec)}
+        </Box>}
+</AppHover>
 }
 
 type replyProps = {
@@ -162,6 +247,7 @@ const Reply: React.FC<replyProps> = ({
                         key={_id}
                         comment={reply} 
                         commenterId={replierId} 
+                        commentId={commentId}
                     />
                 )
         }

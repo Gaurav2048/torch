@@ -1,4 +1,4 @@
-import { BoardType, CommentType, Member, Organisation } from ".."
+import { BoardType, CommentType, Member, Organisation, REACTION_TYPE } from ".."
 
 export const STATE = {
     BOARD: 'state_type_board',
@@ -35,7 +35,7 @@ export const DEFAULT_ORG: Organisation = {
 export const DEFAULT_MEMBER: Array< Member> = []
 
 //&#
-export const APP_IMOJI = {
+export const APP_IMOJI: { [key: string]: number } = {
     "SMILE": 128512,
     "CLAPS": 128079,
     "THUMBS_UP": 128077,
@@ -54,5 +54,5 @@ export const ROUTES = {
     CREATE_COMMENT: (orgId: string, boardId: string, taskId: string) => `/comment/${orgId}/${boardId}/${taskId}`,
     GET_COMMENTS: (orgId: string, boardId: string, taskId: string) => `/comment/${orgId}/${boardId}/${taskId}`,
     CREATE_REPLY: (orgId: string, boardId: string, taskId: string) => `/comment/${orgId}/${boardId}/${taskId}/reply`,
-
+    CREATE_COMMENT_REACTION: (orgId: string, boardId: string, taskId: string) => `/comment/${orgId}/${boardId}/${taskId}/react`
 }

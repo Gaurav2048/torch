@@ -63,8 +63,39 @@ const replyToComment = catchAsync(async (req, res) => {
     res.status(OK).send(comment); 
 })
 
+const reactToComment = catchAsync(async (req, res) => {
+    const { orgId, boardId, taskId } = req.params
+    const { commentId, reaction, reactorId, type } = req.body
+    const comment = await Comment.findById(commentId)
+    if (!comment) {
+        throw new ApiError(BAD_REQUEST, "Comment Not found")
+    }
+    if (comment?.taskId !== taskId) {
+        throw new ApiError(BAD_REQUEST, "Trying to update the wrong comment.")
+    }
+    let index = -1
+    for (let i = 0; i < comment.reactions.length; i++) {
+        const { reactedBy, reaction: react } = comment.reactions[i]
+        if (reactedBy === reactorId && reaction === react) {
+            index = i
+            break
+        }
+    }
+    if (index !== -1) {
+        comment.reactions.splice(index, 1)
+    } else {
+        comment.reactions.push({
+            reactedBy: reactorId,
+            reaction
+        })
+    }
+    await comment.save()
+    res.status(OK).send(comment)
+})
+
 module.exports = {
     getComments,
     createComment,
-    replyToComment
+    replyToComment,
+    reactToComment
 }
