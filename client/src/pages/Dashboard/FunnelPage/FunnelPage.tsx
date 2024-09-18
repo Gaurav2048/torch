@@ -9,44 +9,52 @@ import CreateBoard from "../Board";
 import ViewTask from "../view";
 
 const FunnelPage: React.FC = () => {
-    const [ board, setBoard ] = useRecoilState(boardAtom)
-    const org = useRecoilValue(orgAtom)
-    
-    const { boardId } = useParams()
-    const navigate = useNavigate()
-    const location = useLocation()
+  const [board, setBoard] = useRecoilState(boardAtom);
+  const org = useRecoilValue(orgAtom);
 
-    const { loading, response, fetchData } = useAxios({
-        method: 'GET',
-        url: `/boards/${org._id}/board/${boardId}`
-    })
+  const { boardId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    useEffect(() => {
-        if (org?._id) {
-            fetchData()
-        }
-    }, [boardId, org?._id])
+  const { loading, response, fetchData } = useAxios({
+    method: "GET",
+    url: `/boards/${org._id}/board/${boardId}`,
+  });
 
-    useEffect(() => {
-        if(!response) return
-        setBoard(response)
-    }, [response])
-
-    const createTask = (columnId: string) => {
-        navigate(`${location.pathname}/create/task/${columnId}`)
+  useEffect(() => {
+    if (org?._id) {
+      fetchData();
     }
+  }, [boardId, org?._id]);
 
-    const openTask = (taskId: string) => {
-        navigate(`${location.pathname}/view/task/${taskId}`)
-    }
+  useEffect(() => {
+    if (!response) return;
+    setBoard(response);
+  }, [response]);
 
-    return !loading ? <>
-        <Funnel board={board} setBoard={setBoard} createTask={createTask} openTask={openTask} />
-        <TaskForm />
-        <CreateBoard />
-        <ViewTask />
-    </> : <div>Loading...</div>
+  const createTask = (columnId: string) => {
+    navigate(`${location.pathname}/create/task/${columnId}`);
+  };
 
-}
+  const openTask = (taskId: string) => {
+    navigate(`${location.pathname}/view/task/${taskId}`);
+  };
+
+  return !loading ? (
+    <>
+      <Funnel
+        board={board}
+        setBoard={setBoard}
+        createTask={createTask}
+        openTask={openTask}
+      />
+      <TaskForm />
+      <CreateBoard />
+      <ViewTask />
+    </>
+  ) : (
+    <div>Loading...</div>
+  );
+};
 
 export default FunnelPage;

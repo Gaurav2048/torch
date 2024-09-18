@@ -1,4 +1,4 @@
-import { Box, Tab, TabList, Tabs } from "@chakra-ui/react"
+import { Box, Tab, TabList, Tabs } from "@chakra-ui/react";
 import Progress from "../../components/Progress";
 import Members from "../../components/Members";
 import { useRecoilState } from "recoil";
@@ -9,72 +9,96 @@ import DashboardRoutes from "../../router/dashboardRouter";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 
 const TAB_SEGMENTS = {
-    FUNNEL: "funnel",
-    NOTES: "notes"
-}
+  FUNNEL: "funnel",
+  NOTES: "notes",
+};
 
 const Dashboard: React.FC = () => {
-    const [ board, setBoard ] = useRecoilState(boardAtom)
-    
-    const [tabIndex, setTabIndex] = useState(0);
-    const location = useLocation()
-    const { orgId } = useParams()
-    // const navigate = useNavigate()
+  const [board, setBoard] = useRecoilState(boardAtom);
 
-    // const { response, fetchData } = useAxios({
-    //     method: 'GET',
-    //     url: `/boards/${orgId}`
-    // })
+  const [tabIndex, setTabIndex] = useState(0);
+  const location = useLocation();
+  const { orgId } = useParams();
+  // const navigate = useNavigate()
 
-    // useEffect(() => {
-    //     fetchData()
-    // }, [])
+  // const { response, fetchData } = useAxios({
+  //     method: 'GET',
+  //     url: `/boards/${orgId}`
+  // })
 
-    // useEffect(() => {
-    //     console.log('response', response)
-    //     if(!response) return
-        
-    //     setBoard(response)
-    // }, [response])
+  // useEffect(() => {
+  //     fetchData()
+  // }, [])
 
-    const handleTabsChange = (index: number) => {
-      setTabIndex(index);
-    };
+  // useEffect(() => {
+  //     console.log('response', response)
+  //     if(!response) return
 
+  //     setBoard(response)
+  // }, [response])
 
+  const handleTabsChange = (index: number) => {
+    setTabIndex(index);
+  };
 
-    useEffect(() => {
-        if (location.pathname.includes(TAB_SEGMENTS.FUNNEL)) {
-            setTabIndex(0)
-        }
-        if (location.pathname.includes(TAB_SEGMENTS.NOTES)) {
-            setTabIndex(1)
-        }
-    }, [])
+  useEffect(() => {
+    if (location.pathname.includes(TAB_SEGMENTS.FUNNEL)) {
+      setTabIndex(0);
+    }
+    if (location.pathname.includes(TAB_SEGMENTS.NOTES)) {
+      setTabIndex(1);
+    }
+  }, []);
 
-    useEffect(() => {
-        // if (tabIndex === 0) navigate('/')
-    }, [tabIndex])
+  useEffect(() => {
+    // if (tabIndex === 0) navigate('/')
+  }, [tabIndex]);
 
-    return <SecondaryNavigation>
-            <Box width="100%" height="100%" overflow="hidden" flexGrow={1} display="flex" flexDirection="column">
-            <Box padding="12px 32px" display="flex" justifyContent="space-between" >
-                <Progress title="Piper Enterprise" />
-                <Members />
-            </Box>
-            <Tabs index={tabIndex} onChange={handleTabsChange} display="flex" flexDirection="column" flexGrow={1} variant="line" >
-                <Box display="flex" justifyContent="space-between" borderBottom="1px solid rgb(235, 235, 235)" alignItems="center">
-                    <TabList width="max-content" borderBottomWidth="0">
-                        <Tab>Board</Tab>
-                        <Tab>Notes</Tab>    
-                    </TabList>
-                </Box>
-            </Tabs>
-            <Box width="100%" height="100%" overflow="hidden" bgColor="rgb(247, 247, 247)">
-                <DashboardRoutes />
-            </Box>
+  return (
+    <SecondaryNavigation>
+      <Box
+        width="100%"
+        height="100%"
+        overflow="hidden"
+        flexGrow={1}
+        display="flex"
+        flexDirection="column"
+      >
+        <Box padding="12px 32px" display="flex" justifyContent="space-between">
+          <Progress title="Piper Enterprise" />
+          <Members />
         </Box>
+        <Tabs
+          index={tabIndex}
+          onChange={handleTabsChange}
+          display="flex"
+          flexDirection="column"
+          flexGrow={1}
+          variant="line"
+        >
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            borderBottom="1px solid rgb(235, 235, 235)"
+            alignItems="center"
+          >
+            <TabList width="max-content" borderBottomWidth="0">
+              <Tab>Board</Tab>
+              <Tab>Notes</Tab>
+            </TabList>
+          </Box>
+        </Tabs>
+        <Box
+          width="100%"
+          height="100%"
+          overflow="hidden"
+          bgColor="rgb(247, 247, 247)"
+        >
+          <DashboardRoutes />
+        </Box>
+      </Box>
     </SecondaryNavigation>
-}
+  );
+};
 
 export default Dashboard;

@@ -9,6 +9,6 @@ import { memberAtom } from "./state";
 //         return members.reduce((prev, member) => {
 //                 prev[member._id] = member
 //         }, {})
-        
-//     } 
+
+//     }
 // })

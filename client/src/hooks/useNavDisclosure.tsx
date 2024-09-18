@@ -1,17 +1,17 @@
-import { useEffect, useMemo, useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useEffect, useMemo, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const useNavDisclosure = (segment: string) => {
-    const location = useLocation()
-    const navigate = useNavigate()
+  const location = useLocation();
+  const navigate = useNavigate();
 
-    const open = useMemo(() => {
-        return location.pathname.includes(segment)
-    }, [location.pathname])
+  const open = useMemo(() => {
+    return location.pathname.includes(segment);
+  }, [location.pathname]);
 
-    const goBack = () => navigate(-1)
+  const goBack = () => navigate(-1);
 
-    return { open, goBack }
-}
+  return { open, goBack };
+};
 
 export default useNavDisclosure;

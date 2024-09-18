@@ -1,7 +1,7 @@
-import { Box } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react";
 
 const TaskDetails: React.FC = () => {
-    return <Box>Task Info</Box>
-}
+  return <Box>Task Info</Box>;
+};
 
 export default TaskDetails;

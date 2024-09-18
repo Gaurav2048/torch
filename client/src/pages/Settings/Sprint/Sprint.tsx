@@ -1,7 +1,7 @@
-import { Box } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react";
 
 const Sprint: React.FC = () => {
-    return <Box>Sprint</Box>
-}
+  return <Box>Sprint</Box>;
+};
 
-export default Sprint
+export default Sprint;

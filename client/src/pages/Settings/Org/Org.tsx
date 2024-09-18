@@ -1,7 +1,7 @@
-import { Box } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react";
 
 const Org: React.FC = () => {
-    return <Box>Org</Box>
-}
+  return <Box>Org</Box>;
+};
 
-export default Org
+export default Org;

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import axiosInstance from './axiosInstance';
+import { useState } from "react";
+import axiosInstance from "./axiosInstance";
 
 const useAxios = (config: any) => {
   const [response, setResponse] = useState<any>(null);
@@ -7,17 +7,17 @@ const useAxios = (config: any) => {
   const [loading, setLoading] = useState(false);
 
   const fetchData = async (data?: any) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const result = await axiosInstance({
         ...config,
         data: {
-          ...data, 
-          ...config?.data
-        }
+          ...data,
+          ...config?.data,
+        },
         // transformResponse: [function (data) {
         //     return {
-        //         ...data, 
+        //         ...data,
         //         id: data._id
         //     };
         //   }],
@@ -29,7 +29,6 @@ const useAxios = (config: any) => {
       setLoading(false);
     }
   };
-
 
   return { response, error, loading, fetchData };
 };

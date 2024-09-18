@@ -1,20 +1,21 @@
-import './App.css'
-import PrimaryNavigation from './components/PrimaryNavigation'
-import ErrorBoundary from './ErrorBoundary'
-import useInitials from './hooks/useInitials'
-import AppRouter from './router'
+import "./App.css";
+import PrimaryNavigation from "./components/PrimaryNavigation";
+import ErrorBoundary from "./ErrorBoundary";
+import useInitials from "./hooks/useInitials";
+import AppRouter from "./router";
 
 function App() {
-  const loading = useInitials()
+  const loading = useInitials();
 
-  return (
-    loading ? <div>Loading...</div> : 
+  return loading ? (
+    <div>Loading...</div>
+  ) : (
     <ErrorBoundary>
       <PrimaryNavigation>
         <AppRouter />
       </PrimaryNavigation>
     </ErrorBoundary>
-  )
+  );
 }
 
-export default App
+export default App;

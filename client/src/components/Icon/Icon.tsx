@@ -2,44 +2,46 @@ import { Box } from "@chakra-ui/react";
 import { avaterText } from "../../utils/textUtils";
 
 type OwnProps = {
-    shape: 'square' | 'circle';
-    border: '1' | '2' | '3';
-    text?: string;
-    size: 'small' | 'medium' | 'large';
-    margin?: string;
-    icon?: any
-}
+  shape: "square" | "circle";
+  border: "1" | "2" | "3";
+  text?: string;
+  size: "small" | "medium" | "large";
+  margin?: string;
+  icon?: any;
+};
 
 const SIZES = {
-    small: '24px',
-    medium: '36px',
-    large: '44px'
-}
+  small: "24px",
+  medium: "36px",
+  large: "44px",
+};
 
 const Icon: React.FC<OwnProps> = ({
-    shape,
-    border,
-    text,
-    size,
-    margin,
-    icon
+  shape,
+  border,
+  text,
+  size,
+  margin,
+  icon,
 }) => {
-    return <Box
-        width={SIZES[size]}
-        height={SIZES[size]}
-        borderRadius={shape === 'square' ? '20%' : '50%'}
-        border={`${border}px solid #cbcbcb`}
-        margin={margin || "0 8px 0 0 "}
-        fontSize="12px"
-        display="flex"
-        color="#cccccc"
-        alignItems="center"
-        justifyContent="center"
-        bgColor="white"
-    >   
-        {text ? avaterText(text) : null}
-        {icon ? icon?.() : null}
+  return (
+    <Box
+      width={SIZES[size]}
+      height={SIZES[size]}
+      borderRadius={shape === "square" ? "20%" : "50%"}
+      border={`${border}px solid #cbcbcb`}
+      margin={margin || "0 8px 0 0 "}
+      fontSize="12px"
+      display="flex"
+      color="#cccccc"
+      alignItems="center"
+      justifyContent="center"
+      bgColor="white"
+    >
+      {text ? avaterText(text) : null}
+      {icon ? icon?.() : null}
     </Box>
-}
+  );
+};
 
-export default Icon
+export default Icon;
