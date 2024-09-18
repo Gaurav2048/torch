@@ -46,7 +46,7 @@ const Members: React.FC = () => {
           </Button>
         )}
       >
-        <AddMembersToBoard />
+        {() => <AddMembersToBoard />}
       </AppMenu>
     </Box>
   );

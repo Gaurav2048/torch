@@ -19,7 +19,7 @@ const Others: React.FC = () => {
           />
         )}
       >
-        <AppNotification />
+        {(onClose) => <AppNotification onClose={onClose} />}
       </AppMenu>
       <Avatar
         size="xs"
