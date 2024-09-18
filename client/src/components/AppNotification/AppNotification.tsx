@@ -30,7 +30,7 @@ const Notification: React.FC = () => {
     <Box width="4px" minHeight="max-content" bgColor="greenyellow"></Box>
     <Flex position="relative" padding="12px" flexGrow={1}>
       <Box position="relative">
-        <Avatar title="John Doe" size="md" />
+        <Avatar name="John Doe" size="md" />
         <Box position="absolute" zIndex={200} border="4px solid white" borderRadius="50%" top="30px" right="-2px" bgColor="green" width="24px" height="24px" />
       </Box>
       <Box marginLeft="12px">
