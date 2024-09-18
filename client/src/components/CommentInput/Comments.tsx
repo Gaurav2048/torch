@@ -29,6 +29,10 @@ const Comments: React.FC<CommentsType & CommentCreateType> = ({ members, createC
     const handleChange = (text: string) => setComment(text)
 
     return <Box height="100%" overflow="hidden">
+        <Flex alignItems="center" marginBottom="8px">
+            <Text fontSize="md" fontWeight={600} marginRight="8px">Add a Comment</Text>
+            <Text fontWeight={400} fontSize="xs" color="gray">Type '@' to mention others</Text>
+        </Flex>
         <CommentInput commentId="" members={members} comment={comment} isPrimary createComment={createComment} createReply={createReply} setComment={handleChange} />
         <Box height="100%" overflow="scroll">
             {comments?.map(obj => <Comment handleChange={handleChange} key={obj?._id} {...obj} createComment={createComment} createReply={createReply} />)}
