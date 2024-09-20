@@ -99,6 +99,7 @@ interface Member {
   name: string;
   email: string;
   password: string;
+  online?: boolean;
   role: string;
   organisation: string;
   createdAt?: string;

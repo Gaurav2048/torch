@@ -280,10 +280,11 @@ const TeamMembers: React.FC = () => {
                   width="8px"
                   height="8px"
                   borderRadius="50%"
-                  bgColor="green"
+                  bgColor={member.online ? "green" : "white"}
+                  border={`1px solid ${member.online ? "none" : "gray"}`}
                 />
                 <Text fontSize="2xs" color="gray">
-                  Online
+                  {member.online ? "Online" : "Ofline"}
                 </Text>
               </Flex>
             </Box>

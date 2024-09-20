@@ -12,6 +12,10 @@ const userSchema = mongoose.Schema(
       require: true,
       unique: true,
     },
+    online: {
+      type: Boolean,
+      default: false
+    },
     role: {
       type: String,
       default: "admin",

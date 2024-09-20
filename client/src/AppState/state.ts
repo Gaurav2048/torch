@@ -6,7 +6,7 @@ import {
   DEFAULT_ORG,
   STATE,
 } from "../Constants";
-import { CommentType, Member } from "..";
+import { CommentType, Member, Organisation } from "..";
 
 export const boardAtom = atom<BoardType>({
   key: STATE.BOARD,

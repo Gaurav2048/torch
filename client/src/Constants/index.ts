@@ -38,6 +38,12 @@ export const DEFAULT_ORG: Organisation = {
   boards: [],
 };
 
+export const SOCKET_EVENT_TYPE = {
+  REGISTER_AVAILABILITY: "register_availability",
+  JOIN_ORGANISATION: "join_organisation",
+  UPDATE_ORGANISATION_AVAILABILITY: "organizationUpdate_avaliablity"
+}
+
 export const DEFAULT_MEMBER: Array<Member> = [];
 
 //&#
