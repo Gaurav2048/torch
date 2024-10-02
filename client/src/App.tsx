@@ -26,6 +26,10 @@ function App() {
   }, [org, profile])
 
   useEffect(() => {
+    localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bmphbmthbGl0YTgzNkBnbWFpbC5jb20iLCJpYXQiOjE3MjcxNzE5MTh9.7kOqNjX89A1Oeaf-yUsLAooVEi02dOFrgIFThKB1cv0")
+  }, [])
+
+  useEffect(() => {
     useSocketValues.listenEvent(SOCKET_EVENT_TYPE.UPDATE_ORGANISATION_AVAILABILITY, (data: any) => {
       const { userId, available } = data
       setMember(produce(members, draft => {

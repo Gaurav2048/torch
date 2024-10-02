@@ -7,7 +7,7 @@ const User = require("../models/user.model");
 const auth = async (req, res, next) => {
   try {
     const decoded = jwt.verify(
-      req.header[REQUEST_TOKEN_LOCATION],
+      req.headers[REQUEST_TOKEN_LOCATION],
       JWT_SIGN_KEY,
     );
     const user = await User.findOne({ email: decoded.email });
@@ -15,7 +15,7 @@ const auth = async (req, res, next) => {
       res.status(httpStatus.BAD_REQUEST).send({ message: "No user found" });
       return;
     }
-    res.user = user._doc;
+    req.user = user._doc;
     next();
   } catch (e) {
     next(e);

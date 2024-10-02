@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { orgAtom } from "../../../AppState/state";
 import { v4 } from "uuid";
+import { Task } from "../../..";
 
 export const DUMMY_SPRINT = "sprint_1";
 
@@ -32,6 +33,7 @@ const TaskForm: React.FC = () => {
     _id: "",
     workType: "",
     columnId,
+    id: ""
   };
 
   const validationSchema = object({
@@ -68,7 +70,7 @@ const TaskForm: React.FC = () => {
     >
       {({ submitForm, errors, values }) => (
         <form>
-          <AppDrawer open={open} onClose={goBack} submitForm={submitForm}>
+          <AppDrawer title="Create Task" open={open} onClose={goBack} submitForm={submitForm}>
             <>
               <Button onClick={() => alert(JSON.stringify(errors))}>
                 click!

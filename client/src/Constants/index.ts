@@ -72,4 +72,5 @@ export const ROUTES = {
     `/comment/${orgId}/${boardId}/${taskId}/reply`,
   CREATE_COMMENT_REACTION: (orgId: string, boardId: string, taskId: string) =>
     `/comment/${orgId}/${boardId}/${taskId}/react`,
+  FETCH_PROFILE: () => `/auth/profile` 
 };

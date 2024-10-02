@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const { JWT_SIGN_KEY } = require("../utils/constants");
 const bcrypt = require("bcrypt");
 const { sendEvent } = require("../app");
+const ApiError = require("../utils/ApiError");
+const { BAD_REQUEST } = require("http-status");
 
 const createUser = async (user) => {
   const hashedPassword = bcrypt.hashSync(user.password, 10);
@@ -30,9 +32,28 @@ const toogleAvailability = async (io, organizationId, userId, available) => {
   });
 }
 
+const loginUserWithEmailAndPassword = async (email, password) => {
+  const dbUser = await User.findOne({
+    email
+  })
+  if (!dbUser) {
+    throw new ApiError(BAD_REQUEST, "User not found")
+  }
+  const isPasswordMatch = await bcrypt.compare(password, dbUser.password)
+  if (!isPasswordMatch) {
+    throw new ApiError(BAD_REQUEST, "Password mismatch")
+  }
+  const token = createToken(email)
+  return {
+    ...dbUser._doc, 
+    token
+  }
+} 
+
 
 module.exports = {
   createUser,
   createToken,
+  loginUserWithEmailAndPassword,
   toogleAvailability
 };

@@ -11,6 +11,9 @@ const useAxios = (config: any) => {
     try {
       const result = await axiosInstance({
         ...config,
+        headers: {
+          "x-access-token": localStorage.getItem("token")
+        },
         data: {
           ...data,
           ...config?.data,
