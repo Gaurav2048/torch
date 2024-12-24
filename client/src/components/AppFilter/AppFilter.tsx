@@ -5,6 +5,7 @@ import AppMenu from "../AppMenu";
 import {
   APPLICABLE_FILTER_TYPE,
   APPLICABLE_FILTERS,
+  APPLIED_FILER,
 } from "../../Constants/FilterData";
 import { capitalize } from "../../utils/textUtils";
 import AppTypography from "../AppTypography/AppTypography";
@@ -15,13 +16,15 @@ import FilterChip from "./FilterChip";
 import { v4 as uuidV4 } from "uuid";
 import { produce } from "immer";
 
-const AppFilter: React.FC = () => {
-  const [appliedFilters, setAppliedFilters] = useState<
-    Array<APPLICABLE_FILTER_TYPE & { params: Array<{id: string, name: string, icon: string}>; id: string }>
-  >([]);
+type OwnProps = {
+    applyFilter: (filters: Array<APPLIED_FILER>) => void
+}
+
+const AppFilter: React.FC<OwnProps> = ({ applyFilter }) => {
+  const [appliedFilters, setAppliedFilters] = useState<Array<APPLIED_FILER>>([]);
 
   useEffect(() => {
-    console.log(appliedFilters)
+    applyFilter(appliedFilters)
   }, [appliedFilters])
 
   const onFilterSelected = (filter: APPLICABLE_FILTER_TYPE) => {

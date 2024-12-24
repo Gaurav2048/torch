@@ -19,28 +19,6 @@ const Dashboard: React.FC = () => {
 
   const [tabIndex, setTabIndex] = useState(0);
   const location = useLocation();
-  const { orgId } = useParams();
-  // const navigate = useNavigate()
-
-  // const { response, fetchData } = useAxios({
-  //     method: 'GET',
-  //     url: `/boards/${orgId}`
-  // })
-
-  // useEffect(() => {
-  //     fetchData()
-  // }, [])
-
-  // useEffect(() => {
-  //     console.log('response', response)
-  //     if(!response) return
-
-  //     setBoard(response)
-  // }, [response])
-
-  const handleTabsChange = (index: number) => {
-    setTabIndex(index);
-  };
 
   useEffect(() => {
     if (location.pathname.includes(TAB_SEGMENTS.FUNNEL)) {
@@ -50,10 +28,6 @@ const Dashboard: React.FC = () => {
       setTabIndex(1);
     }
   }, []);
-
-  useEffect(() => {
-    // if (tabIndex === 0) navigate('/')
-  }, [tabIndex]);
 
   return (
     <SecondaryNavigation>
@@ -65,16 +39,14 @@ const Dashboard: React.FC = () => {
         display="flex"
         flexDirection="column"
       >
-        <Box padding="12px 32px" display="flex" justifyContent="space-between">
+        <Box padding="12px 32px 0 32px" display="flex" justifyContent="space-between">
           <Progress title="Piper Enterprise" />
           <Members />
         </Box>
-        <AppFilter />
         <Box
           width="100%"
           height="100%"
           overflow="hidden"
-          bgColor="rgb(247, 247, 247)"
         >
           <DashboardRoutes />
         </Box>

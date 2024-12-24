@@ -1,12 +1,16 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import { boardAtom, orgAtom } from "../../../AppState/state";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useAxios from "../../../hooks/useAxios";
 import Funnel from "../../../components/Funnel";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import TaskForm from "../Task/TaskForm";
 import CreateBoard from "../Board";
 import ViewTask from "../view";
+import AppFilter from "../../../components/AppFilter";
+import { Box } from "@chakra-ui/react";
+import { APPLIED_FILER } from "../../../Constants/FilterData";
+import { BoardType } from "../../..";
 
 const FunnelPage: React.FC = () => {
   const [board, setBoard] = useRecoilState(boardAtom);
@@ -15,6 +19,10 @@ const FunnelPage: React.FC = () => {
   const { boardId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const filteredBoard = useMemo(() => {
+
+  }, [board])
 
   const { loading, response, fetchData } = useAxios({
     method: "GET",
@@ -40,17 +48,24 @@ const FunnelPage: React.FC = () => {
     navigate(`${location.pathname}/view/task/${taskId}`);
   };
 
+  const applyFilter = (appliedFilters: Array<APPLIED_FILER>) => {
+    // appliedFilters.map(filter => )
+  }
+
   return !loading ? (
     <>
-      <Funnel
-        board={board}
-        setBoard={setBoard}
-        createTask={createTask}
-        openTask={openTask}
-      />
-      <TaskForm />
-      <CreateBoard />
-      <ViewTask />
+      <AppFilter applyFilter={applyFilter} />
+      <Box bgColor="rgb(247, 247, 247)">
+        <Funnel
+          board={board}
+          setBoard={setBoard}
+          createTask={createTask}
+          openTask={openTask}
+        />
+        <TaskForm />
+        <CreateBoard />
+        <ViewTask />
+      </Box>
     </>
   ) : (
     <div>Loading...</div>

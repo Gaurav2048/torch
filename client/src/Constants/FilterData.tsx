@@ -10,6 +10,8 @@ export type APPLICABLE_FILTER_TYPE = {
     alias: string[]
 }
 
+export type APPLIED_FILER = APPLICABLE_FILTER_TYPE & { params: Array<{id: string, name: string, icon: string}>; id: string }
+
 export const APPLICABLE_FILTERS: APPLICABLE_FILTER_TYPE[] = [
     {
         type: "STATUS",
