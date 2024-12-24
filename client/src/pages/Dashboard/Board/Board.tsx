@@ -21,6 +21,7 @@ import { orgAtom } from "../../../AppState/state";
 import { produce } from "immer";
 import { useLocation, useNavigate } from "react-router-dom";
 import useNavDisclosure from "../../../hooks/useNavDisclosure";
+import { Organisation } from "../../..";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),

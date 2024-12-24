@@ -9,7 +9,7 @@ const AppButton: React.FC<ButtonProps> = ({ onClick, children, ...rest }) => {
     setLoading(false);
   };
   return (
-    <Button {...rest} isLoading={loading} onClick={handleClick}>
+    <Button {...rest} cursor="pointer" isLoading={loading}  onClick={handleClick}>
       {children}
     </Button>
   );

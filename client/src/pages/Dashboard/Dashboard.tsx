@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import DashboardRoutes from "../../router/dashboardRouter";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
+import AppFilter from "../../components/AppFilter";
 
 const TAB_SEGMENTS = {
   FUNNEL: "funnel",
@@ -68,26 +69,7 @@ const Dashboard: React.FC = () => {
           <Progress title="Piper Enterprise" />
           <Members />
         </Box>
-        <Tabs
-          index={tabIndex}
-          onChange={handleTabsChange}
-          display="flex"
-          flexDirection="column"
-          flexGrow={1}
-          variant="line"
-        >
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            borderBottom="1px solid rgb(235, 235, 235)"
-            alignItems="center"
-          >
-            <TabList width="max-content" borderBottomWidth="0">
-              <Tab>Board</Tab>
-              <Tab>Notes</Tab>
-            </TabList>
-          </Box>
-        </Tabs>
+        <AppFilter />
         <Box
           width="100%"
           height="100%"

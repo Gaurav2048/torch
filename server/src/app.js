@@ -24,7 +24,9 @@ const io = new Server(server, {
 
 console.log("IO is", io.to)
 const sendEvent = (group, type, data) => {
-    io.to(group).emit(type, data);
+    // io.to(group).emit(type, data);
 }
+
+
 
 module.exports = { app, server, io, sendEvent };

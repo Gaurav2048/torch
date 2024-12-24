@@ -4,5 +4,5 @@ export const avaterText = (str: string) => {
 };
 
 export function capitalize(s: string) {
-  return s[0].toUpperCase() + s.slice(1);
+  return s[0].toUpperCase() + s.slice(1).toLowerCase();
 }

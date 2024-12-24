@@ -5,6 +5,10 @@ import {
   Organisation,
   REACTION_TYPE,
 } from "..";
+import { IconHighPriority, IconLowPriority, IconMediumPriority, IconNoPriority, IconUrgentPriority } from "./Icons";
+
+
+
 
 export const STATE = {
   BOARD: "state_type_board",
@@ -74,3 +78,31 @@ export const ROUTES = {
     `/comment/${orgId}/${boardId}/${taskId}/react`,
   FETCH_PROFILE: () => `/auth/profile` 
 };
+
+export const PRIORITIES = [
+  {
+    id: 0, 
+    priority: "No Priority",
+    icon: () => <IconNoPriority />
+  },
+  {
+    id: 1, 
+    priority: "Low",
+    icon: () => <IconLowPriority />
+  },
+  {
+    id: 2, 
+    priority: "Medium",
+    icon: () => <IconMediumPriority />
+  },
+  {
+    id: 3, 
+    priority: "High",
+    icon: () => <IconHighPriority />
+  },
+  {
+    id: 4, 
+    priority: "Urgent",
+    icon: () => <IconUrgentPriority />
+  }
+]

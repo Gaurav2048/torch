@@ -7,20 +7,27 @@ import {
   MenuList,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 
 type OwnProps = {
   anchor: () => React.ReactElement;
   children: (onClose?: () => void) => React.ReactElement;
+  defaultOpen?: boolean
 };
 
-const AppMenu: React.FC<OwnProps> = ({ anchor, children }) => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+const AppMenu: React.FC<OwnProps> = ({ anchor, children, defaultOpen }) => {
+  const { isOpen, onClose: closeMenu, onOpen: openMenu } = useDisclosure()
+
+  useEffect(() => {
+    if (defaultOpen) openMenu()
+  }, [])
+
   return (
-    <Menu isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+    <Menu isOpen={isOpen} onOpen={openMenu} onClose={closeMenu}>
       <MenuButton as={Box} cursor="pointer">
         {anchor()}
       </MenuButton>
-      <MenuList zIndex={1001}>{children(onClose)}</MenuList>
+      <MenuList padding="4px 0" zIndex={1001}>{children(closeMenu)}</MenuList>
     </Menu>
   );
 };
