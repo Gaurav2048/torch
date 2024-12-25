@@ -63,9 +63,7 @@ function App() {
   ) : (
     <SocketContext.Provider value={{ ...useSocketValues }}>
       <ErrorBoundary>
-        <PrimaryNavigation>
-          <AppRouter />
-        </PrimaryNavigation>
+        <AppRouter />
       </ErrorBoundary>
     </SocketContext.Provider>
   );

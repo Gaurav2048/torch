@@ -9,23 +9,26 @@ import Dashboard from "../pages/Dashboard";
 import Settings from "../pages/Settings";
 import Users from "../pages/Users";
 import Login from "../pages/Login";
+import PrimaryNavigation from "../components/PrimaryNavigation";
 
 const AppRouter: React.FC = () => {
   const orgId = "66beb38e168efaf09cb836bd"; // Need to change to local storage later
 
   return (
     <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={<Navigate to={`/dashboard/${orgId}/funnel`} />}
-        />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard/*" element={<Dashboard />} />
-        <Route path="/settings/*" element={<Settings />} />
-        <Route path="/members/*" element={<Users />} />
-        <Route path="/members/create" element={<Users />} />
-      </Routes>
+      <PrimaryNavigation>
+        <Routes>
+          <Route
+            path="/"
+            element={<Navigate to={`/dashboard/${orgId}/funnel`} />}
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route path="/settings/*" element={<Settings />} />
+          <Route path="/members/*" element={<Users />} />
+          <Route path="/members/create" element={<Users />} />
+        </Routes>
+      </PrimaryNavigation>
     </Router>
   );
 };

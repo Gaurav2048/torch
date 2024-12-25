@@ -6,12 +6,14 @@ import { FaUsers } from "react-icons/fa";
 import { IoMdLogOut } from "react-icons/io";
 import Icon from "../Icon";
 import { colorSchema } from "../../Constants";
+import { Link, useNavigate } from "react-router-dom";
 
 type OwnProps = {
-  children: any;
+  children: React.ReactElement
 };
 
-const PrimaryNavigation: React.FC<OwnProps> = () => {
+const PrimaryNavigation: React.FC<OwnProps> = ({ children }) => {
+  const navigate = useNavigate()
   return (
     <Box display="flex" width="100%" height="100%">
       <Flex
@@ -24,13 +26,15 @@ const PrimaryNavigation: React.FC<OwnProps> = () => {
       >
         <Box>
           <NavigationIcon />
-          <Icon
-            shape="square"
-            margin="24px 0"
-            icon={() => <MdDashboard size="20px" />}
-            size="large"
-            border="1"
-          />
+          <Box onClick={() => navigate('/dashboard')}> 
+            <Icon
+              shape="square"
+              margin="24px 0"
+              icon={() => <MdDashboard size="20px" />}
+              size="large"
+              border="1"
+            />
+          </Box>
           <Icon
             shape="square"
             icon={() => <IoSettingsOutline size="20px" />}
@@ -52,7 +56,7 @@ const PrimaryNavigation: React.FC<OwnProps> = () => {
           border="1"
         />
       </Flex>
-      <AppRouter />
+      {children}
     </Box>
   );
 };
