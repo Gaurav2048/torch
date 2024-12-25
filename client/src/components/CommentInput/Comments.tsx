@@ -149,7 +149,7 @@ const CommentUI: React.FC<CommentUIType> = ({
       </Flex>
       <Text fontSize="medium" marginTop="8px">
         <FormatComment comment={comment || ""} />
-       </Text>
+      </Text>
       <Flex alignItems="center" gap="8px" marginTop="16px">
         {isPrimary ? (
           <AppButton
@@ -303,24 +303,28 @@ const Reply: React.FC<replyProps> = ({
 };
 
 type FormatCommentType = {
-    comment: string
-}
+  comment: string;
+};
 
 const FormatComment: React.FC<FormatCommentType> = ({ comment }) => {
-    const commentSplit = comment.split("@")
-    return <span>
-            {commentSplit.map(segment => {
-                if (segment.startsWith("[") && segment.includes("](")) {
-                    const text = segment.substring(1, segment.indexOf("]("))
-                    return <span>
-                        <Avatar size="xs" name={text} mr="4px" />
-                        {text}
-                    </span>
-                } else {
-                    return segment
-                }
-            })}
-        </span>
-}
+  const commentSplit = comment.split("@");
+  return (
+    <span>
+      {commentSplit.map((segment) => {
+        if (segment.startsWith("[") && segment.includes("](")) {
+          const text = segment.substring(1, segment.indexOf("]("));
+          return (
+            <span>
+              <Avatar size="xs" name={text} mr="4px" />
+              {text}
+            </span>
+          );
+        } else {
+          return segment;
+        }
+      })}
+    </span>
+  );
+};
 
 export default Comments;

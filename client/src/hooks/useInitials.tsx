@@ -8,7 +8,7 @@ const useInitials = () => {
   const orgId = "66beb38e168efaf09cb836bd"; // Need to change to local storage later
   const [org, setOrg] = useRecoilState(orgAtom);
   const [members, setMembers] = useRecoilState(memberAtom);
-  const [ profile, setProfile ] = useRecoilState(profileAtom)
+  const [profile, setProfile] = useRecoilState(profileAtom);
   const { loading, fetchData, response } = useAxios({
     method: "GET",
     url: `/org/${orgId}`,

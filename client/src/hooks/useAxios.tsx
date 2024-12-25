@@ -12,7 +12,7 @@ const useAxios = (config: any) => {
       const result = await axiosInstance({
         ...config,
         headers: {
-          "x-access-token": localStorage.getItem("token")
+          "x-access-token": localStorage.getItem("token"),
         },
         data: {
           ...data,

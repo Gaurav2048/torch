@@ -5,10 +5,13 @@ import {
   Organisation,
   REACTION_TYPE,
 } from "..";
-import { IconHighPriority, IconLowPriority, IconMediumPriority, IconNoPriority, IconUrgentPriority } from "./Icons";
-
-
-
+import {
+  IconHighPriority,
+  IconLowPriority,
+  IconMediumPriority,
+  IconNoPriority,
+  IconUrgentPriority,
+} from "./Icons";
 
 export const STATE = {
   BOARD: "state_type_board",
@@ -45,8 +48,8 @@ export const DEFAULT_ORG: Organisation = {
 export const SOCKET_EVENT_TYPE = {
   REGISTER_AVAILABILITY: "register_availability",
   JOIN_ORGANISATION: "join_organisation",
-  UPDATE_ORGANISATION_AVAILABILITY: "organizationUpdate_avaliablity"
-}
+  UPDATE_ORGANISATION_AVAILABILITY: "organizationUpdate_avaliablity",
+};
 
 export const DEFAULT_MEMBER: Array<Member> = [];
 
@@ -76,33 +79,33 @@ export const ROUTES = {
     `/comment/${orgId}/${boardId}/${taskId}/reply`,
   CREATE_COMMENT_REACTION: (orgId: string, boardId: string, taskId: string) =>
     `/comment/${orgId}/${boardId}/${taskId}/react`,
-  FETCH_PROFILE: () => `/auth/profile` 
+  FETCH_PROFILE: () => `/auth/profile`,
 };
 
 export const PRIORITIES = [
   {
-    id: 0, 
+    id: 0,
     priority: "No Priority",
-    icon: () => <IconNoPriority />
+    icon: () => <IconNoPriority />,
   },
   {
-    id: 1, 
+    id: 1,
     priority: "Low",
-    icon: () => <IconLowPriority />
+    icon: () => <IconLowPriority />,
   },
   {
-    id: 2, 
+    id: 2,
     priority: "Medium",
-    icon: () => <IconMediumPriority />
+    icon: () => <IconMediumPriority />,
   },
   {
-    id: 3, 
+    id: 3,
     priority: "High",
-    icon: () => <IconHighPriority />
+    icon: () => <IconHighPriority />,
   },
   {
-    id: 4, 
+    id: 4,
     priority: "Urgent",
-    icon: () => <IconUrgentPriority />
-  }
-]
+    icon: () => <IconUrgentPriority />,
+  },
+];

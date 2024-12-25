@@ -33,7 +33,7 @@ const TaskForm: React.FC = () => {
     _id: "",
     workType: "",
     columnId,
-    id: ""
+    id: "",
   };
 
   const validationSchema = object({
@@ -70,7 +70,12 @@ const TaskForm: React.FC = () => {
     >
       {({ submitForm, errors, values }) => (
         <form>
-          <AppDrawer title="Create Task" open={open} onClose={goBack} submitForm={submitForm}>
+          <AppDrawer
+            title="Create Task"
+            open={open}
+            onClose={goBack}
+            submitForm={submitForm}
+          >
             <>
               <Button onClick={() => alert(JSON.stringify(errors))}>
                 click!

@@ -14,34 +14,49 @@ export const SocketContext = React.createContext({});
 
 function App() {
   const loading = useInitials();
-  const useSocketValues = useSocket()
-  const org = useRecoilValue(orgAtom)
-  const profile = useRecoilValue(profileAtom)
-  const [ members, setMember ] = useRecoilState(memberAtom)
+  const useSocketValues = useSocket();
+  const org = useRecoilValue(orgAtom);
+  const profile = useRecoilValue(profileAtom);
+  const [members, setMember] = useRecoilState(memberAtom);
 
   useEffect(() => {
-    if (!org || !profile) return
-    useSocketValues.emitEvent(SOCKET_EVENT_TYPE.JOIN_ORGANISATION, { available: true, organisationId: org._id, user:  profile._id})
-    return () => useSocketValues.emitEvent(SOCKET_EVENT_TYPE.REGISTER_AVAILABILITY, { available: false })
-  }, [org, profile])
+    if (!org || !profile) return;
+    useSocketValues.emitEvent(SOCKET_EVENT_TYPE.JOIN_ORGANISATION, {
+      available: true,
+      organisationId: org._id,
+      user: profile._id,
+    });
+    return () =>
+      useSocketValues.emitEvent(SOCKET_EVENT_TYPE.REGISTER_AVAILABILITY, {
+        available: false,
+      });
+  }, [org, profile]);
 
   useEffect(() => {
-    localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bmphbmthbGl0YTgzNkBnbWFpbC5jb20iLCJpYXQiOjE3MjcxNzE5MTh9.7kOqNjX89A1Oeaf-yUsLAooVEi02dOFrgIFThKB1cv0")
-  }, [])
+    localStorage.setItem(
+      "token",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bmphbmthbGl0YTgzNkBnbWFpbC5jb20iLCJpYXQiOjE3MjcxNzE5MTh9.7kOqNjX89A1Oeaf-yUsLAooVEi02dOFrgIFThKB1cv0",
+    );
+  }, []);
 
   useEffect(() => {
-    useSocketValues.listenEvent(SOCKET_EVENT_TYPE.UPDATE_ORGANISATION_AVAILABILITY, (data: any) => {
-      const { userId, available } = data
-      setMember(produce(members, draft => {
-        return draft.map(member => {
-          if (member._id === userId) {
-            member.online = available
-          }
-          return member
-        })
-      }))
-    })
-  }, [])
+    useSocketValues.listenEvent(
+      SOCKET_EVENT_TYPE.UPDATE_ORGANISATION_AVAILABILITY,
+      (data: any) => {
+        const { userId, available } = data;
+        setMember(
+          produce(members, (draft) => {
+            return draft.map((member) => {
+              if (member._id === userId) {
+                member.online = available;
+              }
+              return member;
+            });
+          }),
+        );
+      },
+    );
+  }, []);
 
   return loading ? (
     <div>Loading...</div>

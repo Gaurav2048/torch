@@ -15,23 +15,26 @@ import { BoardType } from "../../..";
 
 const FunnelPage: React.FC = () => {
   const [board, setBoard] = useRecoilState(boardAtom);
-  const [applicableBoard, setApplicableBoard] = useState<BoardType>()
+  const [applicableBoard, setApplicableBoard] = useState<BoardType>();
   const org = useRecoilValue(orgAtom);
 
-  const [appliedFilters, setAppliedFilters] = useState<Array<APPLIED_FILER>>([]);
-
+  const [appliedFilters, setAppliedFilters] = useState<Array<APPLIED_FILER>>(
+    [],
+  );
 
   const { boardId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    setApplicableBoard(produce(board, draft => {
-      return appliedFilters.reduce((boardDraft, current) => {
-        return current.filterMethod(current.params, boardDraft)
-      }, draft)
-    }))
-  }, [board, appliedFilters])
+    setApplicableBoard(
+      produce(board, (draft) => {
+        return appliedFilters.reduce((boardDraft, current) => {
+          return current.filterMethod(current.params, boardDraft);
+        }, draft);
+      }),
+    );
+  }, [board, appliedFilters]);
 
   const { loading, response, fetchData } = useAxios({
     method: "GET",
@@ -50,8 +53,8 @@ const FunnelPage: React.FC = () => {
   }, [response]);
 
   useEffect(() => {
-    setApplicableBoard(board)
-  }, [board])
+    setApplicableBoard(board);
+  }, [board]);
 
   const createTask = (columnId: string) => {
     navigate(`${location.pathname}/create/task/${columnId}`);
@@ -63,14 +66,19 @@ const FunnelPage: React.FC = () => {
 
   return !loading ? (
     <>
-      <AppFilter appliedFilters={appliedFilters} setAppliedFilters={setAppliedFilters} />
+      <AppFilter
+        appliedFilters={appliedFilters}
+        setAppliedFilters={setAppliedFilters}
+      />
       <Box bgColor="rgb(247, 247, 247)" height="100%">
-        {applicableBoard ? <Funnel
-          board={applicableBoard}
-          setBoard={setApplicableBoard}
-          createTask={createTask}
-          openTask={openTask}
-        /> : null}
+        {applicableBoard ? (
+          <Funnel
+            board={applicableBoard}
+            setBoard={setApplicableBoard}
+            createTask={createTask}
+            openTask={openTask}
+          />
+        ) : null}
         <TaskForm />
         <CreateBoard />
         <ViewTask />

@@ -39,15 +39,15 @@ const Dashboard: React.FC = () => {
         display="flex"
         flexDirection="column"
       >
-        <Box padding="12px 32px 0 32px" display="flex" justifyContent="space-between">
+        <Box
+          padding="12px 32px 0 32px"
+          display="flex"
+          justifyContent="space-between"
+        >
           <Progress title="Piper Enterprise" />
           <Members />
         </Box>
-        <Box
-          width="100%"
-          height="100%"
-          overflow="hidden"
-        >
+        <Box width="100%" height="100%" overflow="hidden">
           <DashboardRoutes />
         </Box>
       </Box>

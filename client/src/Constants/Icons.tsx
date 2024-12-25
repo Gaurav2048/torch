@@ -10,17 +10,16 @@ import { GiCycle } from "react-icons/gi";
 import { MdIncompleteCircle } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 
-
 export {
-    MdOutlineSignalCellularNull as IconNoPriority,
-    FcHighPriority as IconUrgentPriority,
-    MdSignalCellular1Bar as IconLowPriority,
-    MdSignalCellular3Bar as IconMediumPriority,
-    MdSignalCellular4Bar as IconHighPriority,
-    MdSignalCellular0Bar as IconPriority,
-    HiMiniUserCircle as IconAssignee,
-    BiSolidLabel as IconLabel,
-    GiCycle as IconSprint,
-    MdIncompleteCircle as IconStatus,
-    IoClose as IconAppClose
-}
+  MdOutlineSignalCellularNull as IconNoPriority,
+  FcHighPriority as IconUrgentPriority,
+  MdSignalCellular1Bar as IconLowPriority,
+  MdSignalCellular3Bar as IconMediumPriority,
+  MdSignalCellular4Bar as IconHighPriority,
+  MdSignalCellular0Bar as IconPriority,
+  HiMiniUserCircle as IconAssignee,
+  BiSolidLabel as IconLabel,
+  GiCycle as IconSprint,
+  MdIncompleteCircle as IconStatus,
+  IoClose as IconAppClose,
+};

@@ -100,10 +100,12 @@ const Projects: React.FC = () => {
             </Flex>
           )}
         >
-          {() => <Box fontSize="small" textAlign="start" paddingLeft="8px">
-            This is the maximum boards you can create. For further query
-            <a href="mailto:gunjankalita836@gmail.com">Write To Us</a>
-          </Box>}
+          {() => (
+            <Box fontSize="small" textAlign="start" paddingLeft="8px">
+              This is the maximum boards you can create. For further query
+              <a href="mailto:gunjankalita836@gmail.com">Write To Us</a>
+            </Box>
+          )}
         </AppMenu>
       </Box>
       <Box height="300px" overflow="scroll">

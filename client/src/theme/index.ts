@@ -12,7 +12,7 @@ const theme = extendTheme({
       300: "#8E64F6",
       200: "#AD84F9",
       100: "#edf2f6",
-      50:  "#cec2ff"
+      50: "#cec2ff",
     },
     secondary: {
       900: "#59231A",
@@ -24,8 +24,8 @@ const theme = extendTheme({
       300: "#F79784",
       200: "#FABAA9",
       100: "#FCDDD1",
-      50: "#FEF2ED"
-    }
+      50: "#FEF2ED",
+    },
   },
   components: {
     Tabs: {

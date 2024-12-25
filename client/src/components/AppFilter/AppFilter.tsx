@@ -18,12 +18,14 @@ import { produce } from "immer";
 import { NOSCROLL_BAR_PROPERTIES } from "../Funnel/Funnel";
 
 type OwnProps = {
-    appliedFilters: Array<APPLIED_FILER>,
-    setAppliedFilters: React.Dispatch<React.SetStateAction<Array<APPLIED_FILER>>>
-}
+  appliedFilters: Array<APPLIED_FILER>;
+  setAppliedFilters: React.Dispatch<React.SetStateAction<Array<APPLIED_FILER>>>;
+};
 
-const AppFilter: React.FC<OwnProps> = ({ appliedFilters, setAppliedFilters }) => {
-
+const AppFilter: React.FC<OwnProps> = ({
+  appliedFilters,
+  setAppliedFilters,
+}) => {
   const onFilterSelected = (filter: APPLICABLE_FILTER_TYPE) => {
     setAppliedFilters([
       ...appliedFilters,
@@ -35,21 +37,28 @@ const AppFilter: React.FC<OwnProps> = ({ appliedFilters, setAppliedFilters }) =>
     ]);
   };
 
-  const modifyFilterParams = (id: string, name: string, icon: string, filterId: string) => {
-    setAppliedFilters(produce(appliedFilters, (draft) => {
-        const param = { id, name, icon }
+  const modifyFilterParams = (
+    id: string,
+    name: string,
+    icon: string,
+    filterId: string,
+  ) => {
+    setAppliedFilters(
+      produce(appliedFilters, (draft) => {
+        const param = { id, name, icon };
         for (const el of draft) {
-            if (el.id === filterId) {
-                if (!el.params.find(el => el.id === id)) {
-                    el.params.push(param)
-                } else {
-                    el.params = el.params.filter(param => param.id !== id)
-                }
+          if (el.id === filterId) {
+            if (!el.params.find((el) => el.id === id)) {
+              el.params.push(param);
+            } else {
+              el.params = el.params.filter((param) => param.id !== id);
             }
+          }
         }
         return draft;
-    }))
-  }
+      }),
+    );
+  };
 
   const handleRemoveFilter = (id: string) => {
     setAppliedFilters(appliedFilters.filter((filter) => filter.id !== id));
@@ -67,7 +76,12 @@ const AppFilter: React.FC<OwnProps> = ({ appliedFilters, setAppliedFilters }) =>
       sx={NOSCROLL_BAR_PROPERTIES}
     >
       {appliedFilters.map((filter) => (
-        <FilterChip key={filter.id} {...filter} onRemoveFilter={handleRemoveFilter} modifyFilterParams={modifyFilterParams}  />
+        <FilterChip
+          key={filter.id}
+          {...filter}
+          onRemoveFilter={handleRemoveFilter}
+          modifyFilterParams={modifyFilterParams}
+        />
       ))}
       <FilterMenu onFilterSelected={onFilterSelected} />
     </Box>
@@ -112,7 +126,11 @@ const FilterMenu: React.FC<FilterMenuProps> = ({ onFilterSelected }) => {
           {APPLICABLE_FILTERS.filter((el) =>
             el.type.includes(query.toUpperCase()),
           ).map((filter) => (
-            <FilterMenuItem {...filter} onSelected={onFilterSelected} onCloseModal={onClose} />
+            <FilterMenuItem
+              {...filter}
+              onSelected={onFilterSelected}
+              onCloseModal={onClose}
+            />
           ))}
         </Box>
       )}
@@ -122,7 +140,7 @@ const FilterMenu: React.FC<FilterMenuProps> = ({ onFilterSelected }) => {
 
 type selectionType = {
   onSelected: (type: APPLICABLE_FILTER_TYPE) => void;
-  onCloseModal?: () => void
+  onCloseModal?: () => void;
 };
 
 const FilterMenuItem: React.FC<APPLICABLE_FILTER_TYPE & selectionType> = ({
@@ -131,13 +149,13 @@ const FilterMenuItem: React.FC<APPLICABLE_FILTER_TYPE & selectionType> = ({
   filterMethod,
   alias,
   onSelected,
-  onCloseModal
+  onCloseModal,
 }) => {
   const { isOpen: hover, onOpen: onEnter, onClose: onExit } = useDisclosure();
   const onItemSelected = () => {
-    onSelected({ icon, type, filterMethod, alias })
-    onCloseModal?.()
-  }
+    onSelected({ icon, type, filterMethod, alias });
+    onCloseModal?.();
+  };
   return (
     <Box
       cursor="pointer"

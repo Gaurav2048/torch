@@ -1,9 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { boardAtom, memberAtom } from "../../AppState/state";
-import {
-  APPLICABLE_FILTER_TYPE,
-  PARAM_TYPE,
-} from "../../Constants/FilterData";
+import { APPLICABLE_FILTER_TYPE, PARAM_TYPE } from "../../Constants/FilterData";
 import { PRIORITIES } from "../../Constants";
 import { useEffect, useState } from "react";
 import {
@@ -33,10 +30,15 @@ const dataTransform = (
   }));
 
 type OwnProps = APPLICABLE_FILTER_TYPE & {
-  params: Array<PARAM_TYPE>; 
+  params: Array<PARAM_TYPE>;
   id: string;
   onRemoveFilter: (val: string) => void;
-  modifyFilterParams: (id: string, name: string, icon: string, filterId: string) => void
+  modifyFilterParams: (
+    id: string,
+    name: string,
+    icon: string,
+    filterId: string,
+  ) => void;
 };
 
 const FilterChip: React.FC<OwnProps> = ({
@@ -46,7 +48,7 @@ const FilterChip: React.FC<OwnProps> = ({
   alias,
   params,
   onRemoveFilter,
-  modifyFilterParams
+  modifyFilterParams,
 }) => {
   const members = useRecoilValue(memberAtom);
   const board = useRecoilValue(boardAtom);
@@ -93,7 +95,13 @@ const FilterChip: React.FC<OwnProps> = ({
         text={params.length > 1 ? alias[1] : alias[0]}
         margin="0 2px"
       />
-      <SelectionModal type={type} data={dataObject[type]} params={params} filterId={filterId} modifyFilterParams={modifyFilterParams} />
+      <SelectionModal
+        type={type}
+        data={dataObject[type]}
+        params={params}
+        filterId={filterId}
+        modifyFilterParams={modifyFilterParams}
+      />
       <Box
         padding="7px 8px"
         bgColor="primary.100"
@@ -118,16 +126,27 @@ type SelectionModalProps = {
     icon: string;
   }>;
   filterId: string;
-  params: Array<PARAM_TYPE>; 
-  modifyFilterParams: (id: string, name: string, icon: string, filterId: string) => void
+  params: Array<PARAM_TYPE>;
+  modifyFilterParams: (
+    id: string,
+    name: string,
+    icon: string,
+    filterId: string,
+  ) => void;
 };
 
-const SelectionModal: React.FC<SelectionModalProps> = ({ data, modifyFilterParams, type, filterId, params }) => {
+const SelectionModal: React.FC<SelectionModalProps> = ({
+  data,
+  modifyFilterParams,
+  type,
+  filterId,
+  params,
+}) => {
   const [query, setQuery] = useState<string>("");
-  
+
   const handleParamsSelect = (id: string, name: string, icon: string) => {
-    modifyFilterParams(id, name, icon, filterId)
-  }
+    modifyFilterParams(id, name, icon, filterId);
+  };
 
   return (
     <AppMenu
@@ -147,7 +166,11 @@ const SelectionModal: React.FC<SelectionModalProps> = ({ data, modifyFilterParam
             color="primary.900"
             variant="caption1"
             width="fit-content"
-            text={params?.length > 1 ? `${params?.length} ${capitalize(type)}` : params?.[0]?.name || '' }
+            text={
+              params?.length > 1
+                ? `${params?.length} ${capitalize(type)}`
+                : params?.[0]?.name || ""
+            }
           />
         </Box>
       )}
@@ -159,7 +182,12 @@ const SelectionModal: React.FC<SelectionModalProps> = ({ data, modifyFilterParam
           {data
             .filter((el) => el.name.toLowerCase().includes(query.toLowerCase()))
             .map((el) => (
-              <FilterSelectMenuItem key={el.id} {...el} selected={!!params.find(param => param.id === el.id)} onSelected={handleParamsSelect} />
+              <FilterSelectMenuItem
+                key={el.id}
+                {...el}
+                selected={!!params.find((param) => param.id === el.id)}
+                onSelected={handleParamsSelect}
+              />
             ))}
         </Box>
       )}
@@ -172,7 +200,7 @@ type FilterOption = {
   name: string;
   icon: any;
   selected: boolean;
-  onSelected: (id: string, name: string,icon: string ) => void;
+  onSelected: (id: string, name: string, icon: string) => void;
 };
 
 const FilterSelectMenuItem: React.FC<FilterOption> = ({
