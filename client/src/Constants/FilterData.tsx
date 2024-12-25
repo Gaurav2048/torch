@@ -55,7 +55,19 @@ const filterByStatus = (
   });
 };
 
-const filterByAssignee = (params: Array<FILTER_TYPES>, board: BoardType) => {};
+const filterByAssignee = (params: Array<PARAM_TYPE>, board: BoardType): BoardType => {
+  if (!params.length) return board;
+  const initialColumns: { [key: string]: any } = {};
+  return produce(board, (draft) => {
+    draft.columns = Object.keys(draft.columns).reduce((prev, current) => {
+      const column = draft.columns[current]
+      column.taskIds = column.taskIds.filter(taskId => !!params.find(param => param.id === draft.tasks[taskId].assignedTo))
+      prev[current] = column
+      return prev
+    }, initialColumns)
+    return draft;
+  })
+};
 
 export const APPLICABLE_FILTERS: APPLICABLE_FILTER_TYPE[] = [
   {
@@ -66,7 +78,7 @@ export const APPLICABLE_FILTERS: APPLICABLE_FILTER_TYPE[] = [
   },
   {
     type: "ASSIGNEE",
-    filterMethod: (params, board) => board,
+    filterMethod: filterByAssignee,
     icon: (color: string) => <IconAssignee color={color} />,
     alias: ["is", "is one of"],
   },
