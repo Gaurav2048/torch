@@ -156,7 +156,7 @@ const Funnel: React.FC<OwnProps> = ({
               paddingTop="12px"
               width="100%"
               height="100%"
-              overflow="auto"
+              overflow="scroll"
               {...provided.droppableProps}
               ref={provided.innerRef}
             >

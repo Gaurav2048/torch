@@ -37,7 +37,8 @@ const Header: React.FC<OwnProps> = ({
           ref={provided.innerRef}
           {...provided.draggableProps}
           minWidth="300px"
-          overflow="scroll"
+          overflowX="scroll"
+          overflowY="hidden"
           marginLeft="20px"
           height="100%"
           sx={NOSCROLL_BAR_PROPERTIES}

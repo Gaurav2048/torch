@@ -64,7 +64,7 @@ const FunnelPage: React.FC = () => {
   return !loading ? (
     <>
       <AppFilter appliedFilters={appliedFilters} setAppliedFilters={setAppliedFilters} />
-      <Box bgColor="rgb(247, 247, 247)">
+      <Box bgColor="rgb(247, 247, 247)" height="100%">
         {applicableBoard ? <Funnel
           board={applicableBoard}
           setBoard={setApplicableBoard}

@@ -15,6 +15,8 @@ export type PARAM_TYPE = { id: string, name: string, icon: string }
 export type APPLIED_FILER = APPLICABLE_FILTER_TYPE & { params: Array<PARAM_TYPE>; id: string }
 
 const filterByStatus = (params: Array<PARAM_TYPE>, board: BoardType): BoardType => {
+    // if no params no filter 
+    if (!params.length) return board;
     const initialColumns: { [key: string]: any } = {}   
     return produce(board, draft => {
       draft.columns = Object.keys(draft.columns).reduce((prev, current) => {
