@@ -2,13 +2,14 @@ import { Avatar, AvatarGroup, Box, Flex, Text, useDisclosure } from "@chakra-ui/
 import { Draggable } from "react-beautiful-dnd";
 import { FaRegComment } from "react-icons/fa6";
 import { useRecoilValue } from "recoil";
-import { orgAtom } from "../../AppState/state";
+import { memberAtom, orgAtom } from "../../AppState/state";
 import { Task } from "../..";
 import AppMenu from "../AppMenu";
 import { IconNoPriority } from "../../Constants/Icons";
 import { colorSchema, PRIORITIES } from "../../Constants";
 import AppTypography from "../AppTypography/AppTypography";
 import { capitalize } from "../../utils/textUtils";
+import { useMemo } from "react";
 
 type OwnProps = {
   task: Task;
@@ -18,11 +19,20 @@ type OwnProps = {
 
 const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
   const org = useRecoilValue(orgAtom);
+  const members = useRecoilValue(memberAtom)
   const workType = org.workTypes.find((type) => task.workType === type._id);
 
   const handleOpenTask = () => {
     openTask(task.id);
   };
+
+  const assignedTo = useMemo(() => {
+    return members.find(el => el._id === task.assignedTo)
+  }, [members, task])
+
+  const createdBy = useMemo(() => {
+    return members.find(el => el._id === task.createdBy)
+  }, [members, task])
 
   return (
     <Draggable draggableId={task.id} index={index}>
@@ -47,17 +57,20 @@ const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
             onClick={handleOpenTask}
           >
             <Box>
-              <Text
-                fontWeight={600}
-                fontSize="2xs"
-                borderRadius="4px"
-                padding="2px 6px"
-                width="fit-content"
-                border={`1px solid ${workType?.color}`}
-                bgColor={workType?.color}
-              >
-                {workType?.name}
-              </Text>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Text
+                  fontWeight={600}
+                  fontSize="2xs"
+                  borderRadius="4px"
+                  padding="2px 6px"
+                  width="fit-content"
+                  border={`1px solid ${workType?.color}`}
+                  bgColor={workType?.color}
+                >
+                  {workType?.name}
+                </Text>
+                <Avatar size="2xs" name={assignedTo?.name} title={assignedTo?.name} />
+              </Flex>
               <Text
                 marginTop="16px"
                 fontSize="sm"
@@ -93,6 +106,7 @@ const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
                 <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
               </AvatarGroup>
               <AssignPriority />
+              <Avatar name={createdBy?.name} size="xs" title={createdBy?.name}/>
             </Flex>
             <Flex alignItems="center" gap="4px">
               <FaRegComment color="lightgray" />
