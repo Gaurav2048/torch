@@ -4,13 +4,14 @@ import {
   DraggableProvided,
   DraggableStateSnapshot,
 } from "react-beautiful-dnd";
-import Column from "./Column";
+import ColumnComponent from "./Column";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { GoPlus } from "react-icons/go";
 import { NOSCROLL_BAR_PROPERTIES } from "./Funnel";
 import { COLORS } from "../../pages/Settings/WorkFlow/WorkFlow";
 import { colorSchema } from "../../Constants";
+import { Column, Task } from "../..";
 
 type OwnProps = {
   column: Column;
@@ -88,7 +89,7 @@ const Header: React.FC<OwnProps> = ({
               Create New Task
             </Button>
           </Box>
-          <Column openTask={openTask} column={column} tasks={tasks} />
+          <ColumnComponent openTask={openTask} column={column} tasks={tasks} />
         </Box>
       )}
     </Draggable>

@@ -2,6 +2,7 @@ import { useRecoilValue } from "recoil";
 import { boardAtom, memberAtom } from "../../AppState/state";
 import {
   APPLICABLE_FILTER_TYPE,
+  PARAM_TYPE,
 } from "../../Constants/FilterData";
 import { PRIORITIES } from "../../Constants";
 import { useEffect, useState } from "react";
@@ -32,7 +33,7 @@ const dataTransform = (
   }));
 
 type OwnProps = APPLICABLE_FILTER_TYPE & {
-  params: Array<{id: string, name: string, icon: string}>; 
+  params: Array<PARAM_TYPE>; 
   id: string;
   onRemoveFilter: (val: string) => void;
   modifyFilterParams: (id: string, name: string, icon: string, filterId: string) => void
@@ -117,7 +118,7 @@ type SelectionModalProps = {
     icon: string;
   }>;
   filterId: string;
-  params: Array<{id: string, name: string, icon: string}>; 
+  params: Array<PARAM_TYPE>; 
   modifyFilterParams: (id: string, name: string, icon: string, filterId: string) => void
 };
 

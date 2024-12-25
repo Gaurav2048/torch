@@ -3,6 +3,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { FaRegComment } from "react-icons/fa6";
 import { useRecoilValue } from "recoil";
 import { orgAtom } from "../../AppState/state";
+import { Task } from "../..";
 
 type OwnProps = {
   task: Task;
@@ -10,7 +11,7 @@ type OwnProps = {
   openTask: (taskId: string) => void;
 };
 
-const Task: React.FC<OwnProps> = ({ task, index, openTask }) => {
+const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
   const org = useRecoilValue(orgAtom);
   const workType = org.workTypes.find((type) => task.workType === type._id);
 
@@ -99,4 +100,4 @@ const Task: React.FC<OwnProps> = ({ task, index, openTask }) => {
   );
 };
 
-export default Task;
+export default TaskComponent;

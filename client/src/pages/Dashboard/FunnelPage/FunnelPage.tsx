@@ -10,19 +10,28 @@ import ViewTask from "../view";
 import AppFilter from "../../../components/AppFilter";
 import { Box } from "@chakra-ui/react";
 import { APPLIED_FILER } from "../../../Constants/FilterData";
+import { produce } from "immer";
 import { BoardType } from "../../..";
 
 const FunnelPage: React.FC = () => {
   const [board, setBoard] = useRecoilState(boardAtom);
+  const [applicableBoard, setApplicableBoard] = useState<BoardType>()
   const org = useRecoilValue(orgAtom);
+
+  const [appliedFilters, setAppliedFilters] = useState<Array<APPLIED_FILER>>([]);
+
 
   const { boardId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const filteredBoard = useMemo(() => {
-
-  }, [board])
+  useEffect(() => {
+    setApplicableBoard(produce(board, draft => {
+      return appliedFilters.reduce((boardDraft, current) => {
+        return current.filterMethod(current.params, boardDraft)
+      }, draft)
+    }))
+  }, [board, appliedFilters])
 
   const { loading, response, fetchData } = useAxios({
     method: "GET",
@@ -40,6 +49,10 @@ const FunnelPage: React.FC = () => {
     setBoard(response);
   }, [response]);
 
+  useEffect(() => {
+    setApplicableBoard(board)
+  }, [board])
+
   const createTask = (columnId: string) => {
     navigate(`${location.pathname}/create/task/${columnId}`);
   };
@@ -48,20 +61,16 @@ const FunnelPage: React.FC = () => {
     navigate(`${location.pathname}/view/task/${taskId}`);
   };
 
-  const applyFilter = (appliedFilters: Array<APPLIED_FILER>) => {
-    // appliedFilters.map(filter => )
-  }
-
   return !loading ? (
     <>
-      <AppFilter applyFilter={applyFilter} />
+      <AppFilter appliedFilters={appliedFilters} setAppliedFilters={setAppliedFilters} />
       <Box bgColor="rgb(247, 247, 247)">
-        <Funnel
-          board={board}
-          setBoard={setBoard}
+        {applicableBoard ? <Funnel
+          board={applicableBoard}
+          setBoard={setApplicableBoard}
           createTask={createTask}
           openTask={openTask}
-        />
+        /> : null}
         <TaskForm />
         <CreateBoard />
         <ViewTask />

@@ -8,6 +8,7 @@ import {
 import { Box } from "@chakra-ui/react";
 import Header from "./Header";
 import { produce } from "immer";
+import { BoardType } from "../..";
 
 type OwnProps = {
   board: BoardType;

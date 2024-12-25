@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
-import Task from "./Task";
+import TaskComponent from "./Task";
 import { Droppable } from "react-beautiful-dnd";
+import { Column, Task } from "../..";
 
 type OwnProps = {
   column: Column;
@@ -8,13 +9,13 @@ type OwnProps = {
   openTask: (taskId: string) => void;
 };
 
-const Column: React.FC<OwnProps> = ({ column, tasks, openTask }) => {
+const ColumnComponent: React.FC<OwnProps> = ({ column, tasks, openTask }) => {
   return (
     <Droppable droppableId={column.id}>
       {(provided) => (
         <Box height="100%" ref={provided.innerRef} {...provided.droppableProps}>
           {tasks.map((task, index) => (
-            <Task openTask={openTask} key={task.id} index={index} task={task} />
+            <TaskComponent openTask={openTask} key={task.id} index={index} task={task} />
           ))}
           {provided.placeholder}
         </Box>
@@ -23,4 +24,4 @@ const Column: React.FC<OwnProps> = ({ column, tasks, openTask }) => {
   );
 };
 
-export default Column;
+export default ColumnComponent;

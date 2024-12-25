@@ -15,17 +15,14 @@ import { useEffect, useState } from "react";
 import FilterChip from "./FilterChip";
 import { v4 as uuidV4 } from "uuid";
 import { produce } from "immer";
+import { NOSCROLL_BAR_PROPERTIES } from "../Funnel/Funnel";
 
 type OwnProps = {
-    applyFilter: (filters: Array<APPLIED_FILER>) => void
+    appliedFilters: Array<APPLIED_FILER>,
+    setAppliedFilters: React.Dispatch<React.SetStateAction<Array<APPLIED_FILER>>>
 }
 
-const AppFilter: React.FC<OwnProps> = ({ applyFilter }) => {
-  const [appliedFilters, setAppliedFilters] = useState<Array<APPLIED_FILER>>([]);
-
-  useEffect(() => {
-    applyFilter(appliedFilters)
-  }, [appliedFilters])
+const AppFilter: React.FC<OwnProps> = ({ appliedFilters, setAppliedFilters }) => {
 
   const onFilterSelected = (filter: APPLICABLE_FILTER_TYPE) => {
     setAppliedFilters([
@@ -43,7 +40,7 @@ const AppFilter: React.FC<OwnProps> = ({ applyFilter }) => {
         const param = { id, name, icon }
         for (const el of draft) {
             if (el.id === filterId) {
-                if (!el.params.find(param => param.id === id)) {
+                if (!el.params.find(el => el.id === id)) {
                     el.params.push(param)
                 } else {
                     el.params = el.params.filter(param => param.id !== id)
@@ -67,6 +64,7 @@ const AppFilter: React.FC<OwnProps> = ({ applyFilter }) => {
       overflow="scroll"
       justifyContent="start"
       alignItems="center"
+      sx={NOSCROLL_BAR_PROPERTIES}
     >
       {appliedFilters.map((filter) => (
         <FilterChip key={filter.id} {...filter} onRemoveFilter={handleRemoveFilter} modifyFilterParams={modifyFilterParams}  />
