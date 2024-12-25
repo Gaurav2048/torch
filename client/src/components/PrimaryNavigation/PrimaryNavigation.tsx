@@ -1,12 +1,11 @@
 import { Box, Flex } from "@chakra-ui/react";
-import AppRouter from "../../router";
 import { MdDashboard } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaUsers } from "react-icons/fa";
 import { IoMdLogOut } from "react-icons/io";
 import Icon from "../Icon";
 import { colorSchema } from "../../Constants";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type OwnProps = {
   children: React.ReactElement
@@ -35,12 +34,14 @@ const PrimaryNavigation: React.FC<OwnProps> = ({ children }) => {
               border="1"
             />
           </Box>
-          <Icon
-            shape="square"
-            icon={() => <IoSettingsOutline size="20px" />}
-            size="large"
-            border="1"
-          />
+          <Box onClick={() => navigate('/settings')}>
+            <Icon
+              shape="square"
+              icon={() => <IoSettingsOutline size="20px" />}
+              size="large"
+              border="1"
+            />
+          </Box>
           <Icon
             shape="square"
             margin="24px 0"

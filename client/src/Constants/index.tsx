@@ -86,26 +86,26 @@ export const PRIORITIES = [
   {
     id: 0,
     priority: "No Priority",
-    icon: () => <IconNoPriority />,
+    icon: (color?: string) => <IconNoPriority color={color} />,
   },
   {
     id: 1,
     priority: "Low",
-    icon: () => <IconLowPriority />,
+    icon: (color?: string) => <IconLowPriority color={color} />,
   },
   {
     id: 2,
     priority: "Medium",
-    icon: () => <IconMediumPriority />,
+    icon: (color?: string) => <IconMediumPriority color={color} />,
   },
   {
     id: 3,
     priority: "High",
-    icon: () => <IconHighPriority />,
+    icon: (color?: string) => <IconHighPriority color={color} />,
   },
   {
     id: 4,
     priority: "Urgent",
-    icon: () => <IconUrgentPriority />,
+    icon: (color?: string) => <IconUrgentPriority color={color} />,
   },
 ];

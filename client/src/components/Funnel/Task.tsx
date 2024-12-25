@@ -1,9 +1,14 @@
-import { Avatar, AvatarGroup, Box, Flex, Text } from "@chakra-ui/react";
+import { Avatar, AvatarGroup, Box, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import { Draggable } from "react-beautiful-dnd";
 import { FaRegComment } from "react-icons/fa6";
 import { useRecoilValue } from "recoil";
 import { orgAtom } from "../../AppState/state";
 import { Task } from "../..";
+import AppMenu from "../AppMenu";
+import { IconNoPriority } from "../../Constants/Icons";
+import { colorSchema, PRIORITIES } from "../../Constants";
+import AppTypography from "../AppTypography/AppTypography";
+import { capitalize } from "../../utils/textUtils";
 
 type OwnProps = {
   task: Task;
@@ -33,24 +38,23 @@ const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          onClick={handleOpenTask}
         >
           <Flex
             grow={1}
             direction="column"
             justifyContent="space-between"
             padding="8px 16px 12px 16px"
+            onClick={handleOpenTask}
           >
             <Box>
               <Text
                 fontWeight={600}
-                fontSize="xs"
-                borderRadius="14px"
-                padding="4px 12px"
-                bgColor="white"
+                fontSize="2xs"
+                borderRadius="4px"
+                padding="2px 6px"
                 width="fit-content"
                 border={`1px solid ${workType?.color}`}
-                color={workType?.color}
+                bgColor={workType?.color}
               >
                 {workType?.name}
               </Text>
@@ -77,16 +81,19 @@ const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
             alignItems="center"
             borderTop="1px solid rgba(235, 235, 235, 1)"
           >
-            <AvatarGroup size="xs" max={2}>
-              <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
-              <Avatar name="Segun Adebayo" src="https://bit.ly/sage-adebayo" />
-              <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
-              <Avatar
-                name="Prosper Otemuyiwa"
-                src="https://bit.ly/prosper-baba"
-              />
-              <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
-            </AvatarGroup>
+            <Flex gap="8px" alignItems="center">
+              <AvatarGroup size="xs" max={2}>
+                <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
+                <Avatar name="Segun Adebayo" src="https://bit.ly/sage-adebayo" />
+                <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
+                <Avatar
+                  name="Prosper Otemuyiwa"
+                  src="https://bit.ly/prosper-baba"
+                />
+                <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
+              </AvatarGroup>
+              <AssignPriority />
+            </Flex>
             <Flex alignItems="center" gap="4px">
               <FaRegComment color="lightgray" />
               <Text fontSize="xs" color="rgb(188, 193, 199)">
@@ -101,3 +108,50 @@ const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
 };
 
 export default TaskComponent;
+
+
+const AssignPriority: React.FC = () => {
+  return <AppMenu anchor={() => <Box border="1px solid lightgray" padding="2px"><IconNoPriority color="lightgray" /></Box>}>
+    {() => <>{PRIORITIES.map(priority => <PriorityMenuItem key={priority.id} {...priority} />)}</>}
+  </AppMenu>
+}
+
+type PriorityItemType = {
+  id: number;
+  priority: string;
+  icon: (color?: string) => JSX.Element;
+}
+
+const PriorityMenuItem: React.FC<PriorityItemType> = ({
+  id,
+  priority,
+  icon
+}) => {
+  const { isOpen: hover, onOpen: onEnter, onClose: onExit } = useDisclosure();
+  const onItemSelected = () => {
+    // onSelected({ icon, type, filterMethod, alias });
+    // onCloseModal?.();
+  };
+  return (
+    <Box
+      cursor="pointer"
+      display="flex"
+      alignItems="center"
+      onMouseEnter={onEnter}
+      onMouseLeave={onExit}
+      margin="0 4px"
+      borderRadius="4px"
+      bgColor={hover ? "gray.100" : "white"}
+      padding="6px 8px"
+      onClick={onItemSelected}
+    >
+      {icon(hover ? colorSchema.PRIMARY : "gray")}
+      <AppTypography
+        ml="2"
+        text={capitalize(priority)}
+        variant="caption1"
+        color={hover ? "primary.900" : "inherit"}
+      />
+    </Box>
+  );
+};

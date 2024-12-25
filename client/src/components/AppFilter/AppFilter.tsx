@@ -11,7 +11,7 @@ import { capitalize } from "../../utils/textUtils";
 import AppTypography from "../AppTypography/AppTypography";
 import { colorSchema } from "../../Constants";
 import AppInput from "../AppInput";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FilterChip from "./FilterChip";
 import { v4 as uuidV4 } from "uuid";
 import { produce } from "immer";
