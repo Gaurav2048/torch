@@ -38,61 +38,61 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            <VStack spacing="4">
-              <Field name="email">
-                {({ field, form }: any) => (
-                  <FormControl
-                    isInvalid={form.errors.email && form.touched.email}
-                  >
-                    <FormLabel htmlFor="email">Email</FormLabel>
-                    <Input
-                      {...field}
-                      id="email"
-                      placeholder="Enter your email"
-                      type="email"
-                    />
-                    <FormErrorMessage>{form.errors.email}</FormErrorMessage>
-                  </FormControl>
-                )}
-              </Field>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ isSubmitting }) => (
+        <Form>
+          <VStack spacing="4">
+            <Field name="email">
+              {({ field, form }: any) => (
+                <FormControl
+                  isInvalid={form.errors.email && form.touched.email}
+                >
+                  <FormLabel htmlFor="email">Email</FormLabel>
+                  <Input
+                    {...field}
+                    id="email"
+                    placeholder="Enter your email"
+                    type="email"
+                  />
+                  <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
 
-              <Field name="password">
-                {({ field, form }: any) => (
-                  <FormControl
-                    isInvalid={form.errors.password && form.touched.password}
-                  >
-                    <FormLabel htmlFor="password">Password</FormLabel>
-                    <Input
-                      {...field}
-                      id="password"
-                      placeholder="Enter your password"
-                      type="password"
-                    />
-                    <FormErrorMessage>{form.errors.password}</FormErrorMessage>
-                  </FormControl>
-                )}
-              </Field>
+            <Field name="password">
+              {({ field, form }: any) => (
+                <FormControl
+                  isInvalid={form.errors.password && form.touched.password}
+                >
+                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <Input
+                    {...field}
+                    id="password"
+                    placeholder="Enter your password"
+                    type="password"
+                  />
+                  <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
 
-              {/* Submit Button */}
-              <Button
-                type="submit"
-                colorScheme="primary"
-                width="full"
-                isLoading={isSubmitting}
-              >
-                Login
-              </Button>
-            </VStack>
-          </Form>
-        )}
-      </Formik>
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              colorScheme="primary"
+              width="full"
+              isLoading={isSubmitting}
+            >
+              Login
+            </Button>
+          </VStack>
+        </Form>
+      )}
+    </Formik>
   );
 };
 

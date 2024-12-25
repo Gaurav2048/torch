@@ -8,11 +8,11 @@ import { colorSchema } from "../../Constants";
 import { useNavigate } from "react-router-dom";
 
 type OwnProps = {
-  children: React.ReactElement
+  children: React.ReactElement;
 };
 
 const PrimaryNavigation: React.FC<OwnProps> = ({ children }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <Box display="flex" width="100%" height="100%">
       <Flex
@@ -25,7 +25,7 @@ const PrimaryNavigation: React.FC<OwnProps> = ({ children }) => {
       >
         <Box>
           <NavigationIcon />
-          <Box onClick={() => navigate('/dashboard')}> 
+          <Box onClick={() => navigate("/dashboard")}>
             <Icon
               shape="square"
               margin="24px 0"
@@ -34,7 +34,7 @@ const PrimaryNavigation: React.FC<OwnProps> = ({ children }) => {
               border="1"
             />
           </Box>
-          <Box onClick={() => navigate('/settings')}>
+          <Box onClick={() => navigate("/settings")}>
             <Icon
               shape="square"
               icon={() => <IoSettingsOutline size="20px" />}

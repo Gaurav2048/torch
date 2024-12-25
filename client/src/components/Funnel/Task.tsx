@@ -1,4 +1,11 @@
-import { Avatar, AvatarGroup, Box, Flex, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Avatar,
+  AvatarGroup,
+  Box,
+  Flex,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { Draggable } from "react-beautiful-dnd";
 import { FaRegComment } from "react-icons/fa6";
 import { useRecoilValue } from "recoil";
@@ -19,7 +26,7 @@ type OwnProps = {
 
 const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
   const org = useRecoilValue(orgAtom);
-  const members = useRecoilValue(memberAtom)
+  const members = useRecoilValue(memberAtom);
   const workType = org.workTypes.find((type) => task.workType === type._id);
 
   const handleOpenTask = () => {
@@ -27,12 +34,12 @@ const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
   };
 
   const assignedTo = useMemo(() => {
-    return members.find(el => el._id === task.assignedTo)
-  }, [members, task])
+    return members.find((el) => el._id === task.assignedTo);
+  }, [members, task]);
 
   const createdBy = useMemo(() => {
-    return members.find(el => el._id === task.createdBy)
-  }, [members, task])
+    return members.find((el) => el._id === task.createdBy);
+  }, [members, task]);
 
   return (
     <Draggable draggableId={task.id} index={index}>
@@ -69,7 +76,11 @@ const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
                 >
                   {workType?.name}
                 </Text>
-                <Avatar size="2xs" name={assignedTo?.name} title={assignedTo?.name} />
+                <Avatar
+                  size="2xs"
+                  name={assignedTo?.name}
+                  title={assignedTo?.name}
+                />
               </Flex>
               <Text
                 marginTop="16px"
@@ -96,17 +107,30 @@ const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
           >
             <Flex gap="8px" alignItems="center">
               <AvatarGroup size="xs" max={2}>
-                <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
-                <Avatar name="Segun Adebayo" src="https://bit.ly/sage-adebayo" />
+                <Avatar
+                  name="Ryan Florence"
+                  src="https://bit.ly/ryan-florence"
+                />
+                <Avatar
+                  name="Segun Adebayo"
+                  src="https://bit.ly/sage-adebayo"
+                />
                 <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
                 <Avatar
                   name="Prosper Otemuyiwa"
                   src="https://bit.ly/prosper-baba"
                 />
-                <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
+                <Avatar
+                  name="Christian Nwamba"
+                  src="https://bit.ly/code-beast"
+                />
               </AvatarGroup>
               <AssignPriority />
-              <Avatar name={createdBy?.name} size="xs" title={createdBy?.name}/>
+              <Avatar
+                name={createdBy?.name}
+                size="xs"
+                title={createdBy?.name}
+              />
             </Flex>
             <Flex alignItems="center" gap="4px">
               <FaRegComment color="lightgray" />
@@ -123,23 +147,36 @@ const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
 
 export default TaskComponent;
 
-
 const AssignPriority: React.FC = () => {
-  return <AppMenu anchor={() => <Box border="1px solid lightgray" padding="2px"><IconNoPriority color="lightgray" /></Box>}>
-    {() => <>{PRIORITIES.map(priority => <PriorityMenuItem key={priority.id} {...priority} />)}</>}
-  </AppMenu>
-}
+  return (
+    <AppMenu
+      anchor={() => (
+        <Box border="1px solid lightgray" padding="2px">
+          <IconNoPriority color="lightgray" />
+        </Box>
+      )}
+    >
+      {() => (
+        <>
+          {PRIORITIES.map((priority) => (
+            <PriorityMenuItem key={priority.id} {...priority} />
+          ))}
+        </>
+      )}
+    </AppMenu>
+  );
+};
 
 type PriorityItemType = {
   id: number;
   priority: string;
   icon: (color?: string) => JSX.Element;
-}
+};
 
 const PriorityMenuItem: React.FC<PriorityItemType> = ({
   id,
   priority,
-  icon
+  icon,
 }) => {
   const { isOpen: hover, onOpen: onEnter, onClose: onExit } = useDisclosure();
   const onItemSelected = () => {
