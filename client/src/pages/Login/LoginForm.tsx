@@ -38,16 +38,6 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <Box
-      width="100%"
-      maxWidth="400px"
-      mx="auto"
-      mt="8"
-      p="8"
-      boxShadow="lg"
-      borderRadius="md"
-      bg="white"
-    >
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -93,7 +83,7 @@ const LoginForm: React.FC = () => {
               {/* Submit Button */}
               <Button
                 type="submit"
-                colorScheme="blue"
+                colorScheme="primary"
                 width="full"
                 isLoading={isSubmitting}
               >
@@ -103,7 +93,6 @@ const LoginForm: React.FC = () => {
           </Form>
         )}
       </Formik>
-    </Box>
   );
 };
 
