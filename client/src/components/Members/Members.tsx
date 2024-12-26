@@ -23,6 +23,7 @@ import useAxios from "../../hooks/useAxios";
 import { colorSchema, ROUTES } from "../../Constants";
 import { produce } from "immer";
 import { capitalize } from "../../utils/textUtils";
+import { Member } from "../..";
 
 const Members: React.FC = () => {
   const members = useRecoilValue(memberAtom);

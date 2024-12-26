@@ -75,6 +75,19 @@ const filterByAssignee = (
   });
 };
 
+const filterByLabel = (params: Array<PARAM_TYPE>, board: BoardType): BoardType => {
+  if (!params.length) return board; // Ensure no filter if no params
+  return produce(board, draft => {
+    Object.keys(draft.columns).map((current) => {
+      draft.columns[current].taskIds = draft.columns[current].taskIds.filter(taskId => {
+        const task = draft.tasks[taskId]
+        return params.find(param => param.id === task.workType)
+      })
+      return draft;
+    })
+  }) 
+}
+
 export const APPLICABLE_FILTERS: APPLICABLE_FILTER_TYPE[] = [
   {
     type: "STATUS",
@@ -90,7 +103,7 @@ export const APPLICABLE_FILTERS: APPLICABLE_FILTER_TYPE[] = [
   },
   {
     type: "LABEL",
-    filterMethod: (params, board) => board,
+    filterMethod: filterByLabel,
     icon: (color: string) => <IconLabel color={color} />,
     alias: ["is", "is one of"],
   },

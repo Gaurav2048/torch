@@ -66,7 +66,9 @@ const Projects: React.FC = () => {
   const [activeBoard, setActiveBoard] = useState("");
 
   useEffect(() => {
-    handleActive(org?.boards?.[0]?._id);
+    if (!activeBoard) {
+      handleActive(org?.boards?.[0]?._id);
+    }
   }, [org]);
 
   const openBoardDrawer = () => {
@@ -80,7 +82,7 @@ const Projects: React.FC = () => {
 
   useEffect(() => {
     if (!activeBoard) return;
-    navigate(`/dashboard/${activeBoard}/funnel`);
+      navigate(`/dashboard/${activeBoard}/funnel`);
   }, [activeBoard]);
 
   return (
@@ -111,6 +113,7 @@ const Projects: React.FC = () => {
       <Box height="300px" overflow="scroll">
         {org?.boards?.map((board) => (
           <Project
+            key={board._id}
             isActive={activeBoard === board._id}
             board={board}
             setActive={handleActive}

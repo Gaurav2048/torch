@@ -42,7 +42,7 @@ const FunnelPage: React.FC = () => {
   });
 
   useEffect(() => {
-    if (org?._id) {
+    if (org?._id && boardId) {
       fetchData();
     }
   }, [boardId, org?._id]);

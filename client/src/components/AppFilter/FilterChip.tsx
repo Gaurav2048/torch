@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import { boardAtom, memberAtom } from "../../AppState/state";
+import { boardAtom, memberAtom, orgAtom } from "../../AppState/state";
 import { APPLICABLE_FILTER_TYPE, PARAM_TYPE } from "../../Constants/FilterData";
 import { PRIORITIES } from "../../Constants";
 import { useEffect, useState } from "react";
@@ -52,6 +52,7 @@ const FilterChip: React.FC<OwnProps> = ({
 }) => {
   const members = useRecoilValue(memberAtom);
   const board = useRecoilValue(boardAtom);
+  const org = useRecoilValue(orgAtom)
   const [status, setStatus] = useState<{ columnID: string; value: string }[]>(
     [],
   );
@@ -69,6 +70,7 @@ const FilterChip: React.FC<OwnProps> = ({
     ASSIGNEE: dataTransform(members, "_id", "name", "name"),
     PRIORITY: dataTransform(PRIORITIES, "id", "priority", "icon"),
     STATUS: dataTransform(status, "columnID", "value", "value"),
+    LABEL: dataTransform(org.workTypes, "_id", "name", "name")
   };
   return (
     <Box marginRight="8px" alignItems="center" display="flex">

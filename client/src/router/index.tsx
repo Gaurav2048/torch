@@ -12,7 +12,7 @@ import Login from "../pages/Login";
 import PrimaryNavigation from "../components/PrimaryNavigation";
 
 const AppRouter: React.FC = () => {
-  const orgId = "66beb38e168efaf09cb836bd"; // Need to change to local storage later
+  const boardId = "66c0238dddbf67fa4ef150f3"; // Need to change to local storage later
 
   return (
     <Router>
@@ -20,7 +20,7 @@ const AppRouter: React.FC = () => {
         <Routes>
           <Route
             path="/"
-            element={<Navigate to={`/dashboard/${orgId}/funnel`} />}
+            element={<Navigate to={`/dashboard/${boardId}/funnel`} />}
           />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard/*" element={<Dashboard />} />
