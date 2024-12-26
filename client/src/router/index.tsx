@@ -12,7 +12,7 @@ import Login from "../pages/Login";
 import PrimaryNavigation from "../components/PrimaryNavigation";
 
 const AppRouter: React.FC = () => {
-  const boardId = "66c0238dddbf67fa4ef150f3"; // Need to change to local storage later
+  const boardId = "66c1864848ce325b5616b648"; // Need to change to local storage later
 
   return (
     <Router>

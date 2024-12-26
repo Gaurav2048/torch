@@ -67,7 +67,7 @@ const Projects: React.FC = () => {
 
   useEffect(() => {
     if (!activeBoard) {
-      handleActive(org?.boards?.[0]?._id);
+      handleActive(org?.boards?.[1]?._id);
     }
   }, [org]);
 

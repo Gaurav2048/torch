@@ -55,6 +55,7 @@ const TaskForm: React.FC = () => {
   });
 
   useEffect(() => {
+    if (!response) return 
     // fetch Tasks 
     setBoard(produce(board, draft => {
       if (!columnId) return draft
