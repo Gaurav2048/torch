@@ -11,6 +11,7 @@ import { getIn, useFormikContext } from "formik";
 import { useRecoilValue } from "recoil";
 import { orgAtom } from "../../../AppState/state";
 import AssignedTo from "./AssignedTo";
+import { Task } from "../../..";
 
 const FormBody: React.FC = () => {
   const { errors, handleChange, values } = useFormikContext<Task>();

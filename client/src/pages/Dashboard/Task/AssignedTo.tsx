@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 import { boardAtom, memberAtom } from "../../../AppState/state";
 import { useMemo } from "react";
 import { useFormikContext } from "formik";
+import { BoardType, MemberMap } from "../../..";
 
 const AssignedTo: React.FC = () => {
   const board = useRecoilValue(boardAtom);

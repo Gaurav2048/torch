@@ -1,4 +1,4 @@
-import { Box, Divider, useDisclosure } from "@chakra-ui/react";
+import { Box, Divider, Flex, useDisclosure } from "@chakra-ui/react";
 import { MdFilterList } from "react-icons/md";
 import AppButton from "../AppButton";
 import AppMenu from "../AppMenu";
@@ -16,6 +16,7 @@ import FilterChip from "./FilterChip";
 import { v4 as uuidV4 } from "uuid";
 import { produce } from "immer";
 import { NOSCROLL_BAR_PROPERTIES } from "../Funnel/Funnel";
+import { IconAppAdjustment } from "../../Constants/Icons";
 
 type OwnProps = {
   appliedFilters: Array<APPLIED_FILER>;
@@ -65,26 +66,28 @@ const AppFilter: React.FC<OwnProps> = ({
   };
 
   return (
-    <Box
+    <Flex
       width="100%"
       padding="8px 0"
-      display="flex"
       margin="0 32px"
       overflow="scroll"
-      justifyContent="start"
+      justifyContent="space-between"
       alignItems="center"
       sx={NOSCROLL_BAR_PROPERTIES}
     >
-      {appliedFilters.map((filter) => (
-        <FilterChip
-          key={filter.id}
-          {...filter}
-          onRemoveFilter={handleRemoveFilter}
-          modifyFilterParams={modifyFilterParams}
-        />
-      ))}
-      <FilterMenu onFilterSelected={onFilterSelected} />
-    </Box>
+      <Flex justifyContent="start" alignItems="start">
+        {appliedFilters.map((filter) => (
+          <FilterChip
+            key={filter.id}
+            {...filter}
+            onRemoveFilter={handleRemoveFilter}
+            modifyFilterParams={modifyFilterParams}
+          />
+        ))}
+        <FilterMenu onFilterSelected={onFilterSelected} />
+      </Flex>
+      <AppButton mr="64px" size="sm" leftIcon={<IconAppAdjustment />}>Display</AppButton>
+    </Flex>
   );
 };
 

@@ -9,6 +9,7 @@ import { BiSolidLabel } from "react-icons/bi";
 import { GiCycle } from "react-icons/gi";
 import { MdIncompleteCircle } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
+import { HiAdjustmentsHorizontal } from "react-icons/hi2";
 
 export {
   MdOutlineSignalCellularNull as IconNoPriority,
@@ -22,4 +23,5 @@ export {
   GiCycle as IconSprint,
   MdIncompleteCircle as IconStatus,
   IoClose as IconAppClose,
+  HiAdjustmentsHorizontal as IconAppAdjustment,
 };

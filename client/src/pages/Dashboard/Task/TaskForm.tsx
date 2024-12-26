@@ -7,17 +7,20 @@ import useNavDisclosure from "../../../hooks/useNavDisclosure";
 import useAxios from "../../../hooks/useAxios";
 import { ROUTES } from "../../../Constants";
 import { useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { orgAtom } from "../../../AppState/state";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { boardAtom, orgAtom } from "../../../AppState/state";
 import { v4 } from "uuid";
 import { Task } from "../../..";
+import { useEffect } from "react";
+import { produce } from "immer";
 
 export const DUMMY_SPRINT = "sprint_1";
 
 const TaskForm: React.FC = () => {
   const { open, goBack } = useNavDisclosure("create/task");
   const org = useRecoilValue(orgAtom);
-  const { boardId, columnId } = useParams();
+  const { boardId, columnId } = useParams<{ boardId: string, columnId: string }>();
+  const [ board, setBoard ] = useRecoilState(boardAtom)
 
   const { loading, response, fetchData } = useAxios({
     method: "post",
@@ -51,13 +54,24 @@ const TaskForm: React.FC = () => {
     workType: string().required("Must add a work type"),
   });
 
-  const onSubmit = async (values: Task) => {
-    const { _id, ...rest } = values;
-    await fetchData({
-      ...rest,
-      columnId,
-      id: v4(),
-    });
+  useEffect(() => {
+    // fetch Tasks 
+    setBoard(produce(board, draft => {
+      if (!columnId) return draft
+      draft.tasks[response.id] = response
+      draft.columns[columnId].taskIds.unshift(response.id)
+      return draft
+    }))
+    goBack()
+  }, [response])
+
+  const onSubmitData = async (values: Task) => {
+      const { _id, ...rest } = values;
+      await fetchData({
+        ...rest,
+        columnId,
+        id: v4(),
+      });
   };
 
   return (
@@ -65,7 +79,7 @@ const TaskForm: React.FC = () => {
       initialValues={task}
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {
-        onSubmit(values);
+        onSubmitData(values);
       }}
     >
       {({ submitForm, errors, values }) => (
@@ -74,6 +88,8 @@ const TaskForm: React.FC = () => {
             title="Create Task"
             open={open}
             onClose={goBack}
+            loading={loading}
+            actionTitle="Create Task"
             submitForm={submitForm}
           >
             <>

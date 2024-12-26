@@ -7,6 +7,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { RiDraggable } from "react-icons/ri";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { v4 } from "uuid";
+import { Task, Todo } from "../../..";
 
 const ICON_SIZE = "18px";
 const ICON_COLOR_RED = "#f00";

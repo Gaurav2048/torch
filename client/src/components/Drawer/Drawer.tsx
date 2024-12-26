@@ -15,6 +15,7 @@ type OwnProps = {
   children: React.ReactElement;
   submitForm: () => void;
   title?: string;
+  loading?: boolean;
   actionTitle?: string;
 };
 
@@ -24,6 +25,7 @@ const AppDrawer: React.FC<OwnProps> = ({
   open,
   onClose,
   children,
+  loading,
   submitForm,
 }) => {
   return (
@@ -40,7 +42,7 @@ const AppDrawer: React.FC<OwnProps> = ({
             <Button variant="outline" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue" onClick={submitForm}>
+            <Button colorScheme="primary" isLoading={loading} onClick={submitForm}>
               {actionTitle}
             </Button>
           </DrawerFooter>
