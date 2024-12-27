@@ -33,8 +33,9 @@ const mongooseOptions = {
 
 
 mongoose
-  .connect("mongodb://localhost:27017/torch", mongooseOptions)
-  .then(() => {
+  .connect("mongodb+srv://gunjan01:Gunjan%402048@cluster0.kkcx05d.mongodb.net/torch?retryWrites=true&w=majority&appName=Cluster0", mongooseOptions)
+  .then((mongoose) => {
+    console.log("Database connected")
     server.listen(3001, (port) => {
       console.log(`Server running ${port}`);
     });
