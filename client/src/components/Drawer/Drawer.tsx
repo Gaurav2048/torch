@@ -42,7 +42,11 @@ const AppDrawer: React.FC<OwnProps> = ({
             <Button variant="outline" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="primary" isLoading={loading} onClick={submitForm}>
+            <Button
+              colorScheme="primary"
+              isLoading={loading}
+              onClick={submitForm}
+            >
               {actionTitle}
             </Button>
           </DrawerFooter>

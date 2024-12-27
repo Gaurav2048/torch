@@ -2,11 +2,18 @@ import { atom } from "recoil";
 import {
   DEFAULT_BOARD,
   DEFAULT_COMMENT,
+  DEFAULT_DISPLAY_PROPERTIES,
   DEFAULT_MEMBER,
   DEFAULT_ORG,
   STATE,
 } from "../Constants";
-import { BoardType, CommentType, Member, Organisation } from "..";
+import {
+  BoardType,
+  CommentType,
+  DisplayPriority,
+  Member,
+  Organisation,
+} from "..";
 
 export const boardAtom = atom<BoardType>({
   key: STATE.BOARD,
@@ -38,4 +45,9 @@ export const profileAtom = atom<Member>({
     role: "admin",
     password: "",
   },
+});
+
+export const displayPriority = atom<DisplayPriority>({
+  key: STATE.DISPLAY_PROPERTIES,
+  default: DEFAULT_DISPLAY_PROPERTIES,
 });

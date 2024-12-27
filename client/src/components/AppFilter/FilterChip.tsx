@@ -52,7 +52,7 @@ const FilterChip: React.FC<OwnProps> = ({
 }) => {
   const members = useRecoilValue(memberAtom);
   const board = useRecoilValue(boardAtom);
-  const org = useRecoilValue(orgAtom)
+  const org = useRecoilValue(orgAtom);
   const [status, setStatus] = useState<{ columnID: string; value: string }[]>(
     [],
   );
@@ -70,7 +70,7 @@ const FilterChip: React.FC<OwnProps> = ({
     ASSIGNEE: dataTransform(members, "_id", "name", "name"),
     PRIORITY: dataTransform(PRIORITIES, "id", "priority", "icon"),
     STATUS: dataTransform(status, "columnID", "value", "value"),
-    LABEL: dataTransform(org.workTypes, "_id", "name", "name")
+    LABEL: dataTransform(org.workTypes, "_id", "name", "name"),
   };
   return (
     <Box marginRight="8px" alignItems="center" display="flex">

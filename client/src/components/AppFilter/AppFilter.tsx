@@ -17,6 +17,7 @@ import { v4 as uuidV4 } from "uuid";
 import { produce } from "immer";
 import { NOSCROLL_BAR_PROPERTIES } from "../Funnel/Funnel";
 import { IconAppAdjustment } from "../../Constants/Icons";
+import DisplayPriorities from "./DisplayPriorities";
 
 type OwnProps = {
   appliedFilters: Array<APPLIED_FILER>;
@@ -86,7 +87,7 @@ const AppFilter: React.FC<OwnProps> = ({
         ))}
         <FilterMenu onFilterSelected={onFilterSelected} />
       </Flex>
-      <AppButton mr="64px" size="sm" leftIcon={<IconAppAdjustment />}>Display</AppButton>
+      <DisplayPriorities />
     </Flex>
   );
 };

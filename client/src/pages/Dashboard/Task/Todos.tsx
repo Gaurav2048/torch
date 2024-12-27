@@ -21,7 +21,7 @@ const Todos: React.FC = () => {
       name="todos"
       render={({ push, remove }) => (
         <Box>
-          <Flex alignItems="center" onClick={() => push(dummyTodo)}>
+          <Flex alignItems="center" onClick={() => push(dummyTodo())}>
             <FormLabel paddingTop="4px">Todos</FormLabel>
             <IoIosAdd size={ICON_SIZE} />
           </Flex>

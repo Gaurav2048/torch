@@ -1,6 +1,7 @@
 import {
   BoardType,
   CommentType,
+  DisplayPriority,
   Member,
   Organisation,
   REACTION_TYPE,
@@ -19,6 +20,7 @@ export const STATE = {
   MEMBER: "state_type_member",
   COMMENTS: "state_type_comments",
   PROFILE: "state_type_profile",
+  DISPLAY_PROPERTIES: "display_properties",
 };
 
 export const colorSchema = {
@@ -109,3 +111,24 @@ export const PRIORITIES = [
     icon: (color?: string) => <IconUrgentPriority color={color} />,
   },
 ];
+
+export const COLUMN_OPTIONS = ["STATUS", "ASSIGNEE", "PRIORITY", "LABEL"];
+export const ORDER_OPTIONS = [...COLUMN_OPTIONS];
+export const DISPLAY_OPTIONS = {
+  PRIORITY: "PRIORITY",
+  ID: "ID",
+  STATUS: "STATUS",
+  LABEL: "LABEL",
+  ASSIGNEE: "ASSIGNEE",
+  SPRINT: "SPRINT",
+  TODOS: "TODOS",
+  CREATOR: "CREATOR",
+};
+
+export const DEFAULT_DISPLAY_PROPERTIES: DisplayPriority = {
+  asc: true,
+  column: "STATUS",
+  orderBy: "ASSIGNEE",
+  display: "board",
+  displayItems: [...Object.keys(DISPLAY_OPTIONS)],
+};

@@ -109,3 +109,11 @@ interface Member {
 interface MemberMap {
   [key: string]: Member;
 }
+
+interface DisplayPriority {
+  display: "board" | "list";
+  column: string;
+  orderBy: string;
+  asc: boolean;
+  displayItems: Array<string>;
+}

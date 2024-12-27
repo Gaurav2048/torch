@@ -10,6 +10,9 @@ import { GiCycle } from "react-icons/gi";
 import { MdIncompleteCircle } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 import { HiAdjustmentsHorizontal } from "react-icons/hi2";
+import { MdDashboard } from "react-icons/md";
+import { FaThList } from "react-icons/fa";
+import { TfiLayoutColumn4Alt } from "react-icons/tfi";
 
 export {
   MdOutlineSignalCellularNull as IconNoPriority,
@@ -24,4 +27,7 @@ export {
   MdIncompleteCircle as IconStatus,
   IoClose as IconAppClose,
   HiAdjustmentsHorizontal as IconAppAdjustment,
+  MdDashboard as IconAppBoard,
+  FaThList as IconAppList,
+  TfiLayoutColumn4Alt as IconAppColumn,
 };

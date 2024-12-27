@@ -9,14 +9,16 @@ import {
 import { Draggable } from "react-beautiful-dnd";
 import { FaRegComment } from "react-icons/fa6";
 import { useRecoilValue } from "recoil";
-import { memberAtom, orgAtom } from "../../AppState/state";
+import { displayPriority, memberAtom, orgAtom } from "../../AppState/state";
 import { Task } from "../..";
 import AppMenu from "../AppMenu";
 import { IconNoPriority } from "../../Constants/Icons";
-import { colorSchema, PRIORITIES } from "../../Constants";
+import { colorSchema, DISPLAY_OPTIONS, PRIORITIES } from "../../Constants";
 import AppTypography from "../AppTypography/AppTypography";
 import { capitalize } from "../../utils/textUtils";
 import { useMemo } from "react";
+import DisplayPriorities from "../AppFilter/DisplayPriorities";
+import { FaTasks } from "react-icons/fa";
 
 type OwnProps = {
   task: Task;
@@ -28,6 +30,7 @@ const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
   const org = useRecoilValue(orgAtom);
   const members = useRecoilValue(memberAtom);
   const workType = org.workTypes.find((type) => task.workType === type._id);
+  const displayProperties = useRecoilValue(displayPriority);
 
   const handleOpenTask = () => {
     openTask(task.id);
@@ -65,22 +68,34 @@ const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
           >
             <Box>
               <Flex justifyContent="space-between" alignItems="center">
-                <Text
-                  fontWeight={600}
-                  fontSize="2xs"
-                  borderRadius="4px"
-                  padding="2px 6px"
-                  width="fit-content"
-                  border={`1px solid ${workType?.color}`}
-                  bgColor={workType?.color}
+                <RenderIf
+                  condition={displayProperties.displayItems.includes(
+                    DISPLAY_OPTIONS.LABEL,
+                  )}
                 >
-                  {workType?.name}
-                </Text>
-                <Avatar
-                  size="2xs"
-                  name={assignedTo?.name}
-                  title={assignedTo?.name}
-                />
+                  <Text
+                    fontWeight={600}
+                    fontSize="2xs"
+                    borderRadius="4px"
+                    padding="2px 6px"
+                    width="fit-content"
+                    border={`1px solid ${workType?.color}`}
+                    bgColor={workType?.color}
+                  >
+                    {workType?.name}
+                  </Text>
+                </RenderIf>
+                <RenderIf
+                  condition={displayProperties.displayItems.includes(
+                    DISPLAY_OPTIONS.ASSIGNEE,
+                  )}
+                >
+                  <Avatar
+                    size="2xs"
+                    name={assignedTo?.name}
+                    title={assignedTo?.name}
+                  />
+                </RenderIf>
               </Flex>
               <Text
                 marginTop="16px"
@@ -93,11 +108,28 @@ const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
               <Text fontSize="xs" textAlign="start" color="rgb(188, 193, 199)">
                 {task.content}
               </Text>
+              {task.todos?.length ? (
+                <RenderIf
+                  condition={displayProperties.displayItems.includes(
+                    DISPLAY_OPTIONS.TODOS,
+                  )}
+                >
+                  <Flex
+                    marginTop="8px"
+                    padding="2px 4px"
+                    gap="8px"
+                    alignItems="center"
+                    width="max-content"
+                    color="rgb(188, 193, 199)"
+                    border="1px solid rgb(188, 193, 199)"
+                    borderRadius="4px"
+                  >
+                    <FaTasks fontSize="16px" color="lightgrey" />
+                    <Text fontSize="xs">{`${task.todos.filter((todo) => todo.completed).length} / ${task.todos.length}`}</Text>
+                  </Flex>
+                </RenderIf>
+              ) : null}
             </Box>
-            {/* <Flex marginTop="8px" padding="2px 4px" gap="8px" alignItems="center" width="max-content" color="rgb(188, 193, 199)" border="1px solid rgb(188, 193, 199)" borderRadius="4px" >
-                        <FaTasks fontSize="16px" />
-                        <Text fontSize='xs'>1/8</Text>
-                    </Flex> */}
           </Flex>
           <Flex
             padding="12px 16px"
@@ -125,12 +157,24 @@ const TaskComponent: React.FC<OwnProps> = ({ task, index, openTask }) => {
                   src="https://bit.ly/code-beast"
                 />
               </AvatarGroup>
-              <AssignPriority />
-              <Avatar
-                name={createdBy?.name}
-                size="xs"
-                title={createdBy?.name}
-              />
+              <RenderIf
+                condition={displayProperties.displayItems.includes(
+                  DISPLAY_OPTIONS.PRIORITY,
+                )}
+              >
+                <AssignPriority />
+              </RenderIf>
+              <RenderIf
+                condition={displayProperties.displayItems.includes(
+                  DISPLAY_OPTIONS.CREATOR,
+                )}
+              >
+                <Avatar
+                  name={createdBy?.name}
+                  size="xs"
+                  title={createdBy?.name}
+                />
+              </RenderIf>
             </Flex>
             <Flex alignItems="center" gap="4px">
               <FaRegComment color="lightgray" />
@@ -205,4 +249,11 @@ const PriorityMenuItem: React.FC<PriorityItemType> = ({
       />
     </Box>
   );
+};
+
+const RenderIf: React.FC<{
+  condition: boolean;
+  children: React.ReactElement;
+}> = ({ condition, children }) => {
+  return condition ? children : null;
 };

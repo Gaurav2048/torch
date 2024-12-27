@@ -82,7 +82,7 @@ const Projects: React.FC = () => {
 
   useEffect(() => {
     if (!activeBoard) return;
-      navigate(`/dashboard/${activeBoard}/funnel`);
+    navigate(`/dashboard/${activeBoard}/funnel`);
   }, [activeBoard]);
 
   return (

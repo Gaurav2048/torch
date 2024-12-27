@@ -4,9 +4,7 @@ import Members from "../../components/Members";
 import DashboardRoutes from "../../router/dashboardRouter";
 import SecondaryNavigation from "../../components/SecondaryNavigation";
 
-
 const Dashboard: React.FC = () => {
-
   return (
     <SecondaryNavigation>
       <Box

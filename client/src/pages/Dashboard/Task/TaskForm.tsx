@@ -19,8 +19,11 @@ export const DUMMY_SPRINT = "sprint_1";
 const TaskForm: React.FC = () => {
   const { open, goBack } = useNavDisclosure("create/task");
   const org = useRecoilValue(orgAtom);
-  const { boardId, columnId } = useParams<{ boardId: string, columnId: string }>();
-  const [ board, setBoard ] = useRecoilState(boardAtom)
+  const { boardId, columnId } = useParams<{
+    boardId: string;
+    columnId: string;
+  }>();
+  const [board, setBoard] = useRecoilState(boardAtom);
 
   const { loading, response, fetchData } = useAxios({
     method: "post",
@@ -55,24 +58,26 @@ const TaskForm: React.FC = () => {
   });
 
   useEffect(() => {
-    if (!response) return 
-    // fetch Tasks 
-    setBoard(produce(board, draft => {
-      if (!columnId) return draft
-      draft.tasks[response.id] = response
-      draft.columns[columnId].taskIds.unshift(response.id)
-      return draft
-    }))
-    goBack()
-  }, [response])
+    if (!response) return;
+    // fetch Tasks
+    setBoard(
+      produce(board, (draft) => {
+        if (!columnId) return draft;
+        draft.tasks[response.id] = response;
+        draft.columns[columnId].taskIds.unshift(response.id);
+        return draft;
+      }),
+    );
+    goBack();
+  }, [response]);
 
   const onSubmitData = async (values: Task) => {
-      const { _id, ...rest } = values;
-      await fetchData({
-        ...rest,
-        columnId,
-        id: v4(),
-      });
+    const { _id, ...rest } = values;
+    await fetchData({
+      ...rest,
+      columnId,
+      id: v4(),
+    });
   };
 
   return (
