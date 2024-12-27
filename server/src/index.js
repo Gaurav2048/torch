@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { server, io } = require("./app");
 const { toogleAvailability } = require("./services/auth.service");
+const Org = require("./models/org.model");
 
 const mongooseOptions = {
   useUnifiedTopology: true,
