@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex, Link, Text } from "@chakra-ui/react";
+import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
 import React, { useEffect, useMemo, useState } from "react";
 import Icon from "../Icon";
 import { BsThreeDotsVertical } from "react-icons/bs";

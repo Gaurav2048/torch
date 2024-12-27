@@ -1,5 +1,4 @@
 import {
-  Box,
   Input,
   InputGroup,
   InputLeftElement,
@@ -12,7 +11,7 @@ type OwnProps = {
   onChange?: (str: string) => void;
 };
 
-const Search: React.FC<OwnProps> = ({ query, onChange }) => {
+const Search: React.FC<OwnProps> = ({ query }) => {
   return (
     <Stack>
       <InputGroup

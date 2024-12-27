@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import AppDrawer from "../../../components/Drawer/Drawer";
 import MemberForm from "./MemberForm";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import { memberAtom, orgAtom } from "../../../AppState/state";
 import { object, string } from "yup";
 import useAxios from "../../../hooks/useAxios";
 import { ROUTES } from "../../../Constants";
+import { Member } from "../../..";
 
 const CreateMember: React.FC = () => {
   const location = useLocation();
@@ -34,6 +35,7 @@ const CreateMember: React.FC = () => {
     organisation: "",
     password: "",
     role: "",
+    _id: ""
   };
 
   useEffect(() => {

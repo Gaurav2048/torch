@@ -4,6 +4,7 @@ const errorHandler = require("./utils/errorHandler");
 const routerV1 = require("./routes");
 const http = require('http')
 const { Server } = require('socket.io')
+const path = require('path')
 
 const app = express();
 app.use(express.json());
@@ -13,6 +14,13 @@ app.use(cors());
 app.use("/v1", routerV1);
 
 app.use(errorHandler);
+
+const buildPath = path.join(__dirname, '../../client/dist');
+app.use(express.static(buildPath));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(buildPath, 'index.html'));
+});
 
 const server = http.createServer(app)
 const io = new Server(server, {

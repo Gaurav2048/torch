@@ -46,13 +46,13 @@ const CommentInput: React.FC<CommentInputType> = ({
       <MentionsInput
         value={comment}
         placeholder="Enter your comment"
-        onChange={(event, newValue) => setComment(newValue)}
+        onChange={(_, newValue) => setComment(newValue)}
         style={defaultStyle}
       >
         <Mention
           trigger="@"
           data={memberSuggestions}
-          renderSuggestion={(suggestion, search, highlightedDisplay) => (
+          renderSuggestion={(suggestion) => (
             <Suggestion displayName={suggestion?.display || ""} />
           )}
         />

@@ -14,6 +14,10 @@ const useInitials = () => {
     url: `/org/${orgId}`,
   });
 
+  console.log(org)
+  console.log(members)
+  console.log(profile)
+
   const {
     loading: loadingMembers,
     fetchData: fetchMembers,

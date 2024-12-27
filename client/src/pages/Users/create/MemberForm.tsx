@@ -6,6 +6,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { getIn, useFormikContext } from "formik";
+import { Member } from "../../..";
 
 const MemberForm: React.FC = () => {
   const { values, errors, handleChange, touched, submitCount } =

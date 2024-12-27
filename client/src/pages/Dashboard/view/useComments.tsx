@@ -1,8 +1,6 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
-  boardAtom,
   commentsAtom,
-  memberAtom,
   orgAtom,
   profileAtom,
 } from "../../../AppState/state";
@@ -20,7 +18,7 @@ const useComments = () => {
   const { boardId, taskId } = useParams();
 
   const {
-    loading: createCommentLoader,
+    loading: _,
     response: createCommentData,
     fetchData: createCommentRequest,
   } = useAxios({
@@ -38,7 +36,6 @@ const useComments = () => {
   });
 
   const {
-    loading: createReplyLoader,
     response: createReplyData,
     fetchData: createReplyRequest,
   } = useAxios({
@@ -47,7 +44,6 @@ const useComments = () => {
   });
 
   const {
-    loading: createCommentReactionLoader,
     response: createCommentReactionData,
     fetchData: toogleCommentReactionRequest,
   } = useAxios({

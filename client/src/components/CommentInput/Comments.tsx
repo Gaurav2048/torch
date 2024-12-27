@@ -267,8 +267,6 @@ type replyProps = {
 const Reply: React.FC<replyProps> = ({
   showReply,
   commentObj,
-  commenterId,
-  handleChange,
   createComment,
   createReply,
   commentId,

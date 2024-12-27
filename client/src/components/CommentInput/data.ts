@@ -1,3 +1,5 @@
+import { CommentType, REACTION_TYPE } from "../..";
+
 export const comments: CommentType = {
   _id: "_id",
   comment: "This is the primary comment",
@@ -5,7 +7,7 @@ export const comments: CommentType = {
   reactions: [
     {
       reactedBy: "66bfd2b776fa92717662d44c",
-      reaction: "THUMBS_UP",
+      reaction: REACTION_TYPE.THUMBS_UP,
     },
   ],
   replies: [

@@ -61,7 +61,7 @@ const Funnel: React.FC<OwnProps> = ({
     return result;
   };
 
-  const handleDragEnd = (result: DropResult, provided: ResponderProvided) => {
+  const handleDragEnd = (result: DropResult, _: ResponderProvided) => {
     const { source, destination, type } = result;
 
     if (!destination) {

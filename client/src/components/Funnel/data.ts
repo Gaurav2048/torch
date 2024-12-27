@@ -1,4 +1,4 @@
-export const board: BoardType = {
+export const board = {
   id: "board-1",
   orgId: "org_id_1",
   assignedTo: "member_1",

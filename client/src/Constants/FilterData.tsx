@@ -114,13 +114,13 @@ export const APPLICABLE_FILTERS: APPLICABLE_FILTER_TYPE[] = [
   },
   {
     type: "PRIORITY",
-    filterMethod: (params, board) => board,
+    filterMethod: (_, board) => board,
     icon: (color: string) => <IconPriority color={color} />,
     alias: ["is", "is one of"],
   },
   {
     type: "SPRINT",
-    filterMethod: (params, board) => board,
+    filterMethod: (_, board) => board,
     icon: (color: string) => <IconSprint color={color} />,
     alias: ["is", "is one of"],
   },

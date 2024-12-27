@@ -1,7 +1,6 @@
 import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
 import { IoCloseOutline } from "react-icons/io5";
 import AppButton from "../AppButton";
-import CommentInput from "../CommentInput/CommentInput";
 import { colorSchema } from "../../Constants";
 
 type AppNotificationType = {

@@ -1,9 +1,7 @@
 import {
   Box,
-  Button,
   Menu,
   MenuButton,
-  MenuItem,
   MenuList,
   useDisclosure,
 } from "@chakra-ui/react";

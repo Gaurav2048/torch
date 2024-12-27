@@ -16,7 +16,6 @@ import FilterChip from "./FilterChip";
 import { v4 as uuidV4 } from "uuid";
 import { produce } from "immer";
 import { NOSCROLL_BAR_PROPERTIES } from "../Funnel/Funnel";
-import { IconAppAdjustment } from "../../Constants/Icons";
 import DisplayPriorities from "./DisplayPriorities";
 
 type OwnProps = {

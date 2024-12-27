@@ -1,5 +1,3 @@
-import { position } from "@chakra-ui/react";
-
 export default {
   control: {
     backgroundColor: "#fff",

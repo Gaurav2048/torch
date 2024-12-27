@@ -37,7 +37,6 @@ const Todos: React.FC = () => {
 export default Todos;
 
 const TodoUi: React.FC<Todo & { index: number; remove: any }> = ({
-  id,
   completed,
   text,
   index,

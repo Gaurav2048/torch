@@ -1,14 +1,12 @@
 import React from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import {
-  Box,
   Button,
   FormControl,
   FormLabel,
   FormErrorMessage,
   Input,
-  Heading,
   VStack,
 } from "@chakra-ui/react";
 

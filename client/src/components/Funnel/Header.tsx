@@ -32,7 +32,7 @@ const Header: React.FC<OwnProps> = ({
 
   return (
     <Draggable draggableId={column._id} index={index}>
-      {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
+      {(provided: DraggableProvided, _: DraggableStateSnapshot) => (
         <Box
           ref={provided.innerRef}
           {...provided.draggableProps}

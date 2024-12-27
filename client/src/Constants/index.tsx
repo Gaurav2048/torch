@@ -4,7 +4,6 @@ import {
   DisplayPriority,
   Member,
   Organisation,
-  REACTION_TYPE,
 } from "..";
 import {
   IconHighPriority,

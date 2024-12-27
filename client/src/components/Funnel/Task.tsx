@@ -17,7 +17,6 @@ import { colorSchema, DISPLAY_OPTIONS, PRIORITIES } from "../../Constants";
 import AppTypography from "../AppTypography/AppTypography";
 import { capitalize } from "../../utils/textUtils";
 import { useMemo } from "react";
-import DisplayPriorities from "../AppFilter/DisplayPriorities";
 import { FaTasks } from "react-icons/fa";
 
 type OwnProps = {
@@ -218,7 +217,6 @@ type PriorityItemType = {
 };
 
 const PriorityMenuItem: React.FC<PriorityItemType> = ({
-  id,
   priority,
   icon,
 }) => {

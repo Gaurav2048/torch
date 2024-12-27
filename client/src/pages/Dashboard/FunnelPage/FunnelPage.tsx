@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import { boardAtom, orgAtom } from "../../../AppState/state";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import useAxios from "../../../hooks/useAxios";
 import Funnel from "../../../components/Funnel";
 import { useLocation, useNavigate, useParams } from "react-router-dom";

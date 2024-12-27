@@ -1,5 +1,4 @@
 import "./App.css";
-import PrimaryNavigation from "./components/PrimaryNavigation";
 import ErrorBoundary from "./ErrorBoundary";
 import useInitials from "./hooks/useInitials";
 import useSocket from "./hooks/useSocket";

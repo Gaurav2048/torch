@@ -84,7 +84,7 @@ const TaskForm: React.FC = () => {
     <Formik
       initialValues={task}
       validationSchema={validationSchema}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values) => {
         onSubmitData(values);
       }}
     >

@@ -8,12 +8,12 @@ import {
   Tbody,
   Td,
   Text,
-  Tfoot,
   Th,
   Thead,
   Tr,
 } from "@chakra-ui/react";
 import React from "react";
+import { Member } from "../..";
 
 type OwnProps = {
   members: Array<Member>;
