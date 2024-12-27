@@ -1,7 +1,8 @@
 {
   "scripts": {
     "dev_client": "cd ./client && npm install && npm run build",
-    "dev_server": "cd ./server && npm install && npm run start"
+    "dev_server": "cd ./server && npm install",
+    "start": "cd ./server && npm run start"
   },
   "devDependencies": {
     "prettier": "^3.3.3"
