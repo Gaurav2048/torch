@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mongoose = require("mongoose");
 const { server, io } = require("./app");
 const { toogleAvailability } = require("./services/auth.service");
@@ -33,10 +34,10 @@ const mongooseOptions = {
 
 
 mongoose
-  .connect("mongodb+srv://gunjan01:Gunjan%402048@cluster0.kkcx05d.mongodb.net/torch?retryWrites=true&w=majority&appName=Cluster0", mongooseOptions)
+  .connect(process.env.MONGO_SERVER_URL, mongooseOptions)
   .then((mongoose) => {
     console.log("Database connected")
-    server.listen(3001, (port) => {
+    server.listen(process.env.PORT || 3001, (port) => {
       console.log(`Server running ${port}`);
     });
   });
