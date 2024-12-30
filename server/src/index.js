@@ -1,8 +1,10 @@
-require('dotenv').config();
 const mongoose = require("mongoose");
 const { server, io } = require("./app");
 const { toogleAvailability } = require("./services/auth.service");
 const Org = require("./models/org.model");
+const path = require("path");
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+
 
 const mongooseOptions = {
   useUnifiedTopology: true,
