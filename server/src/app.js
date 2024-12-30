@@ -15,7 +15,7 @@ app.use("/v1", routerV1);
 
 app.use(errorHandler);
 
-const buildPath = path.join(__dirname, '../../client/public');
+const buildPath = path.join(__dirname, '../../client/env');
 app.use(express.static(buildPath));
 
 app.get('*', (req, res) => {
