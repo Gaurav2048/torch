@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const reactionSchema = mongoose.Schema({
   reactedBy: String,
@@ -42,4 +42,4 @@ const commentSchema = mongoose.Schema(
 
 const Comment = mongoose.model("Comment", commentSchema);
 
-module.exports = Comment;
+export default Comment;

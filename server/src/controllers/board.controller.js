@@ -1,9 +1,9 @@
-const Board = require("../models/board.model");
-const Org = require("../models/org.model");
-const User = require("../models/user.model");
-const ApiError = require("../utils/ApiError");
-const catchAsync = require("../utils/catchAsync");
-const httpsStatus = require("http-status");
+import Board from "../models/board.model.js";
+import Org from "../models/org.model.js";
+import User from "../models/user.model.js";
+import ApiError from "../utils/ApiError.js";
+import catchAsync from "../utils/catchAsync.js";
+import httpsStatus from "http-status";
 
 const getBoards = catchAsync(async (req, res) => {
   const { orgId, id } = req.params;
@@ -138,7 +138,7 @@ const removeBoardMember = catchAsync(async (req, res) => {
   });
 });
 
-module.exports = {
+export {
   getBoards,
   createBoard,
   createTask,

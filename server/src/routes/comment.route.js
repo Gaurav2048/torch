@@ -1,10 +1,10 @@
-const express = require("express");
-const {
+import express  from "express";
+import {
   getComments,
   createComment,
   replyToComment,
   reactToComment,
-} = require("../controllers/comment.controller");
+}  from "../controllers/comment.controller.js";
 
 const router = express.Router();
 
@@ -13,4 +13,4 @@ router.post("/:orgId/:boardId/:taskId", createComment);
 router.post("/:orgId/:boardId/:taskId/reply", replyToComment);
 router.patch("/:orgId/:boardId/:taskId/react", reactToComment);
 
-module.exports = router;
+export default router;

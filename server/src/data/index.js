@@ -740,7 +740,7 @@ const USERS = [{
     "__v": 1
   }]
 
-module.exports = {
+export default {
     BOARD,
     COMMENTS,
     ORG,

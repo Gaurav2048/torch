@@ -1,9 +1,9 @@
-const express = require("express");
-const boardRouter = require("./board.route");
-const authRouter = require("./auth.route");
-const orgRouter = require("./org.route");
-const memberRouter = require("./member.route");
-const commentRouter = require("./comment.route");
+import express  from "express";
+import boardRouter  from "./board.route.js";
+import authRouter  from "./auth.route.js";
+import orgRouter  from "./org.route.js";
+import memberRouter  from "./member.route.js";
+import commentRouter  from "./comment.route.js";
 
 const router = express.Router();
 
@@ -13,4 +13,4 @@ router.use("/org", orgRouter);
 router.use("/member", memberRouter);
 router.use("/comment", commentRouter);
 
-module.exports = router;
+export default router;

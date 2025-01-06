@@ -8,7 +8,7 @@ const createLog = (logType, orgId, user1, user2, message, commentId = "") => {
     
 }
 
-module.exports = {
+export default {
     logNewUser: (orgId, user2, message) => createLog('NEW_USER_SIGN_UP', orgId, '', user2, message, ""),
     logTaskAssigned: (orgId, user1, user2, message) => createLog('TASK_ASSIGNED', orgId, user1, user2, message),
     logCommentAddedToTask: (orgId, user1, user2, message, commentId) => createLog('COMMENT_ADDED_ON_TASK', orgId, user1, user2, message, commentId),

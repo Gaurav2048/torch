@@ -1,8 +1,8 @@
-const User = require("../models/user.model");
-const { createUser, createToken, loginUserWithEmailAndPassword } = require("../services/auth.service");
-const ApiError = require("../utils/ApiError");
-const httpStatus = require("http-status");
-const catchAsync = require("../utils/catchAsync");
+import User from "../models/user.model.js";
+import { createUser, createToken, loginUserWithEmailAndPassword } from "../services/auth.service.js";
+import ApiError from "../utils/ApiError.js";
+import httpStatus from "http-status";
+import catchAsync from "../utils/catchAsync.js";
 
 const register = catchAsync(async (req, res) => {
   const userBody = req.body;
@@ -33,7 +33,7 @@ const profile = catchAsync(async (req, res) => {
   res.status(200).send(dbUser)
 })
 
-module.exports = {
+export {
   register,
   login,
   profile

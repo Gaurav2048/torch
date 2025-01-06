@@ -1,13 +1,15 @@
+import status from "http-status";
+import Board from "../models/board.model.js";
+import ApiError from "../utils/ApiError.js";
+import catchAsync from "../utils/catchAsync.js";
+import Comment from "../models/comment.model.js";
+
 const {
   BAD_REQUEST,
   OK,
   INTERNAL_SERVER_ERROR,
   CREATED,
-} = require("http-status");
-const Board = require("../models/board.model");
-const ApiError = require("../utils/ApiError");
-const catchAsync = require("../utils/catchAsync");
-const Comment = require("../models/comment.model");
+} = status
 
 const getComments = catchAsync(async (req, res) => {
   const { orgId, boardId, taskId } = req.params;
@@ -96,7 +98,7 @@ const reactToComment = catchAsync(async (req, res) => {
   res.status(OK).send(comment);
 });
 
-module.exports = {
+export {
   getComments,
   createComment,
   replyToComment,

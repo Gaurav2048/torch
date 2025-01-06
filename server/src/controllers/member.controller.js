@@ -1,8 +1,10 @@
-const { BAD_REQUEST, OK, CREATED } = require("http-status");
-const User = require("../models/user.model");
-const ApiError = require("../utils/ApiError");
-const catchAsync = require("../utils/catchAsync");
-const { createUser } = require("../services/auth.service");
+import status from "http-status";
+import User from "../models/user.model.js";
+import ApiError from "../utils/ApiError.js";
+import catchAsync from "../utils/catchAsync.js";
+import { createUser } from "../services/auth.service.js";
+
+const { BAD_REQUEST, OK, CREATED }  = status
 
 const getMembers = catchAsync(async (req, res) => {
   const { orgId: organisation } = req.params;
@@ -25,7 +27,7 @@ const createMember = catchAsync(async (req, res) => {
   res.status(CREATED).send(user);
 });
 
-module.exports = {
+export {
   getMembers,
   createMember,
 };

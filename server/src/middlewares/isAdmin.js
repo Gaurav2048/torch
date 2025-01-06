@@ -1,4 +1,4 @@
-const { UNAUTHORIZED } = require("http-status");
+import { UNAUTHORIZED } from "http-status";
 
 const isAdmin = (req, res, next) => {
   const user = req.user;

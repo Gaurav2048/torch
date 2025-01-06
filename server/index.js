@@ -1,9 +1,8 @@
-const mongoose = require("mongoose");
-const { server, io } = require("./app");
-const { toogleAvailability } = require("./services/auth.service");
-const Org = require("./models/org.model");
-const path = require("path");
-require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+import mongoose from "mongoose";
+import { app } from "./src/app.js";
+import dotenv from 'dotenv';
+
+dotenv.config()
 
 
 const mongooseOptions = {
@@ -39,7 +38,7 @@ mongoose
   .connect(process.env.MONGO_SERVER_URL, mongooseOptions)
   .then((mongoose) => {
     console.log("Database connected")
-    server.listen(process.env.PORT || 3001, (port) => {
+    app.listen(process.env.PORT || 3001, (port) => {
       console.log(`Server running ${port}`);
     });
   });

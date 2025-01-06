@@ -1,8 +1,8 @@
-const { REQUEST_TOKEN_LOCATION, JWT_SIGN_KEY } = require("../utils/constants");
-const httpStatus = require("http-status");
+import { REQUEST_TOKEN_LOCATION, JWT_SIGN_KEY } from "../utils/constants.js";
+import httpStatus from "http-status";
 
-const jwt = require("jsonwebtoken");
-const User = require("../models/user.model");
+import jwt from "jsonwebtoken";
+import User from "../models/user.model.js";
 
 const auth = async (req, res, next) => {
   try {
@@ -22,4 +22,4 @@ const auth = async (req, res, next) => {
   }
 };
 
-module.exports = auth;
+export default auth;

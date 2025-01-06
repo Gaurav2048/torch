@@ -1,12 +1,11 @@
-const express = require("express");
-const auth = require("../middlewares/auth");
-const {
+import express  from "express";
+import {
   getBoards,
   createBoard,
   createTask,
   createBoardMember,
   removeBoardMember,
-} = require("../controllers/board.controller");
+}  from "../controllers/board.controller.js";
 
 const router = express.Router();
 
@@ -20,4 +19,4 @@ router.post("/:orgId/member", createBoardMember);
 // admin only
 router.put("/:orgId/member", removeBoardMember);
 
-module.exports = router;
+export default router;

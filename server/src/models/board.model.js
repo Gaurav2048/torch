@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const todoSchema = mongoose.Schema({
   id: String,
@@ -59,4 +59,4 @@ const boardSchema = mongoose.Schema({
 
 const Board = mongoose.model("Board", boardSchema);
 
-module.exports = Board;
+export default Board;

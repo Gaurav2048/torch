@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const orgSchema = mongoose.Schema({
   name: {
@@ -35,4 +35,4 @@ const orgSchema = mongoose.Schema({
 
 const Org = mongoose.model("Org", orgSchema);
 
-module.exports = Org;
+export default Org;

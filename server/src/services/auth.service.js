@@ -1,10 +1,9 @@
-const User = require("../models/user.model");
-const jwt = require("jsonwebtoken");
-const { JWT_SIGN_KEY } = require("../utils/constants");
-const bcrypt = require("bcrypt");
-const { sendEvent } = require("../app");
-const ApiError = require("../utils/ApiError");
-const { BAD_REQUEST } = require("http-status");
+import User  from "../models/user.model.js";
+import jwt  from "jsonwebtoken";
+import { JWT_SIGN_KEY }  from "../utils/constants.js";
+import bcrypt  from "bcrypt";
+import ApiError  from "../utils/ApiError.js";
+import status  from "http-status";
 
 const createUser = async (user) => {
   const hashedPassword = bcrypt.hashSync(user.password, 10);
@@ -37,11 +36,11 @@ const loginUserWithEmailAndPassword = async (email, password) => {
     email
   })
   if (!dbUser) {
-    throw new ApiError(BAD_REQUEST, "User not found")
+    throw new ApiError(status.BAD_REQUEST, "User not found")
   }
   const isPasswordMatch = await bcrypt.compare(password, dbUser.password)
   if (!isPasswordMatch) {
-    throw new ApiError(BAD_REQUEST, "Password mismatch")
+    throw new ApiError(status.BAD_REQUEST, "Password mismatch")
   }
   const token = createToken(email)
   return {
@@ -51,7 +50,7 @@ const loginUserWithEmailAndPassword = async (email, password) => {
 } 
 
 
-module.exports = {
+export {
   createUser,
   createToken,
   loginUserWithEmailAndPassword,
